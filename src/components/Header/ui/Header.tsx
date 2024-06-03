@@ -1,11 +1,23 @@
-import { memo, useContext } from "react";
+"use client";
+
+import { User } from "@/types/types";
 import cls from "./Header.module.scss";
-import { UserContext } from "@/components/userContext/userContext";
 import { SearchBar } from "./SearchBar/SearchBar";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { MockApi } from "@/shared/mock-server/server";
 
 export const Header = () => {
-    const authData = useContext(UserContext);
+    const [user, setUser] = useState<User>();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await MockApi.getUserById("1");
+            return data;
+        };
+
+        fetchData().then((data) => setUser(data));
+    }, []);
 
     return (
         <div className={cls.Header}>
@@ -18,9 +30,9 @@ export const Header = () => {
                         <SearchBar />
                     </div>
                     <div>
-                        {authData?.user ? (
-                            <Link href={`/${authData?.user?.id}`}>
-                                <p>{authData?.user?.username}</p>
+                        {user ? (
+                            <Link href={`/${user?.id}`}>
+                                <p>{user?.username}</p>
                             </Link>
                         ) : (
                             <Link href="/login">

@@ -1,11 +1,12 @@
 "use client";
+
 import Link from "next/link";
 import cls from "./page.module.scss";
 import { Button } from "@/components/ui/Button";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Movie, User } from "@/types/types";
-import { useEffect, useState } from "react";
+import { Movie, Review, User } from "@/types/types";
+import { ChangeEvent, useEffect, useState } from "react";
 import { MockApi } from "@/shared/mock-server/server";
 import { useParams } from "next/navigation";
 import { ReviewCard } from "@/components/ReviewCard/ReviewCard";
@@ -14,7 +15,18 @@ export default function MoviePage() {
     const { id } = useParams<{ id: string }>();
 
     const [movie, setMovie] = useState<Movie | undefined>(undefined);
-    const [user, setUser] = useState<User>()
+    const [reviews, setReviews] = useState<Review[]>([]);
+    const [newReviewValue, setNewReviewValue] = useState("");
+    const [user, setUser] = useState<User>();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await MockApi.getUserById(id);
+            return data;
+        };
+
+        fetchData().then((data) => setUser(data));
+    }, []);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -24,6 +36,32 @@ export default function MoviePage() {
 
         fetchData().then((data) => setMovie(data));
     }, [id]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await MockApi.getReviewsByMovieId(id!);
+            return data;
+        };
+
+        fetchData().then((data) => setReviews(data));
+    }, [id]);
+
+    const handleNewReviewChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setNewReviewValue(e.target.value);
+    };
+
+    const handleSendReview = () => {
+        if (user) {
+            const fetchData = async () => {
+                const data = await MockApi.postReview(user?.id, id, newReviewValue);
+                return data;
+            };
+
+            // todo
+            // надо чтобы с сервера приходили только комментарии к конкретному фильму
+            fetchData().then((data) => setReviews(data));
+        }
+    };
 
     return (
         <>

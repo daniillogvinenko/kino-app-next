@@ -47,7 +47,7 @@ export const SearchBar = () => {
                     {searchResultItems.map((movie) => (
                         <Link key={movie.id} href={`/movie/${movie.id}`}>
                             <li>
-                                <Image src={movie.mainImg} alt="" />
+                                <img src={movie.mainImg} alt="" />
                                 <div>
                                     <p>{movie.title}</p>
                                     <p>{movie.description}</p>
