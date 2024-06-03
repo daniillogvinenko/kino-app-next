@@ -12,6 +12,7 @@ import { useParams } from "next/navigation";
 import { ReviewCard } from "@/components/ReviewCard/ReviewCard";
 import { Header } from "@/components/Header";
 import { LOCALSTORAGE_USER } from "@/shared/consts/consts";
+import { Modal } from "@/components/ui/Modal";
 
 export default function MoviePage() {
     const { id } = useParams<{ id: string }>();
@@ -19,6 +20,7 @@ export default function MoviePage() {
     const [movie, setMovie] = useState<Movie | undefined>(undefined);
     const [reviews, setReviews] = useState<Review[]>([]);
     const [newReviewValue, setNewReviewValue] = useState("");
+    const [modalIsOpen, setModalIsOpen] = useState(false);
     const [user, setUser] = useState<User>();
 
     useEffect(() => {
@@ -53,6 +55,14 @@ export default function MoviePage() {
         setNewReviewValue(e.target.value);
     };
 
+    const handleCloseModal = () => {
+        setModalIsOpen(false);
+    };
+
+    const handleOpenModal = () => {
+        setModalIsOpen(true);
+    };
+
     const handleSendReview = () => {
         if (user) {
             const fetchData = async () => {
@@ -69,6 +79,9 @@ export default function MoviePage() {
     return (
         <>
             <Header user={user} />
+            <Modal isOpen={modalIsOpen} onClose={handleCloseModal}>
+                <div className={cls.modalContent}></div>
+            </Modal>
             <div className={cls.MoviePage}>
                 <div className="container">
                     <Link href="/">Назад</Link>
@@ -89,7 +102,9 @@ export default function MoviePage() {
                             <p>{movie?.duration}</p>
                             <br />
                             <p>{movie?.ageLimit}</p>
-                            <Button size="lg">Смотреть</Button>
+                            <Button onClick={handleOpenModal} size="lg">
+                                Смотреть
+                            </Button>
                         </div>
                     </div>
                     <Carousel>
