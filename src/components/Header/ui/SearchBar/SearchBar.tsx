@@ -1,14 +1,14 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState, useRef } from "react";
 import cls from "./SearchBar.module.scss";
 import { Movie } from "@/types/types";
 import { MockApi } from "@/shared/mock-server/server";
 import Link from "next/link";
-import Image from "next/image";
 
 export const SearchBar = () => {
     const [isSearchOpened, setIsSearchOpened] = useState<boolean>(false);
     const [searchValue, setSearchValue] = useState("");
     const [searchResultItems, setSearchResultItems] = useState<Movie[]>([]);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -18,6 +18,12 @@ export const SearchBar = () => {
 
         fetchData().then((data) => setSearchResultItems(data));
     }, [searchValue]);
+
+    useEffect(() => {
+        if (isSearchOpened) {
+            inputRef.current?.focus();
+        }
+    }, [isSearchOpened]);
 
     const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.target.value);
@@ -39,7 +45,13 @@ export const SearchBar = () => {
     return (
         <div className={cls.SearchBar}>
             <div className={cls.inputWrapper}>
-                <input className={cls.input} type="text" value={searchValue} onChange={handleSearchChange} />
+                <input
+                    ref={inputRef}
+                    className={cls.input}
+                    type="text"
+                    value={searchValue}
+                    onChange={handleSearchChange}
+                />
                 <button onClick={handleCloseSearch}>close</button>
             </div>
             {searchResultItems.length ? (
