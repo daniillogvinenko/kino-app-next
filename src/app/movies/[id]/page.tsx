@@ -76,6 +76,19 @@ export default function MoviePage() {
         }
     };
 
+    const handleAddToFavorites = () => {
+        if (user) {
+            const fetchData = async () => {
+                const data = await MockApi.addMovieToFavorites(user?.id, id);
+                return data;
+            };
+
+            fetchData().then((data) => {
+                setUser(data);
+            });
+        }
+    };
+
     return (
         <>
             <Header user={user} />
@@ -105,6 +118,11 @@ export default function MoviePage() {
                             <Button onClick={handleOpenModal} size="lg">
                                 Смотреть
                             </Button>
+                            {user ? (
+                                <Button onClick={handleAddToFavorites} variant="outline" size="lg">
+                                    Добавить в избранное
+                                </Button>
+                            ) : null}
                         </div>
                     </div>
                     <Carousel>
