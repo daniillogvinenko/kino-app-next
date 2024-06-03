@@ -10,6 +10,8 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { MockApi } from "@/shared/mock-server/server";
 import { useParams } from "next/navigation";
 import { ReviewCard } from "@/components/ReviewCard/ReviewCard";
+import { Header } from "@/components/Header";
+import { LOCALSTORAGE_USER } from "@/shared/consts/consts";
 
 export default function MoviePage() {
     const { id } = useParams<{ id: string }>();
@@ -21,7 +23,8 @@ export default function MoviePage() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await MockApi.getUserById(id);
+            // @ts-ignore
+            const data = await MockApi.getUserById(localStorage.getItem(LOCALSTORAGE_USER));
             return data;
         };
 
@@ -65,6 +68,7 @@ export default function MoviePage() {
 
     return (
         <>
+            <Header user={user} />
             <div className={cls.MoviePage}>
                 <div className="container">
                     <Link href="/">Назад</Link>

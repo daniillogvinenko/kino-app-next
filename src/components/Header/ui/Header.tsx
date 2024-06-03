@@ -4,21 +4,8 @@ import { User } from "@/types/types";
 import cls from "./Header.module.scss";
 import { SearchBar } from "./SearchBar/SearchBar";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { MockApi } from "@/shared/mock-server/server";
 
-export const Header = () => {
-    const [user, setUser] = useState<User>();
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const data = await MockApi.getUserById("1");
-            return data;
-        };
-
-        fetchData().then((data) => setUser(data));
-    }, []);
-
+export const Header = ({ user }: { user: User | undefined }) => {
     return (
         <div className={cls.Header}>
             <div className="container">
