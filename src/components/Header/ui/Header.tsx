@@ -4,8 +4,13 @@ import { User } from "@/types/types";
 import cls from "./Header.module.scss";
 import { SearchBar } from "./SearchBar/SearchBar";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 export const Header = ({ user }: { user: User | undefined }) => {
+    const session = useSession();
+    const username = session.data?.user?.name;
+    console.log(session.data);
+
     return (
         <div className={cls.Header}>
             <div className="container">
@@ -17,12 +22,12 @@ export const Header = ({ user }: { user: User | undefined }) => {
                         <SearchBar />
                     </div>
                     <div>
-                        {user ? (
+                        {session.data ? (
                             <Link href={`/${user?.id}`}>
-                                <p>{user?.username}</p>
+                                <p>Пользователь: {username}</p>
                             </Link>
                         ) : (
-                            <Link href="/login">
+                            <Link href="/api/auth/signin">
                                 <div>Войти</div>
                             </Link>
                         )}

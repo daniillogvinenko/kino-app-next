@@ -1,34 +1,11 @@
-"use client";
-
 import { Button } from "@/components/ui/Button";
 import cls from "./page.module.scss";
-import { MockApi } from "@/shared/mock-server/server";
 import { Header } from "@/components/Header";
-import { Movie, User } from "@/types/types";
-import { useEffect, useState } from "react";
-import { LOCALSTORAGE_USER } from "@/shared/consts/consts";
+import { Movie } from "@/types/types";
 
-export default function Home() {
-    const [movies, setMovies] = useState<Movie[]>([]);
-    const [user, setUser] = useState<User>();
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const data = await MockApi.getUserById(localStorage.getItem(LOCALSTORAGE_USER));
-            return data;
-        };
-
-        fetchData().then((data) => setUser(data));
-    }, []);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const data = await MockApi.getAllMovies();
-            return data;
-        };
-
-        fetchData().then((data) => setMovies(data));
-    }, []);
+export default async function Home() {
+    const user = await fetch(`http://localhost:3000/api/movies/${1}`).then((data) => data.json());
+    const movies: Movie[] = await fetch("http://localhost:3000/api/movies").then((data) => data.json());
 
     return (
         <>

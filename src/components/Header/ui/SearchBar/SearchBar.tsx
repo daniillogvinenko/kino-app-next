@@ -1,7 +1,6 @@
 import { ChangeEvent, useEffect, useState, useRef } from "react";
 import cls from "./SearchBar.module.scss";
 import { Movie } from "@/types/types";
-import { MockApi } from "@/shared/mock-server/server";
 import Link from "next/link";
 
 export const SearchBar = () => {
@@ -11,12 +10,16 @@ export const SearchBar = () => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-        const fetchData = async () => {
-            const data = await MockApi.getMoviesBySearch(searchValue);
-            return data;
-        };
+        if (searchValue) {
+            const fetchData = async () => {
+                const data = await fetch(`http://localhost:3000/api/movies?search=${searchValue}`).then((data) =>
+                    data.json()
+                );
+                return data;
+            };
 
-        fetchData().then((data) => setSearchResultItems(data));
+            fetchData().then((data) => setSearchResultItems(data));
+        }
     }, [searchValue]);
 
     useEffect(() => {

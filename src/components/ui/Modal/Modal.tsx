@@ -12,7 +12,7 @@ interface ModalProps {
     lazy?: boolean;
 }
 
-const ANIMATION_DELAY = 150;
+const ANIMATION_DELAY = 0;
 
 export const Modal = (props: ModalProps) => {
     const { children, className, isOpen, onClose, lazy } = props;

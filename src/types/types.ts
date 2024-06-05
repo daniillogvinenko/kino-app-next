@@ -1,3 +1,8 @@
+type MovieId = string;
+type ReviewId = string;
+type UserId = string;
+type PersonId = string;
+
 type Genre =
     | "драма"
     | "криминал"
@@ -10,10 +15,13 @@ type Genre =
     | "приключения"
     | "военный"
     | "детектив"
+    | "мелодрама"
+    | "документальный"
+    | "триллер"
     | "приключения";
 
 export interface Movie {
-    id: string;
+    id: MovieId;
     title: string;
     description: string;
     mainImg: string;
@@ -23,19 +31,35 @@ export interface Movie {
     country: string;
     duration: string;
     ageLimit: string;
+    director: PersonId;
+    mainActors: PersonId[];
 }
 
 export interface Review {
-    id: string;
+    id: ReviewId;
     userId: string;
     movieId: string;
     text: string;
 }
 
 export interface User {
-    id: string;
+    id: UserId;
     username: string;
     password: string;
     // массив id фильмов
-    favorites: string[];
+    favorites: MovieId[];
+}
+
+type Profession = "Продюсер" | "Режисер" | "Актер" | "Сценарист" | "Монтажер" | "Оператор" | "Композитор";
+
+export interface Person {
+    id: PersonId;
+    fullName: string;
+    professions: Profession[];
+    height: string;
+    dateOfBirth: string;
+    placeOfBirth: string;
+    genres: Genre[];
+    mainImg: string;
+    otherImages: string[];
 }
