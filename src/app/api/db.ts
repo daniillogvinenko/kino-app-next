@@ -1,4 +1,4 @@
-import { Movie, Person, Review, User } from "@/types/types";
+import { Movie, Person, Review, User } from "@/shared/types/types";
 
 export const movies: Movie[] = [
     {

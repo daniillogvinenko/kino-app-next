@@ -14,7 +14,7 @@ export const authOptions = {
         CredentialsProvider({
             credentials: {
                 username: { label: "username", type: "text", placeholder: "Enter username" },
-                password: { label: "password", type: "password" },
+                password: { label: "password", type: "password", placeholder: "Enter password" },
             },
             async authorize(credentials) {
                 if (!credentials?.username || !credentials.password) return null;

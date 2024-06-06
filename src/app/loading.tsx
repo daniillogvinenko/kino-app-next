@@ -1,3 +1,10 @@
+import { Header } from "@/components/Header";
+
 export default function Loading() {
-    return <div>Loading...</div>;
+    return (
+        <>
+            <Header user={undefined} />
+            <div className="container">Loading...</div>
+        </>
+    );
 }

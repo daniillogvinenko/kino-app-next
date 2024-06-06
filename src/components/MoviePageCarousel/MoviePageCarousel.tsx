@@ -1,6 +1,6 @@
 "use client";
 
-import { Movie } from "@/types/types";
+import { Movie } from "@/shared/types/types";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 

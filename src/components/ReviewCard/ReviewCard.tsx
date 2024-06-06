@@ -1,4 +1,4 @@
-import { Review } from "@/types/types";
+import { Review } from "@/shared/types/types";
 import cls from "./ReviewCard.module.scss";
 import { cn } from "@/shared/helpers/classNames/classNames";
 

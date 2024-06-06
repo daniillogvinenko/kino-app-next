@@ -6,7 +6,7 @@ import { ReviewCard } from "@/components/ReviewCard/ReviewCard";
 import { Header } from "@/components/Header";
 import { FavoritesButton } from "@/components/FavoritesButton/FavoritesButton";
 import { MoviePageCarousel } from "@/components/MoviePageCarousel/MoviePageCarousel";
-import { Movie, Review, User } from "@/types/types";
+import { Movie, Review, User } from "@/shared/types/types";
 
 interface MoviePageProps {
     params: {
@@ -15,8 +15,11 @@ interface MoviePageProps {
 }
 
 export default async function MoviePage({ params }: MoviePageProps) {
-    const movie: Movie = await fetch(`http://localhost:3000/api/movies/${1}`).then((data) => data.json());
-    const reviews: Review[] = await fetch(`http://localhost:3000/api/reviews`).then((data) => data.json());
+    const movie: Movie = await fetch(`http://localhost:3000/api/movies/${params.id}`).then((data) => data.json());
+    // bug - при открытии фильма с id=2 комментарии показываются для первого фильма
+    const reviews: Review[] = await fetch(`http://localhost:3000/api/reviews?movieId=${params.id}`).then((data) =>
+        data.json()
+    );
     const user: User = await fetch(`http://localhost:3000/api/users/${1}`).then((data) => data.json());
 
     return (

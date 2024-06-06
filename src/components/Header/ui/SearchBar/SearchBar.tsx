@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState, useRef } from "react";
 import cls from "./SearchBar.module.scss";
-import { Movie } from "@/types/types";
+import { Movie } from "@/shared/types/types";
 import Link from "next/link";
 
 export const SearchBar = () => {

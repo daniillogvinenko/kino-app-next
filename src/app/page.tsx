@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/Button";
 import cls from "./page.module.scss";
 import { Header } from "@/components/Header";
-import { Movie } from "@/types/types";
+import { Movie } from "@/shared/types/types";
 
 export default async function Home() {
     const user = await fetch(`http://localhost:3000/api/movies/${1}`).then((data) => data.json());

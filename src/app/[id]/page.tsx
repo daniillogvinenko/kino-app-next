@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/Button";
 import { Header } from "@/components/Header";
 import Link from "next/link";
 import { SignOutButton } from "@/components/SignOutButton/SignOutButton";
-import { Movie, User } from "@/types/types";
+import { Movie, User } from "@/shared/types/types";
 
 interface ProfilePageProps {
     params: {

@@ -1,4 +1,4 @@
-import { User } from "@/types/types";
+import { User } from "@/shared/types/types";
 import { Button } from "../ui/Button";
 
 interface FavoritesButtonProps {
