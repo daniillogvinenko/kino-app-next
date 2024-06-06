@@ -7,6 +7,7 @@ import { Header } from "@/components/Header";
 import { FavoritesButton } from "@/components/FavoritesButton/FavoritesButton";
 import { MoviePageCarousel } from "@/components/MoviePageCarousel/MoviePageCarousel";
 import { Movie, Review, User } from "@/shared/types/types";
+import axios from "axios";
 
 interface MoviePageProps {
     params: {
@@ -15,12 +16,11 @@ interface MoviePageProps {
 }
 
 export default async function MoviePage({ params }: MoviePageProps) {
-    const movie: Movie = await fetch(`http://localhost:3000/api/movies/${params.id}`).then((data) => data.json());
-    // bug - при открытии фильма с id=2 комментарии показываются для первого фильма
-    const reviews: Review[] = await fetch(`http://localhost:3000/api/reviews?movieId=${params.id}`).then((data) =>
-        data.json()
-    );
-    const user: User = await fetch(`http://localhost:3000/api/users/${1}`).then((data) => data.json());
+    const movie: Movie = await axios.get(`http://localhost:3000/api/movies/${params.id}`).then((data) => data.data);
+    const reviews: Review[] = await axios
+        .get(`http://localhost:3000/api/reviews?movieId=${params.id}`)
+        .then((data) => data.data);
+    const user: User = await axios.get(`http://localhost:3000/api/users/${1}`).then((data) => data.data);
 
     return (
         <>
@@ -39,7 +39,7 @@ export default async function MoviePage({ params }: MoviePageProps) {
                             <br />
                             <p>{movie?.year}</p>
                             <br />
-                            <p>{movie?.genres.join(", ")}</p>
+                            <p>{movie?.genres?.join(", ")}</p>
                             <br />
                             <p>{movie?.country}</p>
                             <br />
@@ -52,7 +52,7 @@ export default async function MoviePage({ params }: MoviePageProps) {
                             <p>{movie?.director}</p>
                             <br />
                             <p>Актеры</p>
-                            {movie?.mainActors.map((actor) => (
+                            {movie?.mainActors?.map((actor) => (
                                 <p key={actor}>{actor}</p>
                             ))}
                         </div>

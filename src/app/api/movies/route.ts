@@ -1,13 +1,27 @@
 import { NextRequest, NextResponse } from "next/server";
-import { movies, users } from "../db";
+import { prisma } from "../../../../lib/prisma";
 
 export async function GET(req: NextRequest) {
+    const movies = await prisma.movie.findMany();
+
     const userId = req.nextUrl.searchParams.get("userId");
 
     if (userId) {
-        const user = users.find((u) => u.id === userId);
+        const user = await prisma.user.findUnique({
+            where: {
+                username: userId,
+            },
+        });
 
-        const moviesOfUser = movies.filter((m) => user?.favorites.includes(m.id));
+        const moviesOfUser = await prisma.movie.findMany({
+            where: {
+                favoredBy: {
+                    some: {
+                        username: userId,
+                    },
+                },
+            },
+        });
         return NextResponse.json(moviesOfUser);
     }
 

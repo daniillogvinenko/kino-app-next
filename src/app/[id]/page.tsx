@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import Link from "next/link";
 import { SignOutButton } from "@/components/SignOutButton/SignOutButton";
 import { Movie, User } from "@/shared/types/types";
+import axios from "axios";
 
 interface ProfilePageProps {
     params: {
@@ -12,11 +13,11 @@ interface ProfilePageProps {
 }
 
 export default async function ProfilePage({ params }: ProfilePageProps) {
-    const user: User = await fetch(`http://localhost:3000/api/users/${1}`).then((data) => data.json());
+    const user: User = await axios.get(`http://localhost:3000/api/users/${1}`).then((response) => response.data);
 
-    const favoriteMovies: Movie[] = await fetch(`http://localhost:3000/api/movies?userId=${1}`).then((data) =>
-        data.json()
-    );
+    const favoriteMovies: Movie[] = await axios
+        .get(`http://localhost:3000/api/movies?userId=${1}`)
+        .then((response) => response.data);
 
     // if (!localStorage.getItem(LOCALSTORAGE_USER)) {
     //     redirect("/");

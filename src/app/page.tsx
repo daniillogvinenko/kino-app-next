@@ -1,11 +1,12 @@
 import { Button } from "@/components/ui/Button";
 import cls from "./page.module.scss";
 import { Header } from "@/components/Header";
-import { Movie } from "@/shared/types/types";
+import axios from "axios";
+import { prisma } from "../../lib/prisma";
 
 export default async function Home() {
-    const user = await fetch(`http://localhost:3000/api/movies/${1}`).then((data) => data.json());
-    const movies: Movie[] = await fetch("http://localhost:3000/api/movies").then((data) => data.json());
+    const user = await axios.get(`http://localhost:3000/api/movies/${1}`).then((response) => response.data);
+    const movies = await axios.get("http://localhost:3000/api/movies").then((response) => response.data);
 
     return (
         <>

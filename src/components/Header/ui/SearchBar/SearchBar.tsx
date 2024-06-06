@@ -2,23 +2,29 @@ import { ChangeEvent, useEffect, useState, useRef } from "react";
 import cls from "./SearchBar.module.scss";
 import { Movie } from "@/shared/types/types";
 import Link from "next/link";
+import axios from "axios";
 
 export const SearchBar = () => {
     const [isSearchOpened, setIsSearchOpened] = useState<boolean>(false);
     const [searchValue, setSearchValue] = useState("");
     const [searchResultItems, setSearchResultItems] = useState<Movie[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         if (searchValue) {
             const fetchData = async () => {
-                const data = await fetch(`http://localhost:3000/api/movies?search=${searchValue}`).then((data) =>
-                    data.json()
-                );
+                const data = await axios
+                    .get(`http://localhost:3000/api/movies?search=${searchValue}`)
+                    .then((data) => data.data);
                 return data;
             };
 
-            fetchData().then((data) => setSearchResultItems(data));
+            setIsLoading(true);
+            fetchData().then((data) => {
+                setSearchResultItems(data);
+                setIsLoading(false);
+            });
         }
     }, [searchValue]);
 
@@ -57,21 +63,27 @@ export const SearchBar = () => {
                 />
                 <button onClick={handleCloseSearch}>close</button>
             </div>
-            {searchResultItems.length ? (
-                <ul className={cls.searchResults}>
-                    {searchResultItems.map((movie) => (
-                        <Link key={movie.id} href={`/movies/${movie.id}`}>
-                            <li>
-                                <img src={movie.mainImg} alt="" />
-                                <div>
-                                    <p>{movie.title}</p>
-                                    <p>{movie.description}</p>
-                                </div>
-                            </li>
-                        </Link>
-                    ))}
-                </ul>
-            ) : null}
+            {isLoading ? (
+                <div>Loading...</div>
+            ) : (
+                <>
+                    {searchResultItems.length ? (
+                        <ul className={cls.searchResults}>
+                            {searchResultItems.map((movie) => (
+                                <Link key={movie.id} href={`/movies/${movie.id}`}>
+                                    <li>
+                                        <img src={movie.mainImg} alt="" />
+                                        <div>
+                                            <p>{movie.title}</p>
+                                            <p>{movie.description}</p>
+                                        </div>
+                                    </li>
+                                </Link>
+                            ))}
+                        </ul>
+                    ) : null}
+                </>
+            )}
         </div>
     );
 };

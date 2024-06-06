@@ -11,7 +11,7 @@ interface MoviePageCarouselProps {
 export const MoviePageCarousel = ({ movie }: MoviePageCarouselProps) => {
     return (
         <Carousel>
-            {movie?.otherImages.map((img) => (
+            {movie?.otherImages?.map((img) => (
                 <img style={{ aspectRatio: "16 / 9", objectFit: "cover" }} key={img} src={img} alt="" />
             ))}
         </Carousel>
