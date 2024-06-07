@@ -1,14 +1,13 @@
 "use client";
 
-import { User } from "@/shared/types/types";
 import cls from "./Header.module.scss";
 import { SearchBar } from "./SearchBar/SearchBar";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 
-export const Header = ({ user }: { user: User | undefined }) => {
+export const Header = () => {
     const session = useSession();
-    const username = session.data?.user?.name;
+    const user = session.data?.user
 
     return (
         <div className={cls.Header}>
@@ -22,8 +21,8 @@ export const Header = ({ user }: { user: User | undefined }) => {
                     </div>
                     <div>
                         {session.data ? (
-                            <Link href={`/${user?.id}`}>
-                                <p>Пользователь: {username}</p>
+                            <Link href={`/${session.data.user?.name}`}>
+                                <p>Пользователь: {user?.name}</p>
                             </Link>
                         ) : (
                             <Link href="/api/auth/signin">

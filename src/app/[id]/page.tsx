@@ -3,8 +3,9 @@ import { Button } from "@/components/ui/Button";
 import { Header } from "@/components/Header";
 import Link from "next/link";
 import { SignOutButton } from "@/components/SignOutButton/SignOutButton";
-import { Movie, User } from "@/shared/types/types";
 import axios from "axios";
+import { LOCALSTORAGE_USER } from "@/shared/consts/consts";
+import {redirect} from 'next/navigation'
 
 interface ProfilePageProps {
     params: {
@@ -12,20 +13,15 @@ interface ProfilePageProps {
     };
 }
 
+// todo - нужно сделать редирект, если пользователь не авторизован
 export default async function ProfilePage({ params }: ProfilePageProps) {
-    const user: User = await axios.get(`http://localhost:3000/api/users/${1}`).then((response) => response.data);
+    const user = await axios.get(`http://localhost:3000/api/users/user1`).then((response) => response.data);
 
-    const favoriteMovies: Movie[] = await axios
-        .get(`http://localhost:3000/api/movies?userId=${1}`)
-        .then((response) => response.data);
-
-    // if (!localStorage.getItem(LOCALSTORAGE_USER)) {
-    //     redirect("/");
-    // }
+    const favMovies = user?.favoriteMovies
 
     return (
         <>
-            <Header user={user} />
+            <Header />
             <div className={cls.ProfilePage}>
                 <div className="container">
                     <div>
@@ -39,18 +35,12 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
                     <div className={cls.favList}>
                         <p>Любимые фильмы</p>
                         <ul>
-                            {favoriteMovies?.map((fav) => (
+                            {favMovies?.map((fav) => (
                                 <Link key={fav.id} href={`/movies/${fav.id}`}>
                                     <li>
                                         <img src={fav.mainImg} alt="" />
                                         <div>
                                             <p>{fav.title}</p>
-                                            <p>{fav.description}</p>
-                                            <p>{fav.year}</p>
-                                            <p>{fav.genres.join(", ")}</p>
-                                            <p>{fav.country}</p>
-                                            <p>{fav.duration}</p>
-                                            <p>{fav.ageLimit}</p>
                                         </div>
                                     </li>
                                 </Link>

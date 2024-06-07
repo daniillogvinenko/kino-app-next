@@ -6,7 +6,10 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
         where: {
             id: +params.id,
         },
+        include: {
+            mainActors: true,
+            director: true
+        }
     });
-    console.log(movie);
     return NextResponse.json(movie);
 }

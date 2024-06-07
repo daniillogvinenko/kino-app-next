@@ -26,7 +26,7 @@ export const authOptions = {
                 });
 
                 if (currentUser && currentUser.password === credentials.password) {
-                    return { id: currentUser.username };
+                    return { id: currentUser.username, name: currentUser.username };
                 }
 
                 return null;

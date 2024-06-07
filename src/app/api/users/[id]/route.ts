@@ -6,6 +6,9 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
         where: {
             username: params.id,
         },
+        include: {
+            favoriteMovies: true
+        }
     });
 
     return NextResponse.json(user);

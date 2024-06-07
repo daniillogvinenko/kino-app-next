@@ -15,75 +15,23 @@ datasource db {
 }
 
 model User {
-  username  String   @id
-  password  String
-  favorites Movie[]
-  Review    Review[]
+  username       String  @id
+  password       String
+  favoriteMovies Movie[]
 }
 
 model Person {
-  id           Int          @id @default(autoincrement())
-  fullName     String
-  professions  Profession[]
-  height       Int
-  dateOfBirth  String
-  placeOfBirth String
-  genres       Genre[]
-  mainImg      String
-  otherImages  String[]
-  directedIn   Movie[]      @relation("directorOfMovie")
-  actedIn      Movie[]      @relation("actorsOfMovie")
+  id             Int     @id
+  fullName       String
+  directedMovies Movie[] @relation("directorOfMovie")
+  actedInMovies  Movie[] @relation("actorsOfMovie")
 }
 
 model Movie {
-  id          Int      @id @default(autoincrement())
-  title       String
-  description String
-  mainImg     String
-  otherImages String[]
-  genres      Genre[]
-  year        String
-  country     String
-  duration    String
-  ageLimit    String
-  director    Person   @relation("directorOfMovie", fields: [directorId], references: [id])
-  directorId  Int
-  mainActors  Person[] @relation("actorsOfMovie")
-  Review      Review[]
-  favoredBy   User[]
-}
-
-model Review {
-  id       Int    @id @default(autoincrement())
-  user     User   @relation(fields: [username], references: [username])
-  movie    Movie  @relation(fields: [movieId], references: [id])
-  Text     String
-  username String
-  movieId  Int
-}
-
-enum Profession {
-  Producer
-  Director
-  Actor
-  Screenwriter
-  Editor
-  Operator
-  Composer
-}
-
-enum Genre {
-  drama
-  crime
-  fantastic
-  comedy
-  adventures
-  horror
-  actionMovie
-  Western
-  military
-  detective
-  melodrama
-  documentary
-  thriller
+  id         Int      @id
+  title      String
+  director   Person   @relation("directorOfMovie", fields: [directorId], references: [id])
+  directorId Int
+  mainActors Person[] @relation("actorsOfMovie")
+  favoredBy  User[]
 }

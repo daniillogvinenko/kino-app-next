@@ -6,7 +6,6 @@ import { ReviewCard } from "@/components/ReviewCard/ReviewCard";
 import { Header } from "@/components/Header";
 import { FavoritesButton } from "@/components/FavoritesButton/FavoritesButton";
 import { MoviePageCarousel } from "@/components/MoviePageCarousel/MoviePageCarousel";
-import { Movie, Review, User } from "@/shared/types/types";
 import axios from "axios";
 
 interface MoviePageProps {
@@ -16,15 +15,15 @@ interface MoviePageProps {
 }
 
 export default async function MoviePage({ params }: MoviePageProps) {
-    const movie: Movie = await axios.get(`http://localhost:3000/api/movies/${params.id}`).then((data) => data.data);
-    const reviews: Review[] = await axios
-        .get(`http://localhost:3000/api/reviews?movieId=${params.id}`)
-        .then((data) => data.data);
-    const user: User = await axios.get(`http://localhost:3000/api/users/${1}`).then((data) => data.data);
+    const movie = await axios.get(`http://localhost:3000/api/movies/${params.id}`).then((data) => data.data);
+    // const reviews: Review[] = await axios
+    //     .get(`http://localhost:3000/api/reviews?movieId=${params.id}`)
+    //     .then((data) => data.data);
+    const user = await axios.get(`http://localhost:3000/api/users/${1}`).then((data) => data.data);
 
     return (
         <>
-            <Header user={user} />
+            <Header  />
 
             <div className={cls.MoviePage}>
                 <div className="container">
@@ -49,17 +48,17 @@ export default async function MoviePage({ params }: MoviePageProps) {
                             <Button size="lg">Смотреть</Button>
                             <FavoritesButton user={user} id={params.id} />
                             <p>Режисер</p>
-                            <p>{movie?.director}</p>
+                            <p>{movie?.director.fullName}</p>
                             <br />
                             <p>Актеры</p>
                             {movie?.mainActors?.map((actor) => (
-                                <p key={actor}>{actor}</p>
+                                <p key={actor.fullName}>{actor.fullName}</p>
                             ))}
                         </div>
                     </div>
                     <MoviePageCarousel movie={movie!} />
 
-                    <div className={cls.commentsSection}>
+                    {/* <div className={cls.commentsSection}>
                         <div>Комментарии</div>
                         {user ? <div>SendReviews Button</div> : null}
                         {reviews.length ? (
@@ -71,7 +70,7 @@ export default async function MoviePage({ params }: MoviePageProps) {
                         ) : (
                             <div>Комментариев нету</div>
                         )}
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </>
