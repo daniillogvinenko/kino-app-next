@@ -21,17 +21,47 @@ model User {
 }
 
 model Person {
-  id             Int     @id
+  id             Int          @id
   fullName       String
-  directedMovies Movie[] @relation("directorOfMovie")
-  actedInMovies  Movie[] @relation("actorsOfMovie")
+  directedMovies Movie[]      @relation("directorOfMovie")
+  actedInMovies  Movie[]      @relation("actorsOfMovie")
+  personGenres   Genre[]
+  professions    Profession[]
+  mainImage      String?
 }
 
 model Movie {
-  id         Int      @id
-  title      String
-  director   Person   @relation("directorOfMovie", fields: [directorId], references: [id])
-  directorId Int
-  mainActors Person[] @relation("actorsOfMovie")
-  favoredBy  User[]
+  id          Int      @id
+  title       String
+  director    Person   @relation("directorOfMovie", fields: [directorId], references: [id])
+  directorId  Int
+  mainActors  Person[] @relation("actorsOfMovie")
+  favoredBy   User[]
+  movieGenres Genre[]
+}
+
+enum Profession {
+  Producer
+  Director
+  Actor
+  Screenwriter
+  Editor
+  Operator
+  Composer
+}
+
+enum Genre {
+  drama
+  crime
+  fantastic
+  comedy
+  adventures
+  horror
+  actionMovie
+  Western
+  military
+  detective
+  melodrama
+  documentary
+  thriller
 }
