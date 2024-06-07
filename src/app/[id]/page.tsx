@@ -24,12 +24,10 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
                     <div>
                         <p>Профиль</p>
                         <p>Имя пользователя: {user?.username}</p>
-                        <p>Дата регистрации: {user?.username}</p>
-                        <p>Оставлено комментариев: {user?.username}</p>
                         <Button>Изменить данные</Button>
                         <SignOutButton />
                     </div>
-                    <FavMoviesList favMovies={user.favoriteMovies}/>
+                    <FavMoviesList favMovies={user?.favoriteMovies}/>
                 </div>
             </div>
         </>

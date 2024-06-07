@@ -1,14 +1,15 @@
 import { Header } from "@/components/Header";
 import axios from "axios";
+import Link from "next/link";
 
 interface PersonPageProps {
     params: {
-        id: string
-    }
+        id: string;
+    };
 }
 
 export default async function PersonPage(props: PersonPageProps) {
-    const {params} = props
+    const { params } = props;
 
     const person = await axios.get(`http://localhost:3000/api/persons/${params.id}`).then((response) => response.data);
 
@@ -20,12 +21,20 @@ export default async function PersonPage(props: PersonPageProps) {
                 <br />
                 <p>Актер</p>
                 <ul>
-                    {person.actedInMovies.map((m) => <li>{m.title}</li>)}
+                    {person.actedInMovies.map((m) => (
+                        <Link href={`/movies/${m.id}`}>
+                            <li>{m.title}</li>
+                        </Link>
+                    ))}
                 </ul>
                 <br />
                 <p>Режисер</p>
                 <ul>
-                    {person.directedMovies.map((m) => <li>{m.title}</li>)}
+                    {person.directedMovies.map((m) => (
+                        <Link href={`/movies/${m.id}`}>
+                            <li>{m.title}</li>
+                        </Link>
+                    ))}
                 </ul>
             </div>
         </>

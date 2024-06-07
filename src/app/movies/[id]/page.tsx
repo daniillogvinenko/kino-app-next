@@ -23,7 +23,7 @@ export default async function MoviePage({ params }: MoviePageProps) {
 
     return (
         <>
-            <Header  />
+            <Header />
 
             <div className={cls.MoviePage}>
                 <div className="container">
@@ -48,11 +48,15 @@ export default async function MoviePage({ params }: MoviePageProps) {
                             <Button size="lg">Смотреть</Button>
                             <FavoritesButton user={user} id={params.id} />
                             <p>Режисер</p>
-                            <p>{movie?.director.fullName}</p>
+                            <Link href={`/person/${movie?.director.id}`}>
+                                <p>{movie?.director.fullName}</p>
+                            </Link>
                             <br />
                             <p>Актеры</p>
                             {movie?.mainActors?.map((actor) => (
-                                <p key={actor.fullName}>{actor.fullName}</p>
+                                <Link href={`/person/${actor.id}`}>
+                                    <p key={actor.fullName}>{actor.fullName}</p>
+                                </Link>
                             ))}
                         </div>
                     </div>
