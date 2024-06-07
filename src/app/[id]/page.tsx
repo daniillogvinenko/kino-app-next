@@ -4,8 +4,7 @@ import { Header } from "@/components/Header";
 import Link from "next/link";
 import { SignOutButton } from "@/components/SignOutButton/SignOutButton";
 import axios from "axios";
-import { LOCALSTORAGE_USER } from "@/shared/consts/consts";
-import {redirect} from 'next/navigation'
+import { FavMoviesList } from "@/components/FavMoviesList";
 
 interface ProfilePageProps {
     params: {
@@ -15,9 +14,7 @@ interface ProfilePageProps {
 
 // todo - нужно сделать редирект, если пользователь не авторизован
 export default async function ProfilePage({ params }: ProfilePageProps) {
-    const user = await axios.get(`http://localhost:3000/api/users/user1`).then((response) => response.data);
-
-    const favMovies = user?.favoriteMovies
+    const user = await axios.get(`http://localhost:3000/api/users/${params.id}`).then((response) => response.data);
 
     return (
         <>
@@ -32,21 +29,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
                         <Button>Изменить данные</Button>
                         <SignOutButton />
                     </div>
-                    <div className={cls.favList}>
-                        <p>Любимые фильмы</p>
-                        <ul>
-                            {favMovies?.map((fav) => (
-                                <Link key={fav.id} href={`/movies/${fav.id}`}>
-                                    <li>
-                                        <img src={fav.mainImg} alt="" />
-                                        <div>
-                                            <p>{fav.title}</p>
-                                        </div>
-                                    </li>
-                                </Link>
-                            ))}
-                        </ul>
-                    </div>
+                    <FavMoviesList favMovies={user.favoriteMovies}/>
                 </div>
             </div>
         </>

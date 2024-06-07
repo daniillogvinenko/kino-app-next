@@ -7,18 +7,19 @@ import { prisma } from "../../lib/prisma";
 export default async function Home() {
     const movies = await axios.get("http://localhost:3000/api/movies").then((response) => response.data);
 
-    await prisma.user.update({
-        where: {
-            username: 'user1'
-        },
-        data: {
-            favoriteMovies: {
-                connect: {
-                    id: 1
-                }
-            }
-        }
-    })
+    // await prisma.movie.update({
+    //     where: {
+    //         id: 3
+    //     },
+    //     data: {
+    //         mainActors: {
+    //             create: {
+    //                 id: 23,
+    //                 fullName: 'Майкл Мэдсен'
+    //             }
+    //         }
+    //     }
+    // })
 
     return (
         <>
