@@ -1,14 +1,16 @@
 .Header {
-    padding: 40px 0;
+    padding: 25px 0;
     position: fixed;
     width: 100%;
     z-index: 50;
     background-color: var(--bg-color);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.397);
+    transition: background-color 0.3s;
 
     .flex {
         display: flex;
         justify-content: space-between;
+        align-items: center;
 
         .logo {
             font-size: 32px;
@@ -30,4 +32,9 @@
             }
         }
     }
+}
+
+.headerIsVisible {
+    box-shadow: none;
+    background-color: transparent;
 }

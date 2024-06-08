@@ -4,13 +4,31 @@ import cls from "./Header.module.scss";
 import { SearchBar } from "./SearchBar/SearchBar";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import { Button } from "@/components/ui/Button";
+import { useCallback, useEffect, useState } from "react";
+import { cn } from "@/shared/helpers/classNames/classNames";
 
 export const Header = () => {
     const session = useSession();
     const user = session.data?.user;
+    const [headerIsVisible, setHeaderIsVisible] = useState(true);
+
+    const handleListener = useCallback(() => {
+        if (scrollY > 100) {
+            setHeaderIsVisible(false);
+        } else {
+            setHeaderIsVisible(true);
+        }
+    }, []);
+
+    useEffect(() => {
+        document.addEventListener("scroll", handleListener);
+
+        return () => removeEventListener("scroll", handleListener);
+    }, [handleListener]);
 
     return (
-        <div className={cls.Header}>
+        <div className={cn(cls.Header, { [cls.headerIsVisible]: headerIsVisible }, [])}>
             <div className="container">
                 <div className={cls.flex}>
                     <Link href="/">
@@ -26,9 +44,9 @@ export const Header = () => {
                                 <p>{user?.name}</p>
                             </Link>
                         ) : (
-                            <Link href="/api/auth/signin">
-                                <div>Войти</div>
-                            </Link>
+                            <Button href="/api/auth/signin" variant={"outline"}>
+                                Войти
+                            </Button>
                         )}
                     </div>
                 </div>

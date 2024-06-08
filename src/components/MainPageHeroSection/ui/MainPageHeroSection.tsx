@@ -6,8 +6,8 @@ export const MainPageHeroSection = () => {
         <div className={cls.MainPageHeroSection}>
             <div className="container">
                 <div className={cls.wrapper}>
-                    <h1>ЧЕЛОВЕК-ПАУК: ВОЗВРАЩЕНИЕ ДОМОЙ</h1>
-                    <div className={cls.about}>2022 | Комедия, приключения</div>
+                    <h1>Однажды в… Голливуде</h1>
+                    <div className={cls.about}>2019 | Драма, комедия</div>
                     <div className={cls.button}>
                         <Button>Смотреть</Button>
                         {/* <Button>Смотреть</Button> */}
