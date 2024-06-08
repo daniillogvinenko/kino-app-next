@@ -1,5 +1,6 @@
 import NextAuth, { User } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
+import VKProvider from 'next-auth/providers/vk'
 import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "../../../../../lib/prisma";
 
@@ -10,7 +11,10 @@ export const authOptions = {
             clientId: process.env.GITHUB_ID!,
             clientSecret: process.env.GITHUB_SECRET!,
         }),
-        // ...add more providers here
+        VKProvider({
+            clientId: process.env.VK_ID!,
+            clientSecret: process.env.VK_SECRET!
+        }),
         CredentialsProvider({
             credentials: {
                 username: { label: "username", type: "text", placeholder: "Enter username" },
