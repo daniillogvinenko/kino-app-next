@@ -6,9 +6,5 @@ import { useSession, signOut } from "next-auth/react";
 export const SignOutButton = () => {
     const session = useSession();
 
-    return (
-        <Button variant="secondary" onClick={() => signOut({ callbackUrl: "/" })}>
-            Выйти
-        </Button>
-    );
+    return <Button onClick={() => signOut({ callbackUrl: "/" })}>Выйти</Button>;
 };

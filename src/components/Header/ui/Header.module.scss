@@ -12,16 +12,12 @@
         justify-content: space-between;
         align-items: center;
 
-        .logo {
-            font-size: 32px;
-            font-weight: 900;
-            line-height: 100%;
-        }
-
         .userLink {
             display: flex;
             gap: 8px;
             align-items: center;
+            width: 240px;
+            justify-content: right;
 
             .userAvatar {
                 width: 32px;

@@ -27,6 +27,7 @@
             height: 6px;
             background-color: var(--accent-color);
             margin-top: 8px;
+            border-radius: 5px 5px 0 0;
         }
     }
 }
@@ -34,36 +35,4 @@
 .separator {
     height: 1px;
     background-color: #B5B5B5;
-}
-
-.listWrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    margin-top: 50px;
-    row-gap: 20px;
-
-    .movieCard {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        line-height: 150%;
-
-        img {
-            border-radius: 16px;
-        }
-
-        .movieYear {
-            font-weight: 400;
-        }
-
-        .movieTitle {
-            font-weight: 400;
-        }
-
-        .movieRating {
-            margin-bottom: 8px;
-            color: #B5B5B5;
-            font-weight: 300;
-        }
-    }
 }

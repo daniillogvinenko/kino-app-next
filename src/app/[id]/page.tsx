@@ -4,7 +4,7 @@ import { Header } from "@/components/Header";
 import Link from "next/link";
 import { SignOutButton } from "@/components/SignOutButton/SignOutButton";
 import axios from "axios";
-import { FavMoviesList } from "@/components/FavMoviesList";
+import { MovieList } from "@/components/MovieList";
 
 interface ProfilePageProps {
     params: {
@@ -21,13 +21,16 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
             <Header />
             <div className={cls.ProfilePage}>
                 <div className="container">
-                    <div>
-                        <p>Профиль</p>
-                        <p>Имя пользователя: {user?.username}</p>
-                        <Button>Изменить данные</Button>
-                        <SignOutButton />
+                    <div className={cls.contentWrapper}>
+                        <div className={cls.username}>{user.username}</div>
+                        <div className={cls.btnWrapper}>
+                            <Button variant={"outline"}>Редактировать профиль</Button>
+                            <SignOutButton />
+                        </div>
+                        <div className={cls.favTitle}>Избранное</div>
+                        {/* <FavMoviesList favMovies={user?.favoriteMovies} /> */}
+                        <MovieList movies={user?.favoriteMovies} />
                     </div>
-                    <FavMoviesList favMovies={user?.favoriteMovies}/>
                 </div>
             </div>
         </>

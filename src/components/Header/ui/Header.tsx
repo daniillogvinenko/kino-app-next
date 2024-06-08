@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/Button";
 import { useCallback, useEffect, useState } from "react";
 import { cn } from "@/shared/helpers/classNames/classNames";
+import Image from "next/image";
 
 export const Header = () => {
     const session = useSession();
@@ -32,7 +33,7 @@ export const Header = () => {
             <div className="container">
                 <div className={cls.flex}>
                     <Link href="/">
-                        <div className={cls.logo}>Movies App</div>
+                        <Image src="/static/icons/header-logo.svg" alt="logo" width={240} height={32} />
                     </Link>
                     <div>
                         <SearchBar />

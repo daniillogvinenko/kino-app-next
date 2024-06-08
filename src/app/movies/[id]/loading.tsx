@@ -1,5 +1,5 @@
 import { Header } from "@/components/Header";
-import cls from "./page.module.scss";
+import cls from "./loading.module.scss";
 export default function Loading() {
     return (
         <>

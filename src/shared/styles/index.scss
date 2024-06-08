@@ -10,3 +10,12 @@ body {
     max-width: 1240px;
     margin: 0 auto;
 }
+
+body::-webkit-scrollbar {
+    width: 6px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+}

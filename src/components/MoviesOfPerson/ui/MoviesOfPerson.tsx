@@ -5,6 +5,7 @@ import cls from "./MoviesOfPerson.module.scss";
 import Image from "next/image";
 import { cn } from "@/shared/helpers/classNames/classNames";
 import { Button } from "@/components/ui/Button";
+import { MovieList } from "@/components/MovieList";
 
 interface MoviesOfPersonProps {
     person: any;
@@ -49,26 +50,6 @@ export const MoviesOfPerson = ({ person, className }: MoviesOfPersonProps) => {
             ) : (
                 <MovieList movies={person.directedMovies} />
             )}
-        </div>
-    );
-};
-
-const MovieList = ({ movies }: { movies: any[] }) => {
-    return (
-        <div className={cls.listWrapper}>
-            {movies.map((movie) => (
-                <div key={movie.id} className={cls.movieCard}>
-                    <Image width={85} height={130} src={`/static/images/movies/${movie.mainImage}`} alt="movieImage" />
-                    <div>
-                        <div className={cls.movieYear}>2019</div>
-                        <div className={cls.movieTitle}>{movie.title}</div>
-                        <div className={cls.movieRating}>Рейтинг: 7,3</div>
-                        <Button href={`/movies/${movie.id}`} variant={"outline"} size={"sm"}>
-                            Подробнее
-                        </Button>
-                    </div>
-                </div>
-            ))}
         </div>
     );
 };
