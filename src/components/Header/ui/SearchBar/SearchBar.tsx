@@ -74,7 +74,7 @@ export const SearchBar = () => {
                     />
                 </div>
                 {isLoading ? (
-                    <div>Loading...</div>
+                    <span className={cls.loader}></span>
                 ) : (
                     <>
                         {searchResultItems.length ? (

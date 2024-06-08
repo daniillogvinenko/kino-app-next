@@ -9,7 +9,7 @@ export const MainPageHeroSection = () => {
                     <h1>Однажды в… Голливуде</h1>
                     <div className={cls.about}>2019 | Драма, комедия</div>
                     <div className={cls.button}>
-                        <Button>Смотреть</Button>
+                        <Button href="/movies/4">Смотреть</Button>
                         {/* <Button>Смотреть</Button> */}
                     </div>
                 </div>
