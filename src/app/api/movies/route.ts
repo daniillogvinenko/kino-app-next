@@ -5,12 +5,11 @@ export async function GET(req: NextRequest) {
     const movies = await prisma.movie.findMany({
         include: {
             director: true,
-            mainActors: true
-        }
+            mainActors: true,
+        },
     });
 
     const userId = req.nextUrl.searchParams.get("userId");
-
     if (userId) {
         const user = await prisma.user.findUnique({
             where: {
@@ -32,10 +31,7 @@ export async function GET(req: NextRequest) {
 
     const searchValue = req.nextUrl.searchParams.get("search");
     if (searchValue) {
-        const filteredMovies = movies.filter(
-            (m) =>
-                m.title.toLowerCase().includes(searchValue.toLowerCase())
-        );
+        const filteredMovies = movies.filter((m) => m.title.toLowerCase().includes(searchValue.toLowerCase()));
         return NextResponse.json(filteredMovies);
     }
 

@@ -1,29 +1,31 @@
+.title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 40px;
+    margin-bottom: 25px;
+}
+
 .wrapper {
     display: flex;
-    justify-content: space-e;
     gap: 20px;
     flex-wrap: wrap;
 }
 
 .card {
-    width: 320px;
-    // border: 1px solid #000;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.356);
-    border-radius: 8px;
-    overflow: hidden;
+    width: 190px;
+    display: flex;
+    flex-direction: column;
 
-    .imgWrapper {
-        height: 200px;
-        overflow: hidden;
-
-        .img {
-            object-fit: cover;
-            width: 100%;
-        }
+    img {
+        border-radius: 20px;
     }
 
-    .title {
+    .movieTitle {
         margin-bottom: 15px;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        margin-top: 12px;
     }
 
     .description {

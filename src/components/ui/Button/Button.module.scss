@@ -1,6 +1,9 @@
 .Button {
-    border-radius: 100px;
+    border-radius: 14px;
     transition-duration: 0.3s;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 300;
 
     &:hover {
         opacity: 0.6;
@@ -8,19 +11,21 @@
 }
 
 .regular {
-    background-color: var(--main-color);
+    background-color: var(--accent-color);
     color: white;
 }
 
 .outline {
-    background-color: var(--secondary-color);
-    color: var(--main-color);
-    border: 1px solid var(--main-color);
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
 }
 
-.secondary {
-    background-color: var(--secondary-color);
-    color: var(--main-color);
+.sm {
+    padding: 6px 10px;
+    line-height: 100%;
+    border-radius: 8px;
+    font-size: 13px;
 }
 
 .md {

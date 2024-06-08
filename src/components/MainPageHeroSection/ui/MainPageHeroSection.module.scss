@@ -1,0 +1,21 @@
+.MainPageHeroSection {
+    height: 695px;
+    background: url('/static/images/pages/hero-main-bg.png') center/cover fixed;
+
+    .wrapper {
+        position: relative;
+        top: 440px;
+
+        h1 {
+            font-weight: 900;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .about {
+            font-size: 14px;
+            line-height: 20px;
+            margin-bottom: 36px;
+        }
+    }
+}

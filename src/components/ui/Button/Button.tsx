@@ -8,9 +8,9 @@ const buttonVariants = cva(cls.Button, {
         variant: {
             regular: cls.regular,
             outline: cls.outline,
-            secondary: cls.secondary,
         },
         size: {
+            sm: cls.sm,
             md: cls.md,
             lg: cls.lg,
         },

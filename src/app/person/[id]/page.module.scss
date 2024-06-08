@@ -1,0 +1,42 @@
+.flex1 {
+    display: flex;
+    gap: 48px;
+    padding-top: 175px;
+
+    img {
+        border-radius: 10px;
+    }
+
+    .fullName {
+        font-weight: 900;
+        font-size: 48px;
+        margin-bottom: 20px;
+    }
+
+    .englishFullname {
+        color: #B5B5B5;
+        margin-bottom: 20px;
+        font-size: 18px;
+    }
+
+    .aboutTitle {
+        font-size: 22px;
+        line-height: 24px;
+        margin-top: 45px;
+        margin-bottom: 20px;
+        font-weight: 700;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: max-content max-content;
+        column-gap: 24px;
+        row-gap: 20px;
+        font-size: 13px;
+
+        .gridLeftColumn {
+            color: #B5B5B5;
+        }
+    }
+
+}

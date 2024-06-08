@@ -1,6 +1,85 @@
-.flex {
+.flex1 {
     display: flex;
     justify-content: space-between;
+    gap: 48px;
+    padding-top: 175px;
+
+    img {
+        border-radius: 10px;
+    }
+
+    .title {
+        font-weight: 900;
+        font-size: 48px;
+        margin-bottom: 20px;
+    }
+
+    .shortInfo {
+        color: #B5B5B5;
+        margin-bottom: 20px;
+        font-size: 18px;
+    }
+
+    p {
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: 300;
+        margin-bottom: 44px;
+    }
+
+    .aboutTitle {
+        font-size: 22px;
+        line-height: 24px;
+        margin-top: 45px;
+        margin-bottom: 20px;
+        font-weight: 700;
+    }
+
+    .aboutGrid {
+        display: grid;
+        grid-template-columns: max-content max-content;
+        column-gap: 24px;
+        row-gap: 20px;
+        font-size: 13px;
+
+        .gridLeftColumn {
+            color: #B5B5B5;
+        }
+
+        .directorFullName {
+            transition-duration: 0.2s;
+
+            &:hover {
+                color: var(--accent-color);
+            }
+        }
+    }
+}
+
+
+.actorsTitle {
+    font-size: 22px;
+    line-height: 24px;
+    margin-top: 60px;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.actorsWrapper {
+    display: flex;
+    gap: 24px;
+    width: 88px;
+
+    .actorCard {
+
+        line-height: 120%;
+
+        img {
+            border-radius: 20px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+    }
 }
 
 .reviewCard {

@@ -7,6 +7,7 @@ import { Header } from "@/components/Header";
 import { FavoritesButton } from "@/components/FavoritesButton/FavoritesButton";
 import { MoviePageCarousel } from "@/components/MoviePageCarousel/MoviePageCarousel";
 import axios from "axios";
+import Image from "next/image";
 
 interface MoviePageProps {
     params: {
@@ -15,11 +16,8 @@ interface MoviePageProps {
 }
 
 export default async function MoviePage({ params }: MoviePageProps) {
-    const movie = await axios.get(`http://localhost:3000/api/movies/${params.id}`).then((data) => data.data);
-    // const reviews: Review[] = await axios
-    //     .get(`http://localhost:3000/api/reviews?movieId=${params.id}`)
-    //     .then((data) => data.data);
-    const user = await axios.get(`http://localhost:3000/api/users/${1}`).then((data) => data.data);
+    const movie: any = await axios.get(`http://localhost:3000/api/movies/${params.id}`).then((data) => data.data);
+    const user: any = await axios.get(`http://localhost:3000/api/users/${1}`).then((data) => data.data);
 
     return (
         <>
@@ -27,54 +25,53 @@ export default async function MoviePage({ params }: MoviePageProps) {
 
             <div className={cls.MoviePage}>
                 <div className="container">
-                    <Link href="/">Назад</Link>
-
-                    <div className={cls.flex}>
-                        <img src={movie?.mainImg!} alt="" />
+                    <div className={cls.flex1}>
+                        <Image
+                            src={`/static/images/movies/${movie.mainImage}`}
+                            alt="movieImage"
+                            width={295}
+                            height={443}
+                        />
                         <div>
-                            <p>{movie?.title}</p>
-                            <br />
-                            <p>{movie?.description}</p>
-                            <br />
-                            <p>{movie?.year}</p>
-                            <br />
-                            <p>{movie?.genres?.join(", ")}</p>
-                            <br />
-                            <p>{movie?.country}</p>
-                            <br />
-                            <p>{movie?.duration}</p>
-                            <br />
-                            <p>{movie?.ageLimit}</p>
-                            <Button size="lg">Смотреть</Button>
-                            <FavoritesButton user={user} id={params.id} />
-                            <p>Режисер</p>
-                            <Link href={`/person/${movie?.director.id}`}>
-                                <p>{movie?.director.fullName}</p>
-                            </Link>
-                            <br />
-                            <p>Актеры</p>
-                            {movie?.mainActors?.map((actor) => (
-                                <Link href={`/person/${actor.id}`}>
-                                    <p key={actor.fullName}>{actor.fullName}</p>
+                            <div className={cls.title}>{movie.title}</div>
+                            <div className={cls.shortInfo}>2022 | {movie.movieGenres.join(", ")} | 18+</div>
+                            <p>{movie.movieDescription}</p>
+                            <Button>Смотреть</Button>
+                            <div className={cls.aboutTitle}>О фильме</div>
+                            <div className={cls.aboutGrid}>
+                                <span className={cls.gridLeftColumn}>Год производства</span>
+                                <span>2009</span>
+                                <span className={cls.gridLeftColumn}>Страна производства</span>
+                                <span>США</span>
+                                <span className={cls.gridLeftColumn}>Жанр</span>
+                                <span>{movie.movieGenres.join(", ")}</span>
+                                <span className={cls.gridLeftColumn}>Режисер</span>
+                                <Link href={`/person/${movie.directorId}`}>
+                                    <span className={cls.directorFullName}>{movie.director.fullName}</span>
                                 </Link>
-                            ))}
+                                <span className={cls.gridLeftColumn}>Длительность</span>
+                                <span>138 мин. / 2:18</span>
+                                <span className={cls.gridLeftColumn}>Возраст</span>
+                                <span>18+</span>
+                            </div>
                         </div>
                     </div>
-                    <MoviePageCarousel movie={movie!} />
-
-                    {/* <div className={cls.commentsSection}>
-                        <div>Комментарии</div>
-                        {user ? <div>SendReviews Button</div> : null}
-                        {reviews.length ? (
-                            <div>
-                                {reviews?.map((review) => (
-                                    <ReviewCard key={review.id} className={cls.reviewCard} review={review} />
-                                ))}
-                            </div>
-                        ) : (
-                            <div>Комментариев нету</div>
-                        )}
-                    </div> */}
+                    <div className={cls.actorsTitle}>В главных ролях</div>
+                    <div className={cls.actorsWrapper}>
+                        {movie.mainActors.map((actor) => (
+                            <Link href={`/person/${actor.id}`} key={actor.id}>
+                                <div className={cls.actorCard}>
+                                    <Image
+                                        src={`/static/images/persons/${actor.mainImage}`}
+                                        alt="actorImage"
+                                        width={88}
+                                        height={88}
+                                    />
+                                    <div>{actor.fullName}</div>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
                 </div>
             </div>
         </>

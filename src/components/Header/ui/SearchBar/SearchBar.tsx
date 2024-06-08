@@ -1,13 +1,15 @@
 import { ChangeEvent, useEffect, useState, useRef } from "react";
 import cls from "./SearchBar.module.scss";
-import { Movie } from "@/shared/types/types";
 import Link from "next/link";
 import axios from "axios";
+import Image from "next/image";
+import Input from "@/components/ui/Input";
+import { Overlay } from "@/components/ui/Overlay";
 
 export const SearchBar = () => {
     const [isSearchOpened, setIsSearchOpened] = useState<boolean>(false);
     const [searchValue, setSearchValue] = useState("");
-    const [searchResultItems, setSearchResultItems] = useState<Movie[]>([]);
+    const [searchResultItems, setSearchResultItems] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -48,42 +50,58 @@ export const SearchBar = () => {
     };
 
     if (!isSearchOpened) {
-        return <p onClick={handleOpenSearch}>Search</p>;
+        return (
+            <div className={cls.SearchBarOpen} onClick={handleOpenSearch}>
+                <Image width={24} height={24} src="/static/icons/search.svg" alt="searchIcon" />
+                <span>Поиск</span>
+            </div>
+        );
     }
 
     return (
-        <div className={cls.SearchBar}>
-            <div className={cls.inputWrapper}>
-                <input
-                    ref={inputRef}
-                    className={cls.input}
-                    type="text"
-                    value={searchValue}
-                    onChange={handleSearchChange}
-                />
-                <button onClick={handleCloseSearch}>close</button>
+        <>
+            <Overlay onClick={handleCloseSearch} className={cls.overlay} />
+
+            <div className={cls.SearchBar}>
+                <div className={cls.inputWrapper}>
+                    <Input ref={inputRef} value={searchValue} onChange={handleSearchChange} />
+                    <Image
+                        onClick={handleCloseSearch}
+                        src="/static/icons/close.svg"
+                        alt="closeIcon"
+                        width={14}
+                        height={14}
+                    />
+                </div>
+                {isLoading ? (
+                    <div>Loading...</div>
+                ) : (
+                    <>
+                        {searchResultItems.length ? (
+                            <ul className={cls.searchResults}>
+                                {searchResultItems.map((movie) => (
+                                    <Link key={movie.id} href={`/movies/${movie.id}`}>
+                                        <li>
+                                            <Image
+                                                src={`/static/images/movies/${movie.mainImage}`}
+                                                alt=""
+                                                width={43}
+                                                height={65}
+                                            />
+                                            <div className={cls.movieInfoWrapper}>
+                                                <p>{movie.title}</p>
+                                                <p className={cls.movieInfo}>
+                                                    <span>8,5</span>Lorem, ipsum dolor
+                                                </p>
+                                            </div>
+                                        </li>
+                                    </Link>
+                                ))}
+                            </ul>
+                        ) : null}
+                    </>
+                )}
             </div>
-            {isLoading ? (
-                <div>Loading...</div>
-            ) : (
-                <>
-                    {searchResultItems.length ? (
-                        <ul className={cls.searchResults}>
-                            {searchResultItems.map((movie) => (
-                                <Link key={movie.id} href={`/movies/${movie.id}`}>
-                                    <li>
-                                        <img src={movie.mainImg} alt="" />
-                                        <div>
-                                            <p>{movie.title}</p>
-                                            <p>{movie.description}</p>
-                                        </div>
-                                    </li>
-                                </Link>
-                            ))}
-                        </ul>
-                    ) : null}
-                </>
-            )}
-        </div>
+        </>
     );
 };
