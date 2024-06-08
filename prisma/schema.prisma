@@ -20,24 +20,29 @@ model User {
   favoriteMovies Movie[]
 }
 
+// рост, дата рожд., место рожд.
 model Person {
-  id             Int          @id
-  fullName       String
-  directedMovies Movie[]      @relation("directorOfMovie")
-  actedInMovies  Movie[]      @relation("actorsOfMovie")
-  personGenres   Genre[]
-  professions    Profession[]
-  mainImage      String?
+  id              Int          @id
+  fullName        String
+  fullNameEnglish String
+  directedMovies  Movie[]      @relation("directorOfMovie")
+  actedInMovies   Movie[]      @relation("actorsOfMovie")
+  personGenres    Genre[]
+  professions     Profession[]
+  mainImage       String
 }
 
+// длительность, страна, возр. ограничение
 model Movie {
-  id          Int      @id
-  title       String
-  director    Person   @relation("directorOfMovie", fields: [directorId], references: [id])
-  directorId  Int
-  mainActors  Person[] @relation("actorsOfMovie")
-  favoredBy   User[]
-  movieGenres Genre[]
+  id               Int      @id
+  title            String
+  director         Person   @relation("directorOfMovie", fields: [directorId], references: [id])
+  directorId       Int
+  mainActors       Person[] @relation("actorsOfMovie")
+  favoredBy        User[]
+  movieGenres      Genre[]
+  mainImage        String
+  movieDescription String
 }
 
 enum Profession {

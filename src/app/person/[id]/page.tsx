@@ -14,8 +14,6 @@ export default async function PersonPage(props: PersonPageProps) {
 
     const person = await axios.get(`http://localhost:3000/api/persons/${params.id}`).then((response) => response.data);
 
-    console.log(`/static/images/persons/${params.id}`)
-
     return (
         <>
             <Header />
