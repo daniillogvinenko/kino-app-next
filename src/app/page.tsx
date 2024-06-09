@@ -5,10 +5,11 @@ import axios from "axios";
 import { MainPageHeroSection } from "@/components/MainPageHeroSection";
 import Image from "next/image";
 import Link from "next/link";
+import { API } from "@/shared/consts/consts";
 
 export default async function Home() {
     const movies = await axios
-        .get("http://localhost:3000/api/movies")
+        .get(`${API}/api/movies`)
         .then((response) => response.data)
         .catch(() => undefined);
 

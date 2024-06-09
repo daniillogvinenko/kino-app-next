@@ -5,6 +5,7 @@ import axios from "axios";
 import Image from "next/image";
 import Input from "@/components/ui/Input";
 import { Overlay } from "@/components/ui/Overlay";
+import { API } from "@/shared/consts/consts";
 
 export const SearchBar = () => {
     const [isSearchOpened, setIsSearchOpened] = useState<boolean>(false);
@@ -18,7 +19,7 @@ export const SearchBar = () => {
         if (searchValue) {
             const fetchData = async () => {
                 const data = await axios
-                    .get(`http://localhost:3000/api/movies?search=${searchValue}`)
+                    .get(`${API}/movies?search=${searchValue}`)
                     .then((response) => response.data)
                     .catch(() => setError(true));
                 return data;

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { SignOutButton } from "@/components/SignOutButton/SignOutButton";
 import axios from "axios";
 import { MovieList } from "@/components/MovieList";
+import { API } from "@/shared/consts/consts";
 
 interface ProfilePageProps {
     params: {
@@ -15,7 +16,7 @@ interface ProfilePageProps {
 // todo - нужно сделать редирект, если пользователь не авторизован
 export default async function ProfilePage({ params }: ProfilePageProps) {
     const user = await axios
-        .get(`http://localhost:3000/api/users/${params.id}`)
+        .get(`${API}/api/users/${params.id}`)
         .then((response) => response.data)
         .catch(() => undefined);
 

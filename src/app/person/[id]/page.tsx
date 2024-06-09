@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
+import { API } from "@/shared/consts/consts";
 
 interface PersonPageProps {
     params: {
@@ -15,7 +16,7 @@ export default async function PersonPage(props: PersonPageProps) {
     const { params } = props;
 
     const person = await axios
-        .get(`http://localhost:3000/api/persons/${params.id}`)
+        .get(`${API}/api/persons/${params.id}`)
         .then((response) => response.data)
         .catch(() => undefined);
 

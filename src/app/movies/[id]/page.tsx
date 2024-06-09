@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { Header } from "@/components/Header";
 import axios from "axios";
 import Image from "next/image";
+import { API } from "@/shared/consts/consts";
 
 interface MoviePageProps {
     params: {
@@ -14,7 +15,7 @@ interface MoviePageProps {
 
 export default async function MoviePage({ params }: MoviePageProps) {
     const movie: any = await axios
-        .get(`http://localhost:3000/api/movies/${params.id}`)
+        .get(`${API}/api/movies/${params.id}`)
         .then((data) => data.data)
         .catch(() => undefined);
 
