@@ -19,9 +19,13 @@ export const SearchBar = () => {
         if (searchValue) {
             const fetchData = async () => {
                 const data = await axios
-                    .get(`${API}/movies?search=${searchValue}`)
-                    .then((response) => response.data)
-                    .catch(() => setError(true));
+                    .get(`${API}/api/movies?search=${searchValue}`)
+                    .then((response) => {
+                        return response.data;
+                    })
+                    .catch(() => {
+                        setError(true);
+                    });
                 return data;
             };
 
@@ -81,7 +85,7 @@ export const SearchBar = () => {
                 ) : (
                     <>
                         {error ? (
-                            <div>Произошла ошибка</div>
+                            <div>Произошла ошибка при загрузке</div>
                         ) : (
                             <>
                                 {searchResultItems.length ? (
