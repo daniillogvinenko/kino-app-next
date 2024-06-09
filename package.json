@@ -8,7 +8,7 @@
         "start": "next start",
         "lint": "next lint",
         "postinstall": "prisma generate",
-        "build": "prisma generate && start:build"
+        "build": "prisma generate && run start:build"
     },
     "dependencies": {
         "@prisma/client": "^5.15.0",
