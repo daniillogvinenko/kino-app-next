@@ -2,10 +2,7 @@ import Link from "next/link";
 import cls from "./page.module.scss";
 import { Button } from "@/components/ui/Button";
 
-import { ReviewCard } from "@/components/ReviewCard/ReviewCard";
 import { Header } from "@/components/Header";
-import { FavoritesButton } from "@/components/FavoritesButton/FavoritesButton";
-import { MoviePageCarousel } from "@/components/MoviePageCarousel/MoviePageCarousel";
 import axios from "axios";
 import Image from "next/image";
 
@@ -58,7 +55,7 @@ export default async function MoviePage({ params }: MoviePageProps) {
                     </div>
                     <div className={cls.actorsTitle}>В главных ролях</div>
                     <div className={cls.actorsWrapper}>
-                        {movie.mainActors.map((actor) => (
+                        {movie.mainActors.map((actor: any) => (
                             <Link href={`/person/${actor.id}`} key={actor.id}>
                                 <div className={cls.actorCard}>
                                     <Image

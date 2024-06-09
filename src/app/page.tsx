@@ -16,7 +16,7 @@ export default async function Home() {
             <div className="container">
                 <div className={cls.title}>В тренде</div>
                 <div className={cls.wrapper}>
-                    {movies.map((movie) => (
+                    {movies.map((movie: any) => (
                         <Link key={movie.id} href={`movies/${movie.id}`}>
                             <div key={movie.id} className={cls.card}>
                                 <Image
