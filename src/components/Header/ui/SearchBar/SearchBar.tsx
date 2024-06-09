@@ -11,6 +11,7 @@ export const SearchBar = () => {
     const [searchValue, setSearchValue] = useState("");
     const [searchResultItems, setSearchResultItems] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
@@ -18,7 +19,8 @@ export const SearchBar = () => {
             const fetchData = async () => {
                 const data = await axios
                     .get(`http://localhost:3000/api/movies?search=${searchValue}`)
-                    .then((data) => data.data);
+                    .then((response) => response.data)
+                    .catch(() => setError(true));
                 return data;
             };
 
@@ -77,28 +79,34 @@ export const SearchBar = () => {
                     <span className={cls.loader}></span>
                 ) : (
                     <>
-                        {searchResultItems.length ? (
-                            <ul className={cls.searchResults}>
-                                {searchResultItems.map((movie) => (
-                                    <Link key={movie.id} href={`/movies/${movie.id}`}>
-                                        <li>
-                                            <Image
-                                                src={`/static/images/movies/${movie.mainImage}`}
-                                                alt=""
-                                                width={43}
-                                                height={65}
-                                            />
-                                            <div className={cls.movieInfoWrapper}>
-                                                <p>{movie.title}</p>
-                                                <p className={cls.movieInfo}>
-                                                    <span>8,5</span>Lorem, ipsum dolor
-                                                </p>
-                                            </div>
-                                        </li>
-                                    </Link>
-                                ))}
-                            </ul>
-                        ) : null}
+                        {error ? (
+                            <div>Произошла ошибка</div>
+                        ) : (
+                            <>
+                                {searchResultItems.length ? (
+                                    <ul className={cls.searchResults}>
+                                        {searchResultItems.map((movie) => (
+                                            <Link key={movie.id} href={`/movies/${movie.id}`}>
+                                                <li>
+                                                    <Image
+                                                        src={`/static/images/movies/${movie.mainImage}`}
+                                                        alt=""
+                                                        width={43}
+                                                        height={65}
+                                                    />
+                                                    <div className={cls.movieInfoWrapper}>
+                                                        <p>{movie.title}</p>
+                                                        <p className={cls.movieInfo}>
+                                                            <span>8,5</span>Lorem, ipsum dolor
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                            </Link>
+                                        ))}
+                                    </ul>
+                                ) : null}
+                            </>
+                        )}
                     </>
                 )}
             </div>

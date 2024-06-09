@@ -38,6 +38,6 @@ export async function GET(req: NextRequest) {
 
         return NextResponse.json(movies);
     } catch (error) {
-        console.log(error);
+        return NextResponse.error();
     }
 }
