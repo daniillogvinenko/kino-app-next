@@ -86,7 +86,7 @@ export const SearchBar = () => {
                             <>
                                 {searchResultItems.length ? (
                                     <ul className={cls.searchResults}>
-                                        {searchResultItems.map((movie) => (
+                                        {searchResultItems?.map((movie) => (
                                             <Link key={movie.id} href={`/movies/${movie.id}`}>
                                                 <li>
                                                     <Image
