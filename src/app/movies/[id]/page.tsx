@@ -24,15 +24,15 @@ export default async function MoviePage({ params }: MoviePageProps) {
                 <div className="container">
                     <div className={cls.flex1}>
                         <Image
-                            src={`/static/images/movies/${movie.mainImage}`}
+                            src={`/static/images/movies/${movie?.mainImage}`}
                             alt="movieImage"
                             width={295}
                             height={443}
                         />
                         <div>
-                            <div className={cls.title}>{movie.title}</div>
-                            <div className={cls.shortInfo}>2022 | {movie.movieGenres.join(", ")} | 18+</div>
-                            <p>{movie.movieDescription}</p>
+                            <div className={cls.title}>{movie?.title}</div>
+                            <div className={cls.shortInfo}>2022 | {movie?.movieGenres.join(", ")} | 18+</div>
+                            <p>{movie?.movieDescription}</p>
                             <Button>Смотреть</Button>
                             <div className={cls.aboutTitle}>О фильме</div>
                             <div className={cls.aboutGrid}>
@@ -41,10 +41,10 @@ export default async function MoviePage({ params }: MoviePageProps) {
                                 <span className={cls.gridLeftColumn}>Страна производства</span>
                                 <span>США</span>
                                 <span className={cls.gridLeftColumn}>Жанр</span>
-                                <span>{movie.movieGenres.join(", ")}</span>
+                                <span>{movie?.movieGenres.join(", ")}</span>
                                 <span className={cls.gridLeftColumn}>Режисер</span>
-                                <Link href={`/person/${movie.directorId}`}>
-                                    <span className={cls.directorFullName}>{movie.director.fullName}</span>
+                                <Link href={`/person/${movie?.directorId}`}>
+                                    <span className={cls.directorFullName}>{movie?.director.fullName}</span>
                                 </Link>
                                 <span className={cls.gridLeftColumn}>Длительность</span>
                                 <span>138 мин. / 2:18</span>
@@ -55,7 +55,7 @@ export default async function MoviePage({ params }: MoviePageProps) {
                     </div>
                     <div className={cls.actorsTitle}>В главных ролях</div>
                     <div className={cls.actorsWrapper}>
-                        {movie.mainActors.map((actor: any) => (
+                        {movie?.mainActors.map((actor: any) => (
                             <Link href={`/person/${actor.id}`} key={actor.id}>
                                 <div className={cls.actorCard}>
                                     <Image

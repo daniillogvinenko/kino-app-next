@@ -22,7 +22,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
             <div className={cls.ProfilePage}>
                 <div className="container">
                     <div className={cls.contentWrapper}>
-                        <div className={cls.username}>{user.username}</div>
+                        <div className={cls.username}>{user?.username}</div>
                         <div className={cls.btnWrapper}>
                             <Button variant={"outline"}>Редактировать профиль</Button>
                             <SignOutButton />
