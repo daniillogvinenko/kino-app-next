@@ -6,6 +6,7 @@ import { Header } from "@/components/Header";
 import axios from "axios";
 import Image from "next/image";
 import { API } from "@/shared/consts/consts";
+import { WatchMovieButton } from "@/components/WatchMovieButton";
 
 interface MoviePageProps {
     params: {
@@ -38,7 +39,7 @@ export default async function MoviePage({ params }: MoviePageProps) {
                                     <div className={cls.title}>{movie?.title}</div>
                                     <div className={cls.shortInfo}>2022 | {movie?.movieGenres.join(", ")} | 18+</div>
                                     <p>{movie?.movieDescription}</p>
-                                    <Button>Смотреть</Button>
+                                    <WatchMovieButton />
                                     <div className={cls.aboutTitle}>О фильме</div>
                                     <div className={cls.aboutGrid}>
                                         <span className={cls.gridLeftColumn}>Год производства</span>
