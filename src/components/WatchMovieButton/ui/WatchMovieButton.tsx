@@ -3,18 +3,18 @@
 import cls from "./WatchMovieButton.module.scss";
 import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
+import { API } from "@/shared/consts/consts";
 import Image from "next/image";
-import { ChangeEvent, SyntheticEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, SyntheticEvent, useCallback, useEffect, useRef, useState } from "react";
 
 interface WatchMovieButtonProps {
     src?: string;
 }
 
-export const WatchMovieButton = ({
-    src = "http://localhost:3000/static/video/movies/4.mp4",
-}: WatchMovieButtonProps) => {
+export const WatchMovieButton = ({ src = `${API}/static/video/movies/4.mp4` }: WatchMovieButtonProps) => {
     const [windowIsOpen, setWindowIsOpen] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);
+    const [isFullscreen, setIsFullscreen] = useState(false);
     const divRef = useRef<HTMLDivElement>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -38,8 +38,14 @@ export const WatchMovieButton = ({
         }
     };
 
-    const handleFullScreen = () => {
+    const handleEnterFullScreen = () => {
         divRef.current?.requestFullscreen();
+        setIsFullscreen(true);
+    };
+
+    const handleLeaveFullScreen = () => {
+        document.exitFullscreen();
+        setIsFullscreen(false);
     };
 
     const onTimeUpdate = (e: SyntheticEvent<HTMLVideoElement, Event>) => {
@@ -51,12 +57,20 @@ export const WatchMovieButton = ({
         videoRef!.current!.currentTime = (+e.target.value * videoRef!.current!.duration) / 100;
     };
 
+    const handleReplay = () => {
+        videoRef!.current!.currentTime -= 10;
+    };
+
+    const handleSkip = () => {
+        videoRef!.current!.currentTime += 10;
+    };
+
     return (
         <>
             <Modal onClose={handleClose} isOpen={windowIsOpen}>
                 <div className="container">
                     <div className={cls.modalContent} ref={divRef}>
-                        <video onTimeUpdate={onTimeUpdate} ref={videoRef} src={src}></video>
+                        <video onClick={handlePlayPause} onTimeUpdate={onTimeUpdate} ref={videoRef} src={src}></video>
                         <div className={cls.controls}>
                             <input
                                 ref={inputRef}
@@ -65,30 +79,57 @@ export const WatchMovieButton = ({
                                 type="range"
                             />
                             <div className={cls.btnWrapper}>
-                                {isPlaying ? (
+                                <div className={cls.leftButtons}>
+                                    {isPlaying ? (
+                                        <Image
+                                            onClick={handlePlayPause}
+                                            src="/static/icons/pause.svg"
+                                            alt="playBtn"
+                                            width={32}
+                                            height={32}
+                                        />
+                                    ) : (
+                                        <Image
+                                            onClick={handlePlayPause}
+                                            src="/static/icons/play.svg"
+                                            alt="playBtn"
+                                            width={32}
+                                            height={32}
+                                        />
+                                    )}
                                     <Image
-                                        onClick={handlePlayPause}
-                                        src="/static/icons/pause.svg"
+                                        onClick={handleReplay}
+                                        src={`/static/icons/replay10s.svg`}
+                                        alt="replay"
+                                        width={28}
+                                        height={28}
+                                    />
+                                    <Image
+                                        onClick={handleSkip}
+                                        src={`/static/icons/skip10s.svg`}
+                                        alt="replay"
+                                        width={28}
+                                        height={28}
+                                    />
+                                </div>
+
+                                {isFullscreen ? (
+                                    <Image
+                                        onClick={handleLeaveFullScreen}
+                                        src="/static/icons/leaveFullscreen.svg"
                                         alt="playBtn"
                                         width={32}
                                         height={32}
                                     />
                                 ) : (
                                     <Image
-                                        onClick={handlePlayPause}
-                                        src="/static/icons/play.svg"
+                                        onClick={handleEnterFullScreen}
+                                        src="/static/icons/fullscreen.svg"
                                         alt="playBtn"
                                         width={32}
                                         height={32}
                                     />
                                 )}
-                                <Image
-                                    onClick={handleFullScreen}
-                                    src="/static/icons/fullscreen.svg"
-                                    alt="playBtn"
-                                    width={32}
-                                    height={32}
-                                />
                             </div>
                         </div>
                     </div>
