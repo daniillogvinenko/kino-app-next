@@ -8,10 +8,10 @@ import Image from "next/image";
 import { ChangeEvent, SyntheticEvent, useCallback, useEffect, useRef, useState } from "react";
 
 interface WatchMovieButtonProps {
-    src?: string;
+    src: string;
 }
 
-export const WatchMovieButton = ({ src = `${API}/static/video/movies/4.mp4` }: WatchMovieButtonProps) => {
+export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {
     const [windowIsOpen, setWindowIsOpen] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
@@ -70,7 +70,12 @@ export const WatchMovieButton = ({ src = `${API}/static/video/movies/4.mp4` }: W
             <Modal onClose={handleClose} isOpen={windowIsOpen}>
                 <div className="container">
                     <div className={cls.modalContent} ref={divRef}>
-                        <video onClick={handlePlayPause} onTimeUpdate={onTimeUpdate} ref={videoRef} src={src}></video>
+                        <video
+                            onClick={handlePlayPause}
+                            onTimeUpdate={onTimeUpdate}
+                            ref={videoRef}
+                            src={`${API}/static/video/movies/${src}`}
+                        ></video>
                         <div className={cls.controls}>
                             <input
                                 ref={inputRef}

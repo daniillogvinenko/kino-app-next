@@ -44,6 +44,11 @@ model Movie {
   movieGenres      Genre[]
   mainImage        String
   movieDescription String
+  movieSrc         String?
+  duration         String?
+  year             Int?
+  country          String?
+  age              Int?
 }
 
 enum Profession {

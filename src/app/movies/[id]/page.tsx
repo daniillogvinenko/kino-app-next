@@ -39,13 +39,13 @@ export default async function MoviePage({ params }: MoviePageProps) {
                                     <div className={cls.title}>{movie?.title}</div>
                                     <div className={cls.shortInfo}>2022 | {movie?.movieGenres.join(", ")} | 18+</div>
                                     <p>{movie?.movieDescription}</p>
-                                    <WatchMovieButton />
+                                    <WatchMovieButton src={movie.movieSrc} />
                                     <div className={cls.aboutTitle}>О фильме</div>
                                     <div className={cls.aboutGrid}>
                                         <span className={cls.gridLeftColumn}>Год производства</span>
-                                        <span>2009</span>
+                                        <span>{movie.year}</span>
                                         <span className={cls.gridLeftColumn}>Страна производства</span>
-                                        <span>США</span>
+                                        <span>{movie.country}</span>
                                         <span className={cls.gridLeftColumn}>Жанр</span>
                                         <span>{movie?.movieGenres.join(", ")}</span>
                                         <span className={cls.gridLeftColumn}>Режисер</span>

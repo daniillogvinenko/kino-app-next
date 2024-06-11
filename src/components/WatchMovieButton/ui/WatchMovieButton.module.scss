@@ -12,10 +12,17 @@
 
     .controls {
         width: 100%;
-        padding: 0 20px;
         position: absolute;
-        bottom: 20px;
+        bottom: 0px;
         background-color: rgba(0, 0, 0, 0.486);
+        padding: 15px 20px;
+
+        opacity: 0;
+        transition-duration: 0.8s;
+
+        &:hover {
+            opacity: 1;
+        }
 
         img {
             cursor: pointer;
