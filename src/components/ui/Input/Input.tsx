@@ -1,15 +1,17 @@
-import { ChangeEvent, forwardRef } from "react";
+import { ChangeEvent, InputHTMLAttributes, forwardRef } from "react";
 import cls from "./Input.module.scss";
+import { cn } from "@/shared/helpers/classNames/classNames";
 
-interface InputProps {
-    value: string | number;
-    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+    fullWidth?: boolean;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps, ref) => {
-    const { onChange, value } = props;
+    const { fullWidth, ...otherProps } = props;
 
-    return <input ref={ref} value={value} onChange={onChange} className={cls.Input} type="text" />;
+    return (
+        <input ref={ref} className={cn(cls.Input, { [cls.fullWidth]: fullWidth }, [])} type="text" {...otherProps} />
+    );
 });
 
 Input.displayName = "Input";

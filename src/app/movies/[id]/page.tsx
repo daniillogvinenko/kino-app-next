@@ -7,6 +7,8 @@ import axios from "axios";
 import Image from "next/image";
 import { API } from "@/shared/consts/consts";
 import { WatchMovieButton } from "@/components/WatchMovieButton";
+import Input from "@/components/ui/Input";
+import { SendReview } from "@/components/SendReview";
 
 interface MoviePageProps {
     params: {
@@ -18,6 +20,11 @@ export default async function MoviePage({ params }: MoviePageProps) {
     const movie: any = await axios
         .get(`${API}/api/movies/${params.id}`)
         .then((data) => data.data)
+        .catch(() => undefined);
+
+    const reviews = await axios
+        .get(`${API}/api/reviews?movieId=${params.id}`)
+        .then((response) => response.data)
         .catch(() => undefined);
 
     return (
@@ -73,6 +80,17 @@ export default async function MoviePage({ params }: MoviePageProps) {
                                             <div>{actor.fullName}</div>
                                         </div>
                                     </Link>
+                                ))}
+                            </div>
+                            <div className={cls.actorsTitle}>Отзывы</div>
+                            <SendReview />
+                            <div className={cls.reviewsWrapper}>
+                                {reviews?.map((r: any) => (
+                                    <div className={cls.reviewCard} key={r.id}>
+                                        <p className={cls.username}>{r.user.username}</p>
+                                        <p className={cls.text}>{r.text}</p>
+                                        <p className={cls.dateTime}>{r.dateTime}</p>
+                                    </div>
                                 ))}
                             </div>
                         </>

@@ -16,14 +16,15 @@ datasource db {
 
 // avatar
 model User {
-  username       String  @id
+  username       String   @id
   password       String
   favoriteMovies Movie[]
+  Reviews        Review[]
 }
 
 // рост, дата рожд., место рожд.
 model Person {
-  id              Int          @id
+  id              Int          @id @default(autoincrement())
   fullName        String
   fullNameEnglish String
   directedMovies  Movie[]      @relation("directorOfMovie")
@@ -35,7 +36,7 @@ model Person {
 
 // длительность, страна, возр. ограничение, год
 model Movie {
-  id               Int      @id
+  id               Int      @id @default(autoincrement())
   title            String
   director         Person   @relation("directorOfMovie", fields: [directorId], references: [id])
   directorId       Int
@@ -49,6 +50,17 @@ model Movie {
   year             Int?
   country          String?
   age              Int?
+  Review           Review[]
+}
+
+model Review {
+  id       Int      @id @default(autoincrement())
+  dateTime DateTime
+  text     String
+  user     User     @relation(fields: [username], references: [username])
+  username String
+  movie    Movie    @relation(fields: [movieId], references: [id])
+  movieId  Int
 }
 
 enum Profession {
