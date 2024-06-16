@@ -20,13 +20,27 @@
         .username {
             font-size: 18px;
             color: #b5b5b5;
-            margin-bottom: 10px;
         }
 
         .text {
             font-size: 18px;
             line-height: 24px;
             margin-bottom: 10px;
+        }
+
+        .topFlex {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+
+            .userAvatar {
+                width: 32px;
+                height: 32px;
+                border-radius: 100%;
+                border: 1px solid #000;
+                background-color: white;
+            }
         }
 
         .bottomFlex {

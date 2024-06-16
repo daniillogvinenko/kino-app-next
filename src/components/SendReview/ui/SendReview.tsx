@@ -91,7 +91,10 @@ export const SendReview = ({ movieId }: SendReviewProps) => {
                     <>
                         {reviews?.map((r: any) => (
                             <div className={cls.reviewCard} key={r.id}>
-                                <p className={cls.username}>{r.user.username}</p>
+                                <div className={cls.topFlex}>
+                                    <div className={cls.userAvatar}></div>
+                                    <p className={cls.username}>{r.user.username}</p>
+                                </div>
                                 <p className={cls.text}>{r.text}</p>
                                 <div className={cls.bottomFlex}>
                                     <p className={cls.dateTime}>{new Date(r.dateTime).toDateString()}</p>
