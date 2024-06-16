@@ -7,7 +7,6 @@ import axios from "axios";
 import Image from "next/image";
 import { API } from "@/shared/consts/consts";
 import { WatchMovieButton } from "@/components/WatchMovieButton";
-import Input from "@/components/ui/Input";
 import { SendReview } from "@/components/SendReview";
 
 interface MoviePageProps {
@@ -83,16 +82,8 @@ export default async function MoviePage({ params }: MoviePageProps) {
                                 ))}
                             </div>
                             <div className={cls.actorsTitle}>Отзывы</div>
-                            <SendReview />
-                            <div className={cls.reviewsWrapper}>
-                                {reviews?.map((r: any) => (
-                                    <div className={cls.reviewCard} key={r.id}>
-                                        <p className={cls.username}>{r.user.username}</p>
-                                        <p className={cls.text}>{r.text}</p>
-                                        <p className={cls.dateTime}>{r.dateTime}</p>
-                                    </div>
-                                ))}
-                            </div>
+                            <SendReview movieId={params.id} />
+                            
                         </>
                     ) : (
                         <div style={{ transform: "translateY(200px)" }}>Произошла ошибка при загрузке фильма</div>

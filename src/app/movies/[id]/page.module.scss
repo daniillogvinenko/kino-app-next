@@ -80,33 +80,4 @@
     }
 }
 
-.reviewsWrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
 
-    .reviewCard {
-        padding: 18px;
-        background-color: #44413c;
-        border: 1px solid white;
-        border-radius: 20px;
-        width: 400px;
-
-        .username {
-            font-size: 18px;
-            color: #b5b5b5;
-            margin-bottom: 10px;
-        }
-
-        .text {
-            font-size: 18px;
-            line-height: 24px;
-            margin-bottom: 10px;
-        }
-
-        .dateTime {
-            font-size: 14px;
-            color: #b5b5b5;
-        }
-    }
-}
