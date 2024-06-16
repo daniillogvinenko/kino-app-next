@@ -54,7 +54,7 @@ model Movie {
 }
 
 model Review {
-  id       Int      @id @default(autoincrement())
+  id       Int      @id @unique @default(autoincrement())
   dateTime DateTime
   text     String
   user     User     @relation(fields: [username], references: [username])
