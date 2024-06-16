@@ -16,8 +16,16 @@
     display: flex;
     flex-direction: column;
 
+    &:hover {
+        img {
+            transform: scale(1.07);
+            box-shadow: 0 0 90px rgb(0, 0, 0);
+        }
+    }
+
     img {
         border-radius: 20px;
+        transition-duration: 0.2s;
     }
 
     .movieTitle {

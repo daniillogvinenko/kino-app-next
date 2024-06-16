@@ -72,12 +72,18 @@
     .actorCard {
         line-height: 120%;
 
+        &:hover {
+            img {
+                transform: scale(1.07);
+                box-shadow: 0 0 90px rgb(0, 0, 0);
+            }
+        }
+
         img {
+            transition-duration: 0.2s;
             border-radius: 20px;
             object-fit: cover;
             margin-bottom: 10px;
         }
     }
 }
-
-
