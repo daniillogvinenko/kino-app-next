@@ -73,15 +73,17 @@ export const SendReview = ({ movieId }: SendReviewProps) => {
 
     return (
         <>
-            <div className={cls.newReview}>
-                <Input
-                    placeholder="Введите свой отзыв"
-                    fullWidth
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
-                />
-                <Button onClick={handleSendReview}>Отправить</Button>
-            </div>
+            {user ? (
+                <div className={cls.newReview}>
+                    <Input
+                        placeholder="Введите свой отзыв"
+                        fullWidth
+                        value={value}
+                        onChange={(e) => setValue(e.target.value)}
+                    />
+                    <Button onClick={handleSendReview}>Отправить</Button>
+                </div>
+            ) : null}
             <div className={cls.reviewsWrapper}>
                 {isLoading ? (
                     <div>Loading...</div>
