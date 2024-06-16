@@ -29,6 +29,7 @@ export const SendReview = ({ movieId }: SendReviewProps) => {
                 movieId: movieId,
             })
             .then(() => {
+                setValue("");
                 axios
                     .get(`${API}/api/reviews?movieId=${movieId}`)
                     .then((response) => {
@@ -88,12 +89,17 @@ export const SendReview = ({ movieId }: SendReviewProps) => {
                     <>
                         {reviews?.map((r: any) => (
                             <div className={cls.reviewCard} key={r.id}>
-                                {user?.name === r.username ? (
-                                    <Button onClick={() => handleDeleteReview(r.id)}>X</Button>
-                                ) : null}
                                 <p className={cls.username}>{r.user.username}</p>
                                 <p className={cls.text}>{r.text}</p>
-                                <p className={cls.dateTime}>{r.dateTime}</p>
+                                <div className={cls.bottomFlex}>
+                                    <p className={cls.dateTime}>{new Date(r.dateTime).toDateString()}</p>
+
+                                    {user?.name === r.username ? (
+                                        <p onClick={() => handleDeleteReview(r.id)} className={cls.dateTime}>
+                                            Удалить комментарий
+                                        </p>
+                                    ) : null}
+                                </div>
                             </div>
                         ))}
                     </>
