@@ -16,16 +16,19 @@ interface FavoritesButtonProps {
 export const FavoritesButton = (props: FavoritesButtonProps) => {
     const { movieId } = props;
     const [user, setUser] = useState<any>();
+    const [isFavorite, setIsFavorite] = useState<boolean>(false);
     const sesstion = useSession();
     const username = sesstion.data?.user?.name;
 
     const handleAddToFavorites = () => {
+        setIsFavorite(true);
         axios.patch(`${API}/api/users/${username}`, {
             movieId,
             operation: "add",
         });
     };
     const handleRemoveFromFavorites = () => {
+        setIsFavorite(false);
         axios.patch(`${API}/api/users/${username}`, {
             movieId,
             operation: "remove",
@@ -40,14 +43,17 @@ export const FavoritesButton = (props: FavoritesButtonProps) => {
 
         fetchData().then((user) => {
             setUser(user);
+            if (user?.favoriteMovies.some((movie: Movie) => movie.id === +movieId)) {
+                setIsFavorite(true);
+            }
         });
-    }, [username]);
+    }, [username, movieId]);
 
     if (!user) {
         return null;
     }
 
-    if (user?.favoriteMovies.some((movie: Movie) => movie.id === +movieId)) {
+    if (isFavorite) {
         return (
             <Button onClick={handleRemoveFromFavorites} className={cls.favButton} variant={"white"}>
                 <Image width={18} height={18} src={`${API}/static/icons/purpleHeartFilled.svg`} alt="" />
