@@ -1,6 +1,5 @@
 import Link from "next/link";
 import cls from "./page.module.scss";
-import { Button } from "@/components/ui/Button";
 
 import { Header } from "@/components/Header";
 import axios from "axios";
@@ -8,6 +7,7 @@ import Image from "next/image";
 import { API } from "@/shared/consts/consts";
 import { WatchMovieButton } from "@/components/WatchMovieButton";
 import { SendReview } from "@/components/SendReview";
+import { FavoritesButton } from "@/components/FavoritesButton/FavoritesButton";
 
 interface MoviePageProps {
     params: {
@@ -45,7 +45,10 @@ export default async function MoviePage({ params }: MoviePageProps) {
                                     <div className={cls.title}>{movie?.title}</div>
                                     <div className={cls.shortInfo}>2022 | {movie?.movieGenres.join(", ")} | 18+</div>
                                     <p>{movie?.movieDescription}</p>
-                                    <WatchMovieButton src={movie.movieSrc} />
+                                    <div className={cls.btnWrapper}>
+                                        <WatchMovieButton src={movie.movieSrc} />
+                                        <FavoritesButton movieId={params.id} />
+                                    </div>
                                     <div className={cls.aboutTitle}>О фильме</div>
                                     <div className={cls.aboutGrid}>
                                         <span className={cls.gridLeftColumn}>Год производства</span>
@@ -83,7 +86,6 @@ export default async function MoviePage({ params }: MoviePageProps) {
                             </div>
                             <div className={cls.actorsTitle}>Отзывы</div>
                             <SendReview movieId={params.id} />
-                            
                         </>
                     ) : (
                         <div style={{ transform: "translateY(200px)" }}>Произошла ошибка при загрузке фильма</div>
