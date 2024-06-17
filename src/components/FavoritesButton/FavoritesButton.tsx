@@ -11,15 +11,26 @@ import { Movie } from "@prisma/client";
 
 interface FavoritesButtonProps {
     movieId: string;
-    addToFavorites?: () => void;
-    removeFromFavorites?: () => void;
 }
 
 export const FavoritesButton = (props: FavoritesButtonProps) => {
-    const { addToFavorites, movieId, removeFromFavorites } = props;
+    const { movieId } = props;
     const [user, setUser] = useState<any>();
     const sesstion = useSession();
     const username = sesstion.data?.user?.name;
+
+    const handleAddToFavorites = () => {
+        axios.patch(`${API}/api/users/${username}`, {
+            movieId,
+            operation: "add",
+        });
+    };
+    const handleRemoveFromFavorites = () => {
+        axios.patch(`${API}/api/users/${username}`, {
+            movieId,
+            operation: "remove",
+        });
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -30,9 +41,7 @@ export const FavoritesButton = (props: FavoritesButtonProps) => {
         fetchData().then((user) => {
             setUser(user);
         });
-    }, []);
-
-    console.log(user);
+    }, [username]);
 
     if (!user) {
         return null;
@@ -40,14 +49,14 @@ export const FavoritesButton = (props: FavoritesButtonProps) => {
 
     if (user?.favoriteMovies.some((movie: Movie) => movie.id === +movieId)) {
         return (
-            <Button className={cls.favButton} variant={"white"}>
+            <Button onClick={handleRemoveFromFavorites} className={cls.favButton} variant={"white"}>
                 <Image width={18} height={18} src={`${API}/static/icons/purpleHeartFilled.svg`} alt="" />
             </Button>
         );
     }
 
     return (
-        <Button className={cls.favButton} variant={"white"}>
+        <Button onClick={handleAddToFavorites} className={cls.favButton} variant={"white"}>
             <Image width={18} height={18} src={`${API}/static/icons/purpleHeart.svg`} alt="" />
         </Button>
     );
