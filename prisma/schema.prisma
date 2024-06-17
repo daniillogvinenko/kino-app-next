@@ -61,6 +61,8 @@ model Review {
   username String
   movie    Movie    @relation(fields: [movieId], references: [id])
   movieId  Int
+  likes    Int
+  dislikes Int
 }
 
 enum Profession {
