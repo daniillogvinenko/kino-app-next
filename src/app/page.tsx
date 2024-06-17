@@ -1,6 +1,4 @@
-import { Button } from "@/components/ui/Button";
 import cls from "./page.module.scss";
-import { Header } from "@/components/Header";
 import axios from "axios";
 import { MainPageHeroSection } from "@/components/MainPageHeroSection";
 import Image from "next/image";
@@ -15,7 +13,6 @@ export default async function Home() {
 
     return (
         <>
-            <Header />
             <MainPageHeroSection />
             <div className="container">
                 <div className={cls.title}>В тренде</div>

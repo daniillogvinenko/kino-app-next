@@ -1,11 +1,11 @@
 import cls from "./page.module.scss";
 import { Button } from "@/components/ui/Button";
-import { Header } from "@/components/Header";
-import Link from "next/link";
 import { SignOutButton } from "@/components/SignOutButton/SignOutButton";
 import axios from "axios";
 import { MovieList } from "@/components/MovieList";
 import { API } from "@/shared/consts/consts";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
 interface ProfilePageProps {
     params: {
@@ -20,9 +20,14 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
         .then((response) => response.data)
         .catch(() => undefined);
 
+    const session = await getServerSession();
+
+    if (session?.user?.name !== params.id) {
+        redirect("/");
+    }
+
     return (
         <>
-            <Header />
             <div className={cls.ProfilePage}>
                 <div className="container">
                     <div className={cls.contentWrapper}>

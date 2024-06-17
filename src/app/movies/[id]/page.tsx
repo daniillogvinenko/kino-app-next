@@ -28,8 +28,6 @@ export default async function MoviePage({ params }: MoviePageProps) {
 
     return (
         <>
-            <Header />
-
             <div className={cls.MoviePage}>
                 <div className="container">
                     {movie ? (

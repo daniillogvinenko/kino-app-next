@@ -1,9 +1,7 @@
 import { MoviesOfPerson } from "@/components/MoviesOfPerson";
 import cls from "./page.module.scss";
-import { Header } from "@/components/Header";
 import axios from "axios";
 import Image from "next/image";
-import Link from "next/link";
 import { API } from "@/shared/consts/consts";
 
 interface PersonPageProps {
@@ -22,7 +20,6 @@ export default async function PersonPage(props: PersonPageProps) {
 
     return (
         <>
-            <Header />
             <div className="container">
                 {person ? (
                     <>

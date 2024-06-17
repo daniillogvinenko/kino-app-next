@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/Button";
 export default function NOTFOUND() {
     return (
         <div>
-            <Header />
             <div className={cls.notFoundWrapper}>
                 <span>Страницы не существует :{"("}</span>
                 <br />

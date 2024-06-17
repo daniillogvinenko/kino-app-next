@@ -4,7 +4,6 @@ import { PageLoader } from "@/components/PageLoader";
 export default function Loading() {
     return (
         <>
-            <Header />
             <div className={cls.loaderWrapper}>
                 <PageLoader />
             </div>
