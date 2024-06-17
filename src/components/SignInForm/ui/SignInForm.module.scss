@@ -1,0 +1,10 @@
+.SignInForm {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 300px;
+
+    .btn {
+        font-weight: 400;
+    }
+}

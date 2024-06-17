@@ -2,8 +2,9 @@ import GithubProvider from "next-auth/providers/github";
 import VKProvider from "next-auth/providers/vk";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "../../../lib/prisma";
+import { AuthOptions } from "next-auth";
 
-export const authOptions = {
+export const authOptions: AuthOptions = {
     // Configure one or more authentication providers
     providers: [
         GithubProvider({
@@ -36,4 +37,7 @@ export const authOptions = {
             },
         }),
     ],
+    pages: {
+        signIn: "/signin",
+    },
 };
