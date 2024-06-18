@@ -17,7 +17,7 @@ interface SendReviewProps {
 
 export const SendReview = ({ movieId }: SendReviewProps) => {
     const [value, setValue] = useState("");
-    const [reviews, setReviews] = useState<Review[]>();
+    const [reviews, setReviews] = useState<Review[]>([]);
     const [commentIsDeleteing, setCommentIsDeleteing] = useState<string[]>([]);
     const session = useSession();
     const user = session.data?.user;
@@ -35,6 +35,7 @@ export const SendReview = ({ movieId }: SendReviewProps) => {
         });
     };
 
+    // доделать обработку неудачного запроса
     const handleDeleteReview = (reviewId: string) => {
         setCommentIsDeleteing((p) => {
             const originalArray = p;
@@ -47,16 +48,18 @@ export const SendReview = ({ movieId }: SendReviewProps) => {
             }),
             cache: "no-store",
             method: "DELETE",
-        }).then(() => {
-            fetch(`${API}/api/reviews?movieId=${movieId}`, { cache: "no-store" })
-                .then((response) => response.json())
-                .then((data) => {
-                    setReviews(data);
-                    setCommentIsDeleteing((a) => {
-                        const resArray = a.filter((item) => item !== reviewId);
-                        return resArray;
-                    });
+        }).then((response) => {
+            if (response.ok) {
+                console.log("here");
+                setReviews((r) => {
+                    const resArray = JSON.parse(JSON.stringify(r?.filter((item) => item.id !== +reviewId)));
+                    return resArray;
                 });
+                setCommentIsDeleteing((a) => {
+                    const resArray = a.filter((item) => item !== reviewId);
+                    return resArray;
+                });
+            }
         });
     };
 

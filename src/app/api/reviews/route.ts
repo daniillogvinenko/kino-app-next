@@ -38,7 +38,6 @@ export async function POST(req: Request) {
 }
 
 export async function DELETE(req: Request, res: NextApiResponse) {
-    throw new Error("");
     const body = await req.json();
 
     await prisma.review.delete({
