@@ -3,6 +3,7 @@ import { MainPageHeroSection } from "@/components/MainPageHeroSection";
 import Image from "next/image";
 import Link from "next/link";
 import { API } from "@/shared/consts/consts";
+import { FavoritesButton } from "@/components/FavoritesButton/FavoritesButton";
 
 export default async function Home() {
     const movies = await fetch(`${API}/api/movies`, { cache: "no-store" })
@@ -26,6 +27,7 @@ export default async function Home() {
                                             width={190}
                                             height={287}
                                         />
+                                        <FavoritesButton className={cls.favButton} key={movie.id} movieId={movie.id} />
                                         <div className={cls.movieTitle}>{movie.title}</div>
                                     </div>
                                 </Link>

@@ -7,13 +7,15 @@ import cls from "./FavoritesButton.module.scss";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { Movie } from "@prisma/client";
+import { cn } from "@/shared/helpers/classNames/classNames";
 
 interface FavoritesButtonProps {
     movieId: string;
+    className?: string;
 }
 
 export const FavoritesButton = (props: FavoritesButtonProps) => {
-    const { movieId } = props;
+    const { movieId, className } = props;
     const [user, setUser] = useState<any>();
     const [isFavorite, setIsFavorite] = useState<boolean>(false);
     const sesstion = useSession();
@@ -59,14 +61,24 @@ export const FavoritesButton = (props: FavoritesButtonProps) => {
 
     if (isFavorite) {
         return (
-            <Button onClick={handleRemoveFromFavorites} className={cls.favButton} variant={"white"}>
+            <Button
+                shadow="shadow"
+                onClick={handleRemoveFromFavorites}
+                className={cn(cls.favButton, {}, [className])}
+                variant={"white"}
+            >
                 <Image width={18} height={18} src={`${API}/static/icons/purpleHeartFilled.svg`} alt="" />
             </Button>
         );
     }
 
     return (
-        <Button onClick={handleAddToFavorites} className={cls.favButton} variant={"white"}>
+        <Button
+            shadow="shadow"
+            onClick={handleAddToFavorites}
+            className={cn(cls.favButton, {}, [className])}
+            variant={"white"}
+        >
             <Image width={18} height={18} src={`${API}/static/icons/purpleHeart.svg`} alt="" />
         </Button>
     );

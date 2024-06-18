@@ -1,5 +1,5 @@
 import { VariantProps, cva } from "class-variance-authority";
-import { ReactNode } from "react";
+import { MouseEventHandler, ReactNode } from "react";
 import cls from "./Button.module.scss";
 import Link from "next/link";
 import { cn } from "@/shared/helpers/classNames/classNames";
@@ -16,6 +16,10 @@ const buttonVariants = cva(cls.Button, {
             md: cls.md,
             lg: cls.lg,
         },
+        shadow: {
+            noShadow: "",
+            shadow: cls.shadow,
+        },
     },
     defaultVariants: {
         variant: "regular",
@@ -30,8 +34,8 @@ interface ButtonProps extends VariantProps<typeof buttonVariants> {
     className?: string;
 }
 
-export const Button = ({ children, size, variant, href, onClick, className }: ButtonProps) => {
-    const clsName = cn(buttonVariants({ size, variant }), {}, [className]);
+export const Button = ({ children, size, variant, shadow = "noShadow", href, onClick, className }: ButtonProps) => {
+    const clsName = cn(buttonVariants({ size, variant, shadow }), {}, [className]);
 
     if (href) {
         return (
@@ -41,8 +45,15 @@ export const Button = ({ children, size, variant, href, onClick, className }: Bu
         );
     }
 
+    const handleOnClick: MouseEventHandler<HTMLButtonElement> = (e) => {
+        e.stopPropagation();
+        if (onClick) {
+            onClick();
+        }
+    };
+
     return (
-        <button onClick={onClick} className={clsName}>
+        <button onClick={handleOnClick} className={clsName}>
             {children}
         </button>
     );
