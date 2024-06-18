@@ -92,3 +92,20 @@
         align-items: center;
     }
 }
+
+.errorWrapper {
+    text-align: center;
+    padding-top: 50px;
+
+    span {
+        font-size: 48px;
+        font-weight: 500;
+    }
+
+    p {
+        color: #b5b5b5;
+        font-size: 16px;
+        margin-top: 15px;
+        margin-bottom: 20px;
+    }
+}

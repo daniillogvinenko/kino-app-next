@@ -14,7 +14,7 @@
     }
 
     .englishFullname {
-        color: #B5B5B5;
+        color: #b5b5b5;
         margin-bottom: 20px;
         font-size: 18px;
     }
@@ -35,8 +35,24 @@
         font-size: 13px;
 
         .gridLeftColumn {
-            color: #B5B5B5;
+            color: #b5b5b5;
         }
     }
+}
 
+.errorWrapper {
+    text-align: center;
+    padding-top: 320px;
+
+    span {
+        font-size: 48px;
+        font-weight: 500;
+    }
+
+    p {
+        color: #b5b5b5;
+        font-size: 16px;
+        margin-top: 15px;
+        margin-bottom: 20px;
+    }
 }

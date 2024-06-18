@@ -39,7 +39,11 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
                                 <MovieList movies={user?.favoriteMovies} />
                             </>
                         ) : (
-                            <div>Произошла ошибка при загрузке пользователя</div>
+                            <div>
+                                <div className={cls.errorWrapper}>
+                                    <span>Упс!</span> <p>Произошла ошибка при загрузке</p>
+                                </div>
+                            </div>
                         )}
                     </div>
                 </div>

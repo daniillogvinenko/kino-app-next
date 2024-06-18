@@ -13,10 +13,10 @@ export default async function Home() {
         <>
             <MainPageHeroSection />
             <div className="container">
-                <div className={cls.title}>В тренде</div>
-                <div className={cls.wrapper}>
-                    {movies ? (
-                        <>
+                {movies ? (
+                    <>
+                        <div className={cls.title}>В тренде</div>
+                        <div className={cls.wrapper}>
                             {movies?.map((movie: any) => (
                                 <Link key={movie.id} href={`movies/${movie.id}`}>
                                     <div key={movie.id} className={cls.card}>
@@ -30,11 +30,15 @@ export default async function Home() {
                                     </div>
                                 </Link>
                             ))}
-                        </>
-                    ) : (
-                        <div>Ошибка загрузки</div>
-                    )}
-                </div>
+                        </div>
+                    </>
+                ) : (
+                    <div>
+                        <div className={cls.errorWrapper}>
+                            <span>Упс!</span> <p>Произошла ошибка при загрузке фильмов</p>
+                        </div>
+                    </div>
+                )}
             </div>
         </>
     );

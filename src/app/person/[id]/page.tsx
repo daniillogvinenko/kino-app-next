@@ -44,7 +44,11 @@ export default async function PersonPage(props: PersonPageProps) {
                         <MoviesOfPerson person={person} />
                     </>
                 ) : (
-                    <div style={{ transform: "translateY(200px)" }}>Произошла ошибка при загрузке</div>
+                    <div>
+                        <div className={cls.errorWrapper}>
+                            <span>Упс!</span> <p>Произошла ошибка при загрузке</p>
+                        </div>
+                    </div>
                 )}
             </div>
         </>

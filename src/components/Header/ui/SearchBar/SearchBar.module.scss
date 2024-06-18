@@ -24,7 +24,7 @@
         background-color: white;
         width: 500px;
         border-radius: 20px;
-        background-color: #44413C;
+        background-color: #44413c;
         border: 1px solid white;
         overflow: hidden;
         z-index: 10;
@@ -41,10 +41,9 @@
             gap: 20px;
             padding: 10px 20px;
 
-
             .movieInfo {
                 font-size: 14px;
-                color: #B5B5B5;
+                color: #b5b5b5;
                 line-height: 180%;
 
                 span {
@@ -54,12 +53,9 @@
                 }
             }
 
-
             &:hover {
-                background-color: #53504C;
+                background-color: #53504c;
             }
-
-
         }
     }
 }
@@ -73,25 +69,7 @@
 }
 
 .loader {
-    width: 48px;
-    height: 48px;
-    border: 5px solid #FFF;
-    border-bottom-color: transparent;
-    border-radius: 50%;
-    display: inline-block;
-    box-sizing: border-box;
-    animation: rotation 1s linear infinite;
     position: absolute;
     left: 44%;
     top: 50px;
-}
-
-@keyframes rotation {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
 }

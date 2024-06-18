@@ -78,7 +78,11 @@ export default async function MoviePage({ params }: MoviePageProps) {
                             <SendReview movieId={params.id} />
                         </>
                     ) : (
-                        <div style={{ transform: "translateY(200px)" }}>Произошла ошибка при загрузке фильма</div>
+                        <div>
+                            <div className={cls.errorWrapper}>
+                                <span>Упс!</span> <p>Произошла ошибка при загрузке страницы</p>
+                            </div>
+                        </div>
                     )}
                 </div>
             </div>
