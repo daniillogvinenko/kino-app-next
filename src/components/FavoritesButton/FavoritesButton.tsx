@@ -6,7 +6,6 @@ import { API } from "@/shared/consts/consts";
 import cls from "./FavoritesButton.module.scss";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { Movie } from "@prisma/client";
 
 interface FavoritesButtonProps {
@@ -22,22 +21,27 @@ export const FavoritesButton = (props: FavoritesButtonProps) => {
 
     const handleAddToFavorites = () => {
         setIsFavorite(true);
-        axios.patch(`${API}/api/users/${username}`, {
-            movieId,
-            operation: "add",
+        fetch(`${API}/api/users/${username}`, {
+            method: "PATCH",
+            body: JSON.stringify({ movieId, operation: "add" }),
+            cache: "no-store",
         });
     };
+
     const handleRemoveFromFavorites = () => {
         setIsFavorite(false);
-        axios.patch(`${API}/api/users/${username}`, {
-            movieId,
-            operation: "remove",
+        fetch(`${API}/api/users/${username}`, {
+            method: "PATCH",
+            body: JSON.stringify({ movieId, operation: "remove" }),
+            cache: "no-store",
         });
     };
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await axios.get(`${API}/api/users/${username}`).then((response) => response.data);
+            const data = await fetch(`${API}/api/users/${username}`, { cache: "no-store" }).then((response) =>
+                response.json()
+            );
             return data;
         };
 

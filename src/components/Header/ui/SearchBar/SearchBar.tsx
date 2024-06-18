@@ -1,7 +1,6 @@
 import { ChangeEvent, useEffect, useState, useRef } from "react";
 import cls from "./SearchBar.module.scss";
 import Link from "next/link";
-import axios from "axios";
 import Image from "next/image";
 import Input from "@/components/ui/Input";
 import { Overlay } from "@/components/ui/Overlay";
@@ -18,10 +17,9 @@ export const SearchBar = () => {
     useEffect(() => {
         if (searchValue) {
             const fetchData = async () => {
-                const data = await axios
-                    .get(`${API}/api/movies?search=${searchValue}`)
+                const data = await fetch(`${API}/api/movies?search=${searchValue}`, { cache: "no-store" })
                     .then((response) => {
-                        return response.data;
+                        return response.json();
                     })
                     .catch(() => {
                         setError(true);

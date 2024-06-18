@@ -1,6 +1,5 @@
 import { MoviesOfPerson } from "@/components/MoviesOfPerson";
 import cls from "./page.module.scss";
-import axios from "axios";
 import Image from "next/image";
 import { API } from "@/shared/consts/consts";
 
@@ -13,9 +12,8 @@ interface PersonPageProps {
 export default async function PersonPage(props: PersonPageProps) {
     const { params } = props;
 
-    const person = await axios
-        .get(`${API}/api/persons/${params.id}`)
-        .then((response) => response.data)
+    const person = await fetch(`${API}/api/persons/${params.id}`, { cache: "no-store" })
+        .then((response) => response.json())
         .catch(() => undefined);
 
     return (

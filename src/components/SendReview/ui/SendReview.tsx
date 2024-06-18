@@ -24,17 +24,16 @@ export const SendReview = ({ movieId }: SendReviewProps) => {
     const user = session.data?.user;
 
     const handleSendReview = () => {
-        axios
-            .post(`${API}/api/reviews`, {
-                text: value,
-                username: user?.name,
-                movieId: movieId,
-            })
+        fetch(`${API}/api/reviews`, {
+            method: "POST",
+            body: JSON.stringify({ text: value, username: user?.name, movieId: movieId }),
+            cache: "no-store",
+        })
             .then(() => {
                 setValue("");
-                axios.get(`${API}/api/reviews?movieId=${movieId}`).then((response) => {
-                    setReviews(response.data);
-                });
+                fetch(`${API}/api/reviews?movieId=${movieId}`, { cache: "no-store" })
+                    .then((response) => response.json())
+                    .then((data) => setReviews(data));
             })
             .catch((e) => console.log(e));
     };
@@ -45,24 +44,23 @@ export const SendReview = ({ movieId }: SendReviewProps) => {
             originalArray.push(reviewId);
             return JSON.parse(JSON.stringify(originalArray));
         });
-        axios
-            .delete(`${API}/api/reviews`, {
-                data: {
-                    id: reviewId,
-                },
-            })
-            .then(() => {
-                axios.get(`${API}/api/reviews?movieId=${movieId}`).then((response) => {
-                    setReviews(response.data);
-                });
-            });
+        fetch(`${API}/api/reviews`, {
+            body: JSON.stringify({
+                id: reviewId,
+            }),
+            cache: "no-store",
+            method: "DELETE",
+        }).then(() => {
+            fetch(`${API}/api/reviews?movieId=${movieId}`, { cache: "no-store" })
+                .then((response) => response.json())
+                .then((data) => setReviews(data));
+        });
     };
 
     useEffect(() => {
         const fetchData = async () => {
-            const reviews = await axios
-                .get(`${API}/api/reviews?movieId=${movieId}`)
-                .then((response) => response.data)
+            const reviews = await fetch(`${API}/api/reviews?movieId=${movieId}`, { cache: "no-store" })
+                .then((response) => response.json())
                 .catch(() => undefined);
 
             return reviews;

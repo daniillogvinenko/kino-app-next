@@ -1,14 +1,12 @@
 import cls from "./page.module.scss";
-import axios from "axios";
 import { MainPageHeroSection } from "@/components/MainPageHeroSection";
 import Image from "next/image";
 import Link from "next/link";
 import { API } from "@/shared/consts/consts";
 
 export default async function Home() {
-    const movies = await axios
-        .get(`${API}/api/movies`)
-        .then((response) => response.data)
+    const movies = await fetch(`${API}/api/movies`, { cache: "no-store" })
+        .then((response) => response.json())
         .catch(() => undefined);
 
     return (

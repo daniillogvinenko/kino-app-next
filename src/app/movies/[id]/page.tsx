@@ -1,8 +1,6 @@
 import Link from "next/link";
 import cls from "./page.module.scss";
 
-import { Header } from "@/components/Header";
-import axios from "axios";
 import Image from "next/image";
 import { API } from "@/shared/consts/consts";
 import { WatchMovieButton } from "@/components/WatchMovieButton";
@@ -16,14 +14,8 @@ interface MoviePageProps {
 }
 
 export default async function MoviePage({ params }: MoviePageProps) {
-    const movie: any = await axios
-        .get(`${API}/api/movies/${params.id}`)
-        .then((data) => data.data)
-        .catch(() => undefined);
-
-    const reviews = await axios
-        .get(`${API}/api/reviews?movieId=${params.id}`)
-        .then((response) => response.data)
+    const movie: any = await fetch(`${API}/api/movies/${params.id}`, { cache: "no-store" })
+        .then((response) => response.json())
         .catch(() => undefined);
 
     return (
