@@ -8,11 +8,15 @@ import { Button } from "@/components/ui/Button";
 import { useCallback, useEffect, useState } from "react";
 import { cn } from "@/shared/helpers/classNames/classNames";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+
+const pagesWithoutHeader = ["/signin"];
 
 export const Header = () => {
     const session = useSession();
     const user = session.data?.user;
     const [headerIsVisible, setHeaderIsVisible] = useState(true);
+    const pathname = usePathname();
 
     const handleListener = useCallback(() => {
         if (scrollY > 100) {
@@ -27,6 +31,10 @@ export const Header = () => {
 
         return () => removeEventListener("scroll", handleListener);
     }, [handleListener]);
+
+    if (pagesWithoutHeader.includes(pathname)) {
+        return null;
+    }
 
     return (
         <div className={cn(cls.Header, { [cls.headerIsVisible]: headerIsVisible }, [])}>
