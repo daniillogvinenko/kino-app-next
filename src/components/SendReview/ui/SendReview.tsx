@@ -19,10 +19,12 @@ export const SendReview = ({ movieId }: SendReviewProps) => {
     const [value, setValue] = useState("");
     const [reviews, setReviews] = useState<Review[]>([]);
     const [commentIsDeleteing, setCommentIsDeleteing] = useState<string[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
     const session = useSession();
     const user = session.data?.user;
 
     const handleSendReview = () => {
+        setIsLoading(true);
         fetch(`${API}/api/reviews`, {
             method: "POST",
             body: JSON.stringify({ text: value, username: user?.name, movieId: movieId }),
@@ -31,7 +33,10 @@ export const SendReview = ({ movieId }: SendReviewProps) => {
             setValue("");
             fetch(`${API}/api/reviews?movieId=${movieId}`, { cache: "no-store" })
                 .then((response) => response.json())
-                .then((data) => setReviews(data));
+                .then((data) => {
+                    setIsLoading(false);
+                    setReviews(data);
+                });
         });
     };
 
@@ -72,7 +77,11 @@ export const SendReview = ({ movieId }: SendReviewProps) => {
             return reviews;
         };
 
-        fetchData().then((data) => setReviews(data));
+        setIsLoading(true);
+        fetchData().then((data) => {
+            setIsLoading(false);
+            setReviews(data);
+        });
     }, [movieId]);
 
     return (
@@ -90,34 +99,45 @@ export const SendReview = ({ movieId }: SendReviewProps) => {
             ) : null}
             <div className={cls.reviewsWrapper}>
                 {reviews ? (
-                    reviews?.map((r: any) => (
-                        <div
-                            className={cn(cls.reviewCard, {}, [commentIsDeleteing.includes(r.id) ? cls.isLoading : ""])}
-                            key={r.id}
-                        >
-                            <PageLoader className={cls.cardLoader} />
-                            <div className={cls.topFlex}>
-                                <div className={cls.userAvatar}></div>
-                                <p className={cls.username}>{r.user.username}</p>
-                            </div>
-                            <p className={cls.text}>{r.text}</p>
-                            <div className={cls.bottomFlex}>
-                                <div className={cls.flexRight}>
-                                    <p className={cls.dateTime}>{new Date(r.dateTime).toDateString()}</p>
-                                    <div className={cls.reactionsWrapper}>
-                                        <Image src={`${API}/static/icons/like.svg`} alt="" height={18} width={18} />
-                                        <p>12</p>
-                                        <Image src={`${API}/static/icons/dislike.svg`} alt="" height={18} width={18} />
-                                    </div>
+                    isLoading ? (
+                        <PageLoader className={cls.loader} />
+                    ) : (
+                        reviews?.map((r: any) => (
+                            <div
+                                className={cn(cls.reviewCard, {}, [
+                                    commentIsDeleteing.includes(r.id) ? cls.isLoading : "",
+                                ])}
+                                key={r.id}
+                            >
+                                <PageLoader className={cls.cardLoader} />
+                                <div className={cls.topFlex}>
+                                    <div className={cls.userAvatar}></div>
+                                    <p className={cls.username}>{r.user.username}</p>
                                 </div>
-                                {user?.name === r.username ? (
-                                    <p onClick={() => handleDeleteReview(r.id)} className={cls.dateTime}>
-                                        Удалить комментарий
-                                    </p>
-                                ) : null}
+                                <p className={cls.text}>{r.text}</p>
+                                <div className={cls.bottomFlex}>
+                                    <div className={cls.flexRight}>
+                                        <p className={cls.dateTime}>{new Date(r.dateTime).toDateString()}</p>
+                                        <div className={cls.reactionsWrapper}>
+                                            <Image src={`${API}/static/icons/like.svg`} alt="" height={18} width={18} />
+                                            <p>12</p>
+                                            <Image
+                                                src={`${API}/static/icons/dislike.svg`}
+                                                alt=""
+                                                height={18}
+                                                width={18}
+                                            />
+                                        </div>
+                                    </div>
+                                    {user?.name === r.username ? (
+                                        <p onClick={() => handleDeleteReview(r.id)} className={cls.dateTime}>
+                                            Удалить комментарий
+                                        </p>
+                                    ) : null}
+                                </div>
                             </div>
-                        </div>
-                    ))
+                        ))
+                    )
                 ) : (
                     <div className={cls.errorWrapper}>
                         <span>Упс!</span> <p>Произошла ошибка при загрузке комментариев</p>
