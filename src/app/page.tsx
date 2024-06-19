@@ -19,18 +19,18 @@ export default async function HomeOage() {
                         <div className={cls.title}>В тренде</div>
                         <div className={cls.wrapper}>
                             {movies?.map((movie: any) => (
-                                <Link key={movie.id} href={`movies/${movie.id}`}>
-                                    <div key={movie.id} className={cls.card}>
+                                <div key={movie.id} className={cls.card}>
+                                    <Link key={movie.id} href={`movies/${movie.id}`}>
                                         <Image
                                             src={`/static/images/movies/${movie.mainImage}`}
                                             alt="movieImage"
                                             width={190}
                                             height={287}
                                         />
-                                        <FavoritesButton className={cls.favButton} key={movie.id} movieId={movie.id} />
-                                        <div className={cls.movieTitle}>{movie.title}</div>
-                                    </div>
-                                </Link>
+                                    </Link>
+                                    <FavoritesButton className={cls.favButton} key={movie.id} movieId={movie.id} />
+                                    <div className={cls.movieTitle}>{movie.title}</div>
+                                </div>
                             ))}
                         </div>
                     </>
