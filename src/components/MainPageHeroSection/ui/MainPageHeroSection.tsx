@@ -10,7 +10,6 @@ export const MainPageHeroSection = () => {
                     <div className={cls.about}>2019 | Драма, комедия</div>
                     <div className={cls.button}>
                         <Button href="/movies/4">Смотреть</Button>
-                        {/* <Button>Смотреть</Button> */}
                     </div>
                 </div>
             </div>

@@ -18,8 +18,8 @@ export const FavoritesButton = (props: FavoritesButtonProps) => {
     const { movieId, className } = props;
     const [user, setUser] = useState<any>();
     const [isFavorite, setIsFavorite] = useState<boolean>(false);
-    const sesstion = useSession();
-    const username = sesstion.data?.user?.name;
+    const session = useSession();
+    const username = session.data?.user?.name;
 
     const handleAddToFavorites = () => {
         setIsFavorite(true);

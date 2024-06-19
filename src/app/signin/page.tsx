@@ -2,7 +2,7 @@ import { GitHubButton } from "@/components/GitHubButton";
 import { SignInForm } from "@/components/SignInForm";
 import cls from "./page.module.scss";
 
-export default async function Home() {
+export default async function SignInPage() {
     return (
         <div className={cls.Page}>
             <div className={cls.formWrapper}>

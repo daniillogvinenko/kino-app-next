@@ -4,7 +4,7 @@ import cls from "./MovieList.module.scss";
 
 export const MovieList = ({ movies }: { movies: any[] }) => {
     return (
-        <div className={cls.listWrapper}>
+        <div data-testid="MovieList" className={cls.listWrapper}>
             {movies?.map((movie) => (
                 <div key={movie?.id} className={cls.movieCard}>
                     <Image width={85} height={130} src={`/static/images/movies/${movie?.mainImage}`} alt="movieImage" />

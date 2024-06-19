@@ -57,7 +57,7 @@ export const SearchBar = () => {
 
     if (!isSearchOpened) {
         return (
-            <div className={cls.SearchBarOpen} onClick={handleOpenSearch}>
+            <div data-testid="SearchBarClosed" className={cls.SearchBarOpen} onClick={handleOpenSearch}>
                 <Image width={24} height={24} src="/static/icons/search.svg" alt="searchIcon" />
                 <span>Поиск</span>
             </div>
@@ -68,7 +68,7 @@ export const SearchBar = () => {
         <>
             <Overlay onClick={handleCloseSearch} className={cls.overlay} />
 
-            <div className={cls.SearchBar}>
+            <div data-testid="SearchBarOpened" className={cls.SearchBar}>
                 <div className={cls.inputWrapper}>
                     <Input ref={inputRef} value={searchValue} onChange={handleSearchChange} />
                     <Image

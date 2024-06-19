@@ -5,7 +5,7 @@ import Link from "next/link";
 import { API } from "@/shared/consts/consts";
 import { FavoritesButton } from "@/components/FavoritesButton/FavoritesButton";
 
-export default async function Home() {
+export default async function HomeOage() {
     const movies = await fetch(`${API}/api/movies`, { cache: "no-store" })
         .then((response) => response.json())
         .catch(() => undefined);
