@@ -45,6 +45,7 @@ export const Button = ({ children, size, variant, shadow = "noShadow", href, onC
         );
     }
 
+    // todo
     const handleOnClick: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.stopPropagation();
         if (onClick) {
@@ -53,7 +54,7 @@ export const Button = ({ children, size, variant, shadow = "noShadow", href, onC
     };
 
     return (
-        <button onClick={handleOnClick} className={clsName}>
+        <button onClick={onClick} className={clsName}>
             {children}
         </button>
     );

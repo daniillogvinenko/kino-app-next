@@ -42,11 +42,7 @@ export const SendReview = ({ movieId }: SendReviewProps) => {
 
     // доделать обработку неудачного запроса
     const handleDeleteReview = (reviewId: string) => {
-        setCommentIsDeleteing((p) => {
-            const originalArray = p;
-            originalArray.push(reviewId);
-            return JSON.parse(JSON.stringify(originalArray));
-        });
+        setCommentIsDeleteing((p) => [...p, reviewId]);
         fetch(`${API}/api/reviews`, {
             body: JSON.stringify({
                 id: reviewId,
