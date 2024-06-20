@@ -4,8 +4,10 @@ import cls from "./WatchMovieButton.module.scss";
 import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
 import { API } from "@/shared/consts/consts";
+import { cn } from "@/shared/helpers/classNames/classNames";
 import Image from "next/image";
 import { ChangeEvent, SyntheticEvent, useCallback, useEffect, useRef, useState } from "react";
+import { useDebouncedCallback } from "use-debounce";
 
 interface WatchMovieButtonProps {
     src: string;
@@ -15,6 +17,7 @@ export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {
     const [windowIsOpen, setWindowIsOpen] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
+    const [controlsIsVisible, setControlsIsVisible] = useState(false);
     const divRef = useRef<HTMLDivElement>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -65,18 +68,27 @@ export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {
         videoRef!.current!.currentTime += 10;
     };
 
+    const debouncedCallback = useDebouncedCallback(() => {
+        setControlsIsVisible(false);
+    }, 1000);
+
+    const handleMouseMove = () => {
+        setControlsIsVisible(true);
+        debouncedCallback();
+    };
+
     return (
         <>
             <Modal onClose={handleClose} isOpen={windowIsOpen}>
                 <div className="container">
-                    <div className={cls.modalContent} ref={divRef}>
+                    <div onMouseMove={handleMouseMove} className={cls.modalContent} ref={divRef}>
                         <video
                             onClick={handlePlayPause}
                             onTimeUpdate={onTimeUpdate}
                             ref={videoRef}
                             src={`${API}/static/video/movies/${src}`}
-                        ></video>
-                        <div className={cls.controls}>
+                        />
+                        <div className={cn(cls.controls, { [cls.controlsHidden]: !controlsIsVisible }, [])}>
                             <input
                                 ref={inputRef}
                                 onChange={handleTimeInputChange}
