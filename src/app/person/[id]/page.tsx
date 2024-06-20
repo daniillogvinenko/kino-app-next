@@ -44,10 +44,8 @@ export default async function PersonPage(props: PersonPageProps) {
                         <MoviesOfPerson person={person} />
                     </>
                 ) : (
-                    <div>
-                        <div className={cls.errorWrapper}>
-                            <span>Упс!</span> <p>Произошла ошибка при загрузке</p>
-                        </div>
+                    <div className={cls.errorWrapper}>
+                        <span>Упс!</span> <p>Произошла ошибка при загрузке</p>
                     </div>
                 )}
             </div>

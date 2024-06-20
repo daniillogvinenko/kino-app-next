@@ -35,10 +35,8 @@ export default async function HomePage() {
                         </div>
                     </>
                 ) : (
-                    <div>
-                        <div className={cls.errorWrapper}>
-                            <span>Упс!</span> <p>Произошла ошибка при загрузке фильмов</p>
-                        </div>
+                    <div className={cls.errorWrapper}>
+                        <span>Упс!</span> <p>Произошла ошибка при загрузке фильмов</p>
                     </div>
                 )}
             </div>

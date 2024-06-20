@@ -6,13 +6,17 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import cls from "./SignInForm.module.scss";
+import { GitHubButton } from "@/components/GitHubButton";
+import { PageLoader } from "@/components/ui/PageLoader";
 
 export const SignInForm = () => {
     const router = useRouter();
     const [usernameInput, setUsernameInput] = useState("");
     const [passwordInput, setPasswordInput] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async () => {
+        setIsLoading(true);
         const res = await signIn("credentials", {
             username: usernameInput,
             password: passwordInput,
@@ -27,21 +31,29 @@ export const SignInForm = () => {
     };
 
     return (
-        <div className={cls.SignInForm}>
-            <Input
-                placeholder="Введите имя пользователя"
-                value={usernameInput}
-                onChange={(e) => setUsernameInput(e.target.value)}
-            />
-            <Input
-                placeholder="Введите пароль"
-                value={passwordInput}
-                onChange={(e) => setPasswordInput(e.target.value)}
-                type="password"
-            />
-            <Button className={cls.btn} variant={"white"} onClick={handleSubmit}>
-                Продолжить
-            </Button>
-        </div>
+        <>
+            {isLoading ? (
+                <PageLoader className={cls.loader} />
+            ) : (
+                <div className={cls.SignInForm}>
+                    <GitHubButton />
+                    <div className={cls.separator}></div>
+                    <Input
+                        placeholder="Введите имя пользователя"
+                        value={usernameInput}
+                        onChange={(e) => setUsernameInput(e.target.value)}
+                    />
+                    <Input
+                        placeholder="Введите пароль"
+                        value={passwordInput}
+                        onChange={(e) => setPasswordInput(e.target.value)}
+                        type="password"
+                    />
+                    <Button className={cls.btn} variant={"white"} onClick={handleSubmit}>
+                        Продолжить
+                    </Button>
+                </div>
+            )}
+        </>
     );
 };

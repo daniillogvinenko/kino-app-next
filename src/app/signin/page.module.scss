@@ -2,23 +2,4 @@
     display: flex;
     justify-content: center;
     margin-top: 200px;
-
-    .formWrapper {
-        padding: 32px;
-        background-color: #625e64;
-        border-radius: 30px;
-        display: inline-block;
-
-        button,
-        input {
-            border-radius: 8px;
-        }
-
-        .separator {
-            height: 1px;
-            background-color: var(--secondary-color);
-            margin-top: 40px;
-            margin-bottom: 40px;
-        }
-    }
 }

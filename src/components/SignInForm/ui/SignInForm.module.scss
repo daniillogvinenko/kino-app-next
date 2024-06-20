@@ -2,9 +2,30 @@
     display: flex;
     flex-direction: column;
     gap: 18px;
-    width: 300px;
+    width: 360px;
+
+    padding: 32px;
+    background-color: #625e64;
+    border-radius: 30px;
+
+    input,
+    button {
+        border-radius: 8px;
+    }
 
     .btn {
         font-weight: 400;
     }
+
+    .separator {
+        height: 1px;
+        background-color: var(--secondary-color);
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+}
+
+.loader {
+    position: relative;
+    top: 120px;
 }

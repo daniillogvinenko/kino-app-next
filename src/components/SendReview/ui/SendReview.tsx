@@ -24,20 +24,22 @@ export const SendReview = ({ movieId }: SendReviewProps) => {
     const user = session.data?.user;
 
     const handleSendReview = () => {
-        setIsLoading(true);
-        fetch(`${API}/api/reviews`, {
-            method: "POST",
-            body: JSON.stringify({ text: value, username: user?.name, movieId: movieId }),
-            cache: "no-store",
-        }).then(() => {
-            setValue("");
-            fetch(`${API}/api/reviews?movieId=${movieId}`, { cache: "no-store" })
-                .then((response) => response.json())
-                .then((data) => {
-                    setIsLoading(false);
-                    setReviews(data);
-                });
-        });
+        if (value && value.trim()) {
+            setIsLoading(true);
+            fetch(`${API}/api/reviews`, {
+                method: "POST",
+                body: JSON.stringify({ text: value, username: user?.name, movieId: movieId }),
+                cache: "no-store",
+            }).then(() => {
+                setValue("");
+                fetch(`${API}/api/reviews?movieId=${movieId}`, { cache: "no-store" })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        setIsLoading(false);
+                        setReviews(data);
+                    });
+            });
+        }
     };
 
     // доделать обработку неудачного запроса
