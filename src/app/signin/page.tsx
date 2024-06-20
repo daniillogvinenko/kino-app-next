@@ -4,7 +4,7 @@ import cls from "./page.module.scss";
 
 export default async function SignInPage() {
     return (
-        <div className={cls.Page}>
+        <div className={cls.SignInPage}>
             <div className={cls.formWrapper}>
                 <GitHubButton />
                 <div className={cls.separator}></div>

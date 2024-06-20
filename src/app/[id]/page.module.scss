@@ -1,39 +1,41 @@
-.contentWrapper {
-    padding-top: 175px;
+.ProfilePage {
+    .contentWrapper {
+        padding-top: 175px;
 
-    .username {
-        font-weight: 900;
-        font-size: 48px;
-        margin-bottom: 20px;
+        .username {
+            font-weight: 900;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .btnWrapper {
+            display: flex;
+            gap: 20px;
+        }
+
+        .favTitle {
+            font-size: 22px;
+            line-height: 24px;
+            margin-top: 45px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
     }
 
-    .btnWrapper {
-        display: flex;
-        gap: 20px;
-    }
+    .errorWrapper {
+        text-align: center;
+        padding-top: 120px;
 
-    .favTitle {
-        font-size: 22px;
-        line-height: 24px;
-        margin-top: 45px;
-        margin-bottom: 20px;
-        font-weight: 700;
-    }
-}
+        span {
+            font-size: 48px;
+            font-weight: 500;
+        }
 
-.errorWrapper {
-    text-align: center;
-    padding-top: 120px;
-
-    span {
-        font-size: 48px;
-        font-weight: 500;
-    }
-
-    p {
-        color: #b5b5b5;
-        font-size: 16px;
-        margin-top: 15px;
-        margin-bottom: 20px;
+        p {
+            color: #b5b5b5;
+            font-size: 16px;
+            margin-top: 15px;
+            margin-bottom: 20px;
+        }
     }
 }

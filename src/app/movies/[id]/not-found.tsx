@@ -3,14 +3,12 @@ import { Button } from "@/components/ui/Button";
 
 export default function NOTFOUND() {
     return (
-        <div>
-            <div className={cls.notFoundWrapper}>
-                <span>Страницы не существует :{"("}</span>
-                <br />
-                <br />
-                <br />
-                <Button href="/">Вернуться на главную</Button>
-            </div>
+        <div className={cls.notFoundWrapper}>
+            <span>Страницы не существует :{"("}</span>
+            <br />
+            <br />
+            <br />
+            <Button href="/">Вернуться на главную</Button>
         </div>
     );
 }

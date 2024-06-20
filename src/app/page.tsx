@@ -5,13 +5,13 @@ import Link from "next/link";
 import { API } from "@/shared/consts/consts";
 import { FavoritesButton } from "@/components/FavoritesButton/FavoritesButton";
 
-export default async function HomeOage() {
+export default async function HomePage() {
     const movies = await fetch(`${API}/api/movies`, { cache: "no-store" })
         .then((response) => response.json())
         .catch(() => undefined);
 
     return (
-        <>
+        <div className={cls.HomePage}>
             <MainPageHeroSection />
             <div className="container">
                 {movies ? (
@@ -42,6 +42,6 @@ export default async function HomeOage() {
                     </div>
                 )}
             </div>
-        </>
+        </div>
     );
 }

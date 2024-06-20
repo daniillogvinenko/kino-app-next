@@ -22,8 +22,17 @@ export default function RootLayout({
             <html lang="en">
                 <body className={inter.className}>
                     <Header />
-                    {children}
-                    <Footer />
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            minHeight: "100vh",
+                            justifyContent: "space-between",
+                        }}
+                    >
+                        <div style={{ flex: "1 1 auto" }}>{children}</div>
+                        <Footer />
+                    </div>
                 </body>
             </html>
         </Providers>

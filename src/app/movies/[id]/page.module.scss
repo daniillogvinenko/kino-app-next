@@ -1,112 +1,114 @@
-.flex1 {
-    display: flex;
-    justify-content: space-between;
-    gap: 48px;
-    padding-top: 175px;
+.MoviePage {
+    .flex1 {
+        display: flex;
+        justify-content: space-between;
+        gap: 48px;
+        padding-top: 175px;
 
-    img {
-        border-radius: 10px;
+        img {
+            border-radius: 10px;
+        }
+
+        .title {
+            font-weight: 900;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .shortInfo {
+            color: #b5b5b5;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 24px;
+            font-weight: 300;
+            margin-bottom: 44px;
+        }
+
+        .aboutTitle {
+            font-size: 22px;
+            line-height: 24px;
+            margin-top: 45px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .aboutGrid {
+            display: grid;
+            grid-template-columns: max-content max-content;
+            column-gap: 24px;
+            row-gap: 20px;
+            font-size: 13px;
+
+            .gridLeftColumn {
+                color: #b5b5b5;
+            }
+
+            .directorFullName {
+                transition-duration: 0.2s;
+
+                &:hover {
+                    color: var(--accent-color);
+                }
+            }
+        }
+
+        .btnWrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
     }
 
-    .title {
-        font-weight: 900;
-        font-size: 48px;
-        margin-bottom: 20px;
-    }
-
-    .shortInfo {
-        color: #b5b5b5;
-        margin-bottom: 20px;
-        font-size: 18px;
-    }
-
-    p {
-        font-size: 18px;
-        line-height: 24px;
-        font-weight: 300;
-        margin-bottom: 44px;
-    }
-
-    .aboutTitle {
+    .actorsTitle {
         font-size: 22px;
         line-height: 24px;
-        margin-top: 45px;
-        margin-bottom: 20px;
+        margin-top: 60px;
+        margin-bottom: 25px;
         font-weight: 700;
     }
 
-    .aboutGrid {
-        display: grid;
-        grid-template-columns: max-content max-content;
-        column-gap: 24px;
-        row-gap: 20px;
-        font-size: 13px;
+    .actorsWrapper {
+        display: flex;
+        gap: 24px;
+        width: 88px;
 
-        .gridLeftColumn {
-            color: #b5b5b5;
-        }
-
-        .directorFullName {
-            transition-duration: 0.2s;
+        .actorCard {
+            line-height: 120%;
 
             &:hover {
-                color: var(--accent-color);
+                img {
+                    transform: scale(1.07);
+                    box-shadow: 0 0 90px rgb(0, 0, 0);
+                }
             }
-        }
-    }
 
-    .btnWrapper {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-    }
-}
-
-.actorsTitle {
-    font-size: 22px;
-    line-height: 24px;
-    margin-top: 60px;
-    margin-bottom: 25px;
-    font-weight: 700;
-}
-
-.actorsWrapper {
-    display: flex;
-    gap: 24px;
-    width: 88px;
-
-    .actorCard {
-        line-height: 120%;
-
-        &:hover {
             img {
-                transform: scale(1.07);
-                box-shadow: 0 0 90px rgb(0, 0, 0);
+                transition-duration: 0.2s;
+                border-radius: 20px;
+                object-fit: cover;
+                margin-bottom: 10px;
             }
         }
+    }
 
-        img {
-            transition-duration: 0.2s;
-            border-radius: 20px;
-            object-fit: cover;
-            margin-bottom: 10px;
+    .errorWrapper {
+        text-align: center;
+        padding-top: 40vh;
+
+        span {
+            font-size: 48px;
+            font-weight: 500;
         }
-    }
-}
 
-.errorWrapper {
-    text-align: center;
-    padding-top: 40vh;
-
-    span {
-        font-size: 48px;
-        font-weight: 500;
-    }
-
-    p {
-        color: #b5b5b5;
-        font-size: 16px;
-        margin-top: 15px;
-        margin-bottom: 20px;
+        p {
+            color: #b5b5b5;
+            font-size: 16px;
+            margin-top: 15px;
+            margin-bottom: 20px;
+        }
     }
 }

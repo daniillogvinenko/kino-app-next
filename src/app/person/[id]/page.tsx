@@ -17,7 +17,7 @@ export default async function PersonPage(props: PersonPageProps) {
         .catch(() => undefined);
 
     return (
-        <>
+        <div className={cls.PersonPage}>
             <div className="container">
                 {person ? (
                     <>
@@ -51,6 +51,6 @@ export default async function PersonPage(props: PersonPageProps) {
                     </div>
                 )}
             </div>
-        </>
+        </div>
     );
 }

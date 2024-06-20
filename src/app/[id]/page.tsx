@@ -24,30 +24,28 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
     }
 
     return (
-        <>
-            <div className={cls.ProfilePage}>
-                <div className="container">
-                    <div className={cls.contentWrapper}>
-                        {user ? (
-                            <>
-                                <div className={cls.username}>{user?.username}</div>
-                                <div className={cls.btnWrapper}>
-                                    <Button variant={"outline"}>Редактировать профиль</Button>
-                                    <SignOutButton />
-                                </div>
-                                <div className={cls.favTitle}>Избранное</div>
-                                <MovieList movies={user?.favoriteMovies} />
-                            </>
-                        ) : (
-                            <div>
-                                <div className={cls.errorWrapper}>
-                                    <span>Упс!</span> <p>Произошла ошибка при загрузке</p>
-                                </div>
+        <div className={cls.ProfilePage}>
+            <div className="container">
+                <div className={cls.contentWrapper}>
+                    {user ? (
+                        <>
+                            <div className={cls.username}>{user?.username}</div>
+                            <div className={cls.btnWrapper}>
+                                <Button variant={"outline"}>Редактировать профиль</Button>
+                                <SignOutButton />
                             </div>
-                        )}
-                    </div>
+                            <div className={cls.favTitle}>Избранное</div>
+                            <MovieList movies={user?.favoriteMovies} />
+                        </>
+                    ) : (
+                        <div>
+                            <div className={cls.errorWrapper}>
+                                <span>Упс!</span> <p>Произошла ошибка при загрузке</p>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
-        </>
+        </div>
     );
 }
