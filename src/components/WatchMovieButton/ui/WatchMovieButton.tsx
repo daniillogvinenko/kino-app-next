@@ -20,7 +20,8 @@ export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {
     const [controlsIsVisible, setControlsIsVisible] = useState(false);
     const divRef = useRef<HTMLDivElement>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
-    const inputRef = useRef<HTMLInputElement>(null);
+    const timeInputRef = useRef<HTMLInputElement>(null);
+    const volumeInputRef = useRef<HTMLInputElement>(null);
 
     const handleOpen = () => {
         setWindowIsOpen(true);
@@ -52,12 +53,16 @@ export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {
     };
 
     const onTimeUpdate = (e: SyntheticEvent<HTMLVideoElement, Event>) => {
-        inputRef!.current!.value = String((+e.currentTarget.currentTime / +e.currentTarget.duration) * 100);
+        timeInputRef!.current!.value = String((+e.currentTarget.currentTime / +e.currentTarget.duration) * 100);
     };
 
     // event -> 0 - 100%
     const handleTimeInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         videoRef!.current!.currentTime = (+e.target.value * videoRef!.current!.duration) / 100;
+    };
+
+    const handleVolumeInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        videoRef!.current!.volume = +e.target.value / 100;
     };
 
     const handleReplay = () => {
@@ -70,7 +75,7 @@ export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {
 
     const debouncedCallback = useDebouncedCallback(() => {
         setControlsIsVisible(false);
-    }, 1000);
+    }, 3000);
 
     const handleMouseMove = () => {
         setControlsIsVisible(true);
@@ -90,7 +95,7 @@ export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {
                         />
                         <div className={cn(cls.controls, { [cls.controlsHidden]: !controlsIsVisible }, [])}>
                             <input
-                                ref={inputRef}
+                                ref={timeInputRef}
                                 onChange={handleTimeInputChange}
                                 className={cls.timeInput}
                                 type="range"
@@ -127,6 +132,12 @@ export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {
                                         alt="replay"
                                         width={28}
                                         height={28}
+                                    />
+                                    <input
+                                        onChange={handleVolumeInputChange}
+                                        ref={volumeInputRef}
+                                        className={cls.volumeInput}
+                                        type="range"
                                     />
                                 </div>
 
