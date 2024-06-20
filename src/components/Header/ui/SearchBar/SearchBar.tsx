@@ -5,7 +5,7 @@ import Image from "next/image";
 import Input from "@/components/ui/Input";
 import { Overlay } from "@/components/ui/Overlay";
 import { API } from "@/shared/consts/consts";
-import { PageLoader } from "@/components/PageLoader";
+import { PageLoader } from "@/components/ui/PageLoader";
 
 export const SearchBar = () => {
     const [isSearchOpened, setIsSearchOpened] = useState<boolean>(false);

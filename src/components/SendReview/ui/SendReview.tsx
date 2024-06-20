@@ -9,7 +9,7 @@ import { useSession } from "next-auth/react";
 import { Review } from "@prisma/client";
 import Image from "next/image";
 import { cn } from "@/shared/helpers/classNames/classNames";
-import { PageLoader } from "@/components/PageLoader";
+import { PageLoader } from "@/components/ui/PageLoader";
 
 interface SendReviewProps {
     movieId: string;

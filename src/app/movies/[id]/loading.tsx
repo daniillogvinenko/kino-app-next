@@ -1,5 +1,5 @@
 import cls from "./loading.module.scss";
-import { PageLoader } from "@/components/PageLoader";
+import { PageLoader } from "@/components/ui/PageLoader";
 export default function Loading() {
     return (
         <>
