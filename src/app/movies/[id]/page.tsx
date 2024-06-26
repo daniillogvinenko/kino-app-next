@@ -73,7 +73,7 @@ export default async function MoviePage({ params }: MoviePageProps) {
                                 </Link>
                             ))}
                         </div>
-                        <div className={cls.actorsTitle}>Отзывы</div>
+                        <div className={cls.actorsTitle}>Комментарии</div>
                         <SendReview movieId={params.id} />
                     </>
                 ) : (
