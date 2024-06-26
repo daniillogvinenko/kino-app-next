@@ -1,0 +1,19 @@
+.RangeInput {
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.5);
+    outline: none;
+    height: 6px;
+    overflow: hidden;
+    border-radius: 10px;
+
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 6px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: -10000px 0 0 10000px var(--accent-color);
+    }
+}

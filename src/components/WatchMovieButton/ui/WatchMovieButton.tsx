@@ -9,6 +9,7 @@ import { cn } from "@/shared/helpers/classNames/classNames";
 import Image from "next/image";
 import { ChangeEvent, SyntheticEvent, useCallback, useEffect, useRef, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
+import { InputRange } from "@/components/ui/InputRange";
 
 interface WatchMovieButtonProps {
     src: string;
@@ -107,12 +108,13 @@ export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {
                             src={`${API}/static/video/movies/${src}`}
                         />
                         <div className={cn(cls.controls, { [cls.controlsHidden]: !controlsIsVisible }, [])}>
-                            <input
+                            {/* <input
                                 ref={timeInputRef}
                                 onChange={handleTimeInputChange}
                                 className={cls.timeInput}
                                 type="range"
-                            />
+                            /> */}
+                            <InputRange onChange={handleTimeInputChange} className={cls.timeInput} ref={timeInputRef} />
                             <div className={cls.btnWrapper}>
                                 <div className={cls.leftButtons}>
                                     {isPlaying ? (
@@ -146,11 +148,16 @@ export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {
                                         width={28}
                                         height={28}
                                     />
-                                    <input
+                                    {/* <input
                                         onChange={handleVolumeInputChange}
                                         ref={volumeInputRef}
                                         className={cls.volumeInput}
                                         type="range"
+                                    /> */}
+                                    <InputRange
+                                        onChange={handleVolumeInputChange}
+                                        className={cls.volumeInput}
+                                        ref={volumeInputRef}
                                     />
                                 </div>
 
