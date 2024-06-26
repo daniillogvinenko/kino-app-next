@@ -12,7 +12,7 @@ import { useDebouncedCallback } from "use-debounce";
 import { InputRange } from "@/components/ui/InputRange";
 
 interface WatchMovieButtonProps {
-    src: string;
+    src: string | null;
 }
 
 export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {

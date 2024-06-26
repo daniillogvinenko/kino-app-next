@@ -2,8 +2,9 @@ import { Button } from "@/components/ui/Button";
 import Image from "next/image";
 import cls from "./MovieList.module.scss";
 import { FavoritesButton } from "@/components/FavoritesButton/FavoritesButton";
+import { Movie } from "@prisma/client";
 
-export const MovieList = ({ movies }: { movies: any[] }) => {
+export const MovieList = ({ movies }: { movies: Movie[] }) => {
     return (
         <div data-testid="MovieList" className={cls.listWrapper}>
             {movies?.map((movie) => (

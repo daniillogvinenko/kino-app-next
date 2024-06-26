@@ -4,9 +4,10 @@ import { useState } from "react";
 import cls from "./MoviesOfPerson.module.scss";
 import { cn } from "@/shared/helpers/classNames/classNames";
 import { MovieList } from "@/components/MovieList";
+import { Movie, Person } from "@prisma/client";
 
 interface MoviesOfPersonProps {
-    person: any;
+    person: Person & { actedInMovies: Movie[]; directedMovies: Movie[] };
     className?: string;
 }
 

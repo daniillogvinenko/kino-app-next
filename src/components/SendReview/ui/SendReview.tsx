@@ -6,7 +6,7 @@ import cls from "./SendReview.module.scss";
 import { useEffect, useState } from "react";
 import { API } from "@/shared/consts/consts";
 import { useSession } from "next-auth/react";
-import { Review } from "@prisma/client";
+import { Review, User } from "@prisma/client";
 import Image from "next/image";
 import { cn } from "@/shared/helpers/classNames/classNames";
 import { PageLoader } from "@/components/ui/PageLoader";
@@ -17,8 +17,8 @@ interface SendReviewProps {
 
 export const SendReview = ({ movieId }: SendReviewProps) => {
     const [value, setValue] = useState("");
-    const [reviews, setReviews] = useState<Review[]>([]);
-    const [commentIsDeleteing, setCommentIsDeleteing] = useState<string[]>([]);
+    const [reviews, setReviews] = useState<(Review & { user: User })[]>([]);
+    const [commentIsDeleteing, setCommentIsDeleteing] = useState<number[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const session = useSession();
     const user = session.data?.user;
@@ -43,7 +43,7 @@ export const SendReview = ({ movieId }: SendReviewProps) => {
     };
 
     // доделать обработку неудачного запроса
-    const handleDeleteReview = (reviewId: string) => {
+    const handleDeleteReview = (reviewId: number) => {
         setCommentIsDeleteing((p) => [...p, reviewId]);
         fetch(`${API}/api/reviews`, {
             body: JSON.stringify({
@@ -55,11 +55,11 @@ export const SendReview = ({ movieId }: SendReviewProps) => {
             if (response.ok) {
                 console.log("here");
                 setReviews((r) => {
-                    const resArray = JSON.parse(JSON.stringify(r?.filter((item) => item.id !== +reviewId)));
+                    const resArray = JSON.parse(JSON.stringify(r?.filter((item) => item.id !== reviewId)));
                     return resArray;
                 });
                 setCommentIsDeleteing((a) => {
-                    const resArray = a.filter((item) => item !== reviewId);
+                    const resArray = a.filter((item) => item !== +reviewId);
                     return resArray;
                 });
             }
@@ -100,7 +100,7 @@ export const SendReview = ({ movieId }: SendReviewProps) => {
                     isLoading ? (
                         <PageLoader className={cls.loader} />
                     ) : (
-                        reviews?.map((r: any) => (
+                        reviews?.map((r: Review & { user: User }) => (
                             <div
                                 className={cn(cls.reviewCard, {}, [
                                     commentIsDeleteing.includes(r.id) ? cls.isLoading : "",

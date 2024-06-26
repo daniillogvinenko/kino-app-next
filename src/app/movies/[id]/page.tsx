@@ -7,7 +7,7 @@ import { WatchMovieButton } from "@/components/WatchMovieButton";
 import { SendReview } from "@/components/SendReview";
 import { FavoritesButton } from "@/components/FavoritesButton/FavoritesButton";
 import { Metadata } from "next";
-import { Movie } from "@prisma/client";
+import { Movie, Person } from "@prisma/client";
 
 interface MoviePageProps {
     params: {
@@ -26,7 +26,9 @@ export async function generateMetadata({ params }: MoviePageProps): Promise<Meta
 }
 
 export default async function MoviePage({ params }: MoviePageProps) {
-    const movie: any = await fetch(`${API}/api/movies/${params.id}`, { cache: "no-store" })
+    const movie: Movie & { director: Person; mainActors: Person[] } = await fetch(`${API}/api/movies/${params.id}`, {
+        cache: "no-store",
+    })
         .then((response) => response.json())
         .catch(() => undefined);
 
@@ -44,7 +46,9 @@ export default async function MoviePage({ params }: MoviePageProps) {
                             />
                             <div>
                                 <div className={cls.title}>{movie?.title}</div>
-                                <div className={cls.shortInfo}>2022 | {movie?.movieGenres.join(", ")} | 18+</div>
+                                <div className={cls.shortInfo}>
+                                    {movie?.year} | {movie?.movieGenres.join(", ")} | {movie?.age}+
+                                </div>
                                 <p>{movie?.movieDescription}</p>
                                 <div className={cls.btnWrapper}>
                                     <WatchMovieButton src={movie.movieSrc} />
@@ -63,15 +67,15 @@ export default async function MoviePage({ params }: MoviePageProps) {
                                         <span className={cls.directorFullName}>{movie?.director.fullName}</span>
                                     </Link>
                                     <span className={cls.gridLeftColumn}>Длительность</span>
-                                    <span>138 мин. / 2:18</span>
+                                    <span>{movie?.duration}</span>
                                     <span className={cls.gridLeftColumn}>Возраст</span>
-                                    <span>18+</span>
+                                    <span>{movie?.age}+</span>
                                 </div>
                             </div>
                         </div>
                         <div className={cls.actorsTitle}>В главных ролях</div>
                         <div className={cls.actorsWrapper}>
-                            {movie?.mainActors.map((actor: any) => (
+                            {movie?.mainActors.map((actor: Person) => (
                                 <Link href={`/person/${actor.id}`} key={actor.id}>
                                     <div className={cls.actorCard}>
                                         <Image

@@ -4,9 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { API } from "@/shared/consts/consts";
 import { FavoritesButton } from "@/components/FavoritesButton/FavoritesButton";
+import { Movie } from "@prisma/client";
 
 export default async function HomePage() {
-    const movies = await fetch(`${API}/api/movies`, { cache: "no-store" })
+    const movies: Movie[] = await fetch(`${API}/api/movies`, { cache: "no-store" })
         .then((response) => response.json())
         .catch(() => undefined);
 
@@ -18,7 +19,7 @@ export default async function HomePage() {
                     <>
                         <div className={cls.title}>В тренде</div>
                         <div className={cls.wrapper}>
-                            {movies?.map((movie: any) => (
+                            {movies?.map((movie) => (
                                 <div key={movie.id} className={cls.card}>
                                     <Link key={movie.id} href={`movies/${movie.id}`}>
                                         <Image
@@ -28,7 +29,11 @@ export default async function HomePage() {
                                             height={287}
                                         />
                                     </Link>
-                                    <FavoritesButton className={cls.favButton} key={movie.id} movieId={movie.id} />
+                                    <FavoritesButton
+                                        className={cls.favButton}
+                                        key={movie.id}
+                                        movieId={movie.id.toString()}
+                                    />
                                     <div className={cls.movieTitle}>{movie.title}</div>
                                 </div>
                             ))}
