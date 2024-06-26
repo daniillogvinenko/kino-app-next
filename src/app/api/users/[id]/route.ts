@@ -17,6 +17,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 export async function PATCH(req: Request, { params }: { params: { id: string } }) {
     const body = await req.json();
 
+    // adds new favorite movie
     if (body.operation === "add") {
         await prisma.user.update({
             where: {
@@ -32,6 +33,7 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
         });
     }
 
+    // removes favorite movie
     if (body.operation === "remove") {
         await prisma.user.update({
             where: {

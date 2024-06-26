@@ -9,6 +9,15 @@
         align-items: center;
         gap: 20px;
         line-height: 150%;
+        position: relative;
+
+        .deleteMovieButton {
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            transform: scale(0.8);
+            cursor: pointer;
+        }
 
         img {
             border-radius: 16px;
@@ -24,7 +33,7 @@
 
         .movieRating {
             margin-bottom: 8px;
-            color: #B5B5B5;
+            color: #b5b5b5;
             font-weight: 300;
         }
     }
