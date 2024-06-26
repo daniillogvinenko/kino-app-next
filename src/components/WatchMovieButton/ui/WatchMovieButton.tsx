@@ -20,7 +20,7 @@ export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [controlsIsVisible, setControlsIsVisible] = useState(false);
-    const [rateModalIsOpened, setRateModalIsOpened] = useState(true);
+    const [rateModalIsOpened, setRateModalIsOpened] = useState(false);
     const divRef = useRef<HTMLDivElement>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
     const timeInputRef = useRef<HTMLInputElement>(null);
