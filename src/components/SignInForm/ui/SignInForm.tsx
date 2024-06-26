@@ -8,6 +8,8 @@ import { useState } from "react";
 import cls from "./SignInForm.module.scss";
 import { GitHubButton } from "@/components/GitHubButton";
 import { PageLoader } from "@/components/ui/PageLoader";
+import Link from "next/link";
+import Image from "next/image";
 
 export const SignInForm = () => {
     const router = useRouter();
@@ -36,8 +38,11 @@ export const SignInForm = () => {
                 <PageLoader className={cls.loader} />
             ) : (
                 <div className={cls.SignInForm}>
-                    <GitHubButton />
-                    <div className={cls.separator}></div>
+                    {/* <GitHubButton />
+                    <div className={cls.separator}></div> */}
+                    <Link href="/">
+                        <Image src="/static/icons/header-logo.svg" alt="logo" width={240} height={32} />
+                    </Link>
                     <Input
                         placeholder="Введите имя пользователя"
                         value={usernameInput}
