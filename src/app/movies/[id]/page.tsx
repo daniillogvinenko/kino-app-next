@@ -6,10 +6,22 @@ import { API } from "@/shared/consts/consts";
 import { WatchMovieButton } from "@/components/WatchMovieButton";
 import { SendReview } from "@/components/SendReview";
 import { FavoritesButton } from "@/components/FavoritesButton/FavoritesButton";
+import { Metadata } from "next";
+import { Movie } from "@prisma/client";
 
 interface MoviePageProps {
     params: {
         id: string;
+    };
+}
+
+export async function generateMetadata({ params }: MoviePageProps): Promise<Metadata> {
+    const movie: Movie = await fetch(`${API}/api/movies/${params.id}`, { cache: "no-store" }).then((response) =>
+        response.json()
+    );
+
+    return {
+        title: `${movie.title}, ${movie.year} - Смотреть фильм онлайн в хорошем качестве`,
     };
 }
 

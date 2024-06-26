@@ -5,10 +5,22 @@ import { MovieList } from "@/components/MovieList";
 import { API } from "@/shared/consts/consts";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import { User } from "@prisma/client";
+import { Metadata } from "next";
 
 interface ProfilePageProps {
     params: {
         id: string;
+    };
+}
+
+export async function generateMetadata({ params }: ProfilePageProps): Promise<Metadata> {
+    const user: User = await fetch(`${API}/api/users/${params.id}`, { cache: "no-store" }).then((response) =>
+        response.json()
+    );
+
+    return {
+        title: `Профиль: ${user.username}`,
     };
 }
 

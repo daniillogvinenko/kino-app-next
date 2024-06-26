@@ -2,10 +2,22 @@ import { MoviesOfPerson } from "@/components/MoviesOfPerson";
 import cls from "./page.module.scss";
 import Image from "next/image";
 import { API } from "@/shared/consts/consts";
+import { Person } from "@prisma/client";
+import { Metadata } from "next";
 
 interface PersonPageProps {
     params: {
         id: string;
+    };
+}
+
+export async function generateMetadata({ params }: PersonPageProps): Promise<Metadata> {
+    const person: Person = await fetch(`${API}/api/persons/${params.id}`, { cache: "no-store" }).then((response) =>
+        response.json()
+    );
+
+    return {
+        title: `${person.fullName} (${person.fullNameEnglish}) - Фильмы, биография`,
     };
 }
 
