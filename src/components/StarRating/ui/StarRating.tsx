@@ -2,6 +2,7 @@ import { cn } from "@/shared/helpers/classNames/classNames";
 import StarIcon from "../../../../public/static/icons/starIcon.svg";
 import cls from "./StarRating.module.scss";
 import { useState } from "react";
+import { Button } from "@/components/ui/Button";
 
 interface Star {
     rate: number;
@@ -43,7 +44,7 @@ const stars: Star[] = [
     },
     {
         rate: 9,
-        description: "Великолеано",
+        description: "Великолепно",
     },
     {
         rate: 10,
@@ -51,11 +52,8 @@ const stars: Star[] = [
     },
 ];
 
-interface StarRatingProps {
-    onClick: (rate: number) => void;
-}
-
-export const StarRating = ({ onClick }: StarRatingProps) => {
+export const StarRating = () => {
+    const [rate, setRate] = useState(0);
     const [currentStarsCount, setCurrentStarsCount] = useState<number>(0);
 
     const onHover = (starsCount: number) => () => {
@@ -66,30 +64,41 @@ export const StarRating = ({ onClick }: StarRatingProps) => {
         setCurrentStarsCount(0);
     };
 
-    const className = (starNumber: Star): string => {
-        if (currentStarsCount >= starNumber.rate && currentStarsCount < 5) {
-            return cls.hoveredRed;
+    const className = (starNumber: number): string => {
+        if (currentStarsCount >= starNumber && currentStarsCount < 5) {
+            return cls.red;
         }
 
-        if (currentStarsCount >= starNumber.rate && currentStarsCount < 7) {
-            return cls.hoveredWhite;
+        if (currentStarsCount >= starNumber && currentStarsCount < 7) {
+            return cls.white;
         }
 
-        if (currentStarsCount >= starNumber.rate) {
-            return cls.hoveredGreen;
+        if (currentStarsCount >= starNumber) {
+            return cls.green;
         }
 
         return cls.normal;
     };
+
+    if (rate) {
+        return (
+            <div className={cls.rate}>
+                <div className={className(rate)}>
+                    {rate} <StarIcon className={cls.icon} width={48} height={48} />
+                </div>
+                <Button onClick={() => setRate(0)} variant={"borderless"}>
+                    Удалить оценку
+                </Button>
+            </div>
+        );
+    }
 
     return (
         <>
             <div className={cls.top}>
                 {currentStarsCount ? (
                     <div className={cls.hoveredTop}>
-                        <p className={className(stars.find((s) => s.rate === currentStarsCount)!)}>
-                            {currentStarsCount}
-                        </p>{" "}
+                        <p className={className(currentStarsCount)}>{currentStarsCount}</p>{" "}
                         <p>{stars.find((s) => s.rate === currentStarsCount)?.description}</p>
                     </div>
                 ) : (
@@ -103,10 +112,10 @@ export const StarRating = ({ onClick }: StarRatingProps) => {
                         key={star.rate}
                         onMouseEnter={onHover(star.rate)}
                         onMouseLeave={onLeave}
-                        className={cn(cls.starIcon, {}, [className(star)])}
+                        className={cn(cls.starIcon, {}, [className(star.rate)])}
                         width={72}
                         height={54}
-                        onClick={() => onClick(star.rate)}
+                        onClick={() => setRate(star.rate)}
                     />
                 ))}
             </div>

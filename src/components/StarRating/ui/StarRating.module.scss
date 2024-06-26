@@ -7,19 +7,19 @@
             font-size: 40px;
             font-weight: 500;
         }
-        .hoveredRed {
+        .red {
             color: red;
             font-size: 150px;
             font-weight: 900;
             margin-bottom: 10px;
         }
-        .hoveredWhite {
+        .white {
             color: white;
             font-size: 150px;
             font-weight: 900;
             margin-bottom: 10px;
         }
-        .hoveredGreen {
+        .green {
             color: #3bb33b;
             font-size: 150px;
             font-weight: 900;
@@ -33,28 +33,75 @@
     font-weight: 900;
 }
 
-.title {
-    font-size: 45px;
-    font-weight: 900;
-}
-
 .rateFlex {
     display: flex;
 
     .starIcon {
         cursor: pointer;
     }
-    .hoveredRed {
+    .red {
         fill: red;
     }
-    .hoveredWhite {
+    .white {
         fill: white;
     }
-    .hoveredGreen {
+    .green {
         fill: #3bb33b;
     }
 
     .normal {
         fill: rgb(143, 143, 143);
+    }
+}
+
+.rate {
+    text-align: center;
+    // todo DRY
+    .red {
+        background: red;
+        font-size: 90px;
+        font-weight: 900;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 15px 40px;
+        border-radius: 100px;
+
+        .icon {
+            fill: white;
+        }
+    }
+    .white {
+        background: rgb(119, 119, 119);
+        font-size: 90px;
+        font-weight: 900;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 15px 40px;
+        border-radius: 100px;
+        color: white;
+
+        .icon {
+            fill: white;
+        }
+    }
+    .green {
+        background: #3bb33b;
+        font-size: 90px;
+        font-weight: 900;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 15px 40px;
+        border-radius: 100px;
+
+        .icon {
+            fill: white;
+        }
+    }
+
+    button {
+        transform: translateY(300px);
     }
 }

@@ -19,7 +19,7 @@ export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [controlsIsVisible, setControlsIsVisible] = useState(false);
-    const [rateModalIsOpened, setRateModalIsOpened] = useState(false);
+    const [rateModalIsOpened, setRateModalIsOpened] = useState(true);
     const divRef = useRef<HTMLDivElement>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
     const timeInputRef = useRef<HTMLInputElement>(null);
@@ -93,7 +93,7 @@ export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {
         <>
             <Modal className={cls.rateModal} isOpen={rateModalIsOpened} onClose={() => setRateModalIsOpened(false)}>
                 <div onMouseMove={handleMouseMove} className={cls.modalContent}>
-                    <StarRating onClick={console.log} />
+                    <StarRating />
                 </div>
             </Modal>
             <Modal className={cls.playerModal} onClose={handleClose} isOpen={windowIsOpen}>

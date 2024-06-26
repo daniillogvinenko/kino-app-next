@@ -10,6 +10,7 @@ const buttonVariants = cva(cls.Button, {
             regular: cls.regular,
             outline: cls.outline,
             white: cls.white,
+            borderless: cls.borderless,
         },
         size: {
             sm: cls.sm,
