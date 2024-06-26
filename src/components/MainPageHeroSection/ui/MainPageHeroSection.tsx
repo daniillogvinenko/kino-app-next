@@ -6,7 +6,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 
 export const MainPageHeroSection = () => {
-    const [emblaRef] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 2500 })]);
+    const [emblaRef] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 4000 })]);
 
     const items: { background: string; title: string; description: string; link: string }[] = [
         {

@@ -1,0 +1,60 @@
+.top {
+    height: 250px;
+    text-align: center;
+
+    .hoveredTop {
+        p {
+            font-size: 40px;
+            font-weight: 500;
+        }
+        .hoveredRed {
+            color: red;
+            font-size: 150px;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+        .hoveredWhite {
+            color: white;
+            font-size: 150px;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+        .hoveredGreen {
+            color: #3bb33b;
+            font-size: 150px;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+    }
+}
+
+.title {
+    font-size: 45px;
+    font-weight: 900;
+}
+
+.title {
+    font-size: 45px;
+    font-weight: 900;
+}
+
+.rateFlex {
+    display: flex;
+
+    .starIcon {
+        cursor: pointer;
+    }
+    .hoveredRed {
+        fill: red;
+    }
+    .hoveredWhite {
+        fill: white;
+    }
+    .hoveredGreen {
+        fill: #3bb33b;
+    }
+
+    .normal {
+        fill: rgb(143, 143, 143);
+    }
+}

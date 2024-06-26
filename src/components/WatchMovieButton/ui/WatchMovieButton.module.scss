@@ -1,87 +1,89 @@
-.modalContent {
-    position: relative;
-    aspect-ratio: 16 / 9;
-    top: 0;
-    z-index: 20;
-    position: relative;
-    // border: 1px solid white;
+.playerModal {
+    .modalContent {
+        position: relative;
+        aspect-ratio: 16 / 9;
+        top: 0;
+        z-index: 20;
+        position: relative;
+        // border: 1px solid white;
 
-    video {
-        width: 100%;
-    }
-
-    .controlsHidden {
-        opacity: 0;
-    }
-
-    .controls {
-        width: 100%;
-        position: absolute;
-        bottom: 0px;
-        background-color: rgba(0, 0, 0, 0.486);
-        padding: 15px 20px;
-
-        transition-duration: 0.6s;
-
-        img {
-            cursor: pointer;
-            transition-duration: 0.2s;
-
-            &:hover {
-                opacity: 0.7;
-            }
-        }
-
-        .timeInput {
-            -webkit-appearance: none;
-            appearance: none;
+        video {
             width: 100%;
-            height: 6px;
-            background: var(--accent-color);
-            border-radius: 4px;
-            cursor: pointer;
-            margin-bottom: 15px;
         }
 
-        .volumeInput {
-            -webkit-appearance: none;
-            appearance: none;
-            height: 4px;
-            background: var(--accent-color);
-            border-radius: 4px;
-            cursor: pointer;
+        .controlsHidden {
+            opacity: 0;
         }
 
-        .timeInput::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            background: var(--accent-color);
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            // border: 4px solid #fff;
-            box-shadow: 0 5px 5px rgba(0, 0, 0, 0.377);
-        }
+        .controls {
+            width: 100%;
+            position: absolute;
+            bottom: 0px;
+            background-color: rgba(0, 0, 0, 0.486);
+            padding: 15px 20px;
 
-        .volumeInput::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            background: var(--accent-color);
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            // border: 4px solid #fff;
-            box-shadow: 0 5px 5px rgba(0, 0, 0, 0.377);
-        }
+            transition-duration: 0.6s;
 
-        .btnWrapper {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 12px;
+            img {
+                cursor: pointer;
+                transition-duration: 0.2s;
 
-            .leftButtons {
+                &:hover {
+                    opacity: 0.7;
+                }
+            }
+
+            .timeInput {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 100%;
+                height: 6px;
+                background: var(--accent-color);
+                border-radius: 4px;
+                cursor: pointer;
+                margin-bottom: 15px;
+            }
+
+            .volumeInput {
+                -webkit-appearance: none;
+                appearance: none;
+                height: 4px;
+                background: var(--accent-color);
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+            .timeInput::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                background: var(--accent-color);
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                // border: 4px solid #fff;
+                box-shadow: 0 5px 5px rgba(0, 0, 0, 0.377);
+            }
+
+            .volumeInput::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                background: var(--accent-color);
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                // border: 4px solid #fff;
+                box-shadow: 0 5px 5px rgba(0, 0, 0, 0.377);
+            }
+
+            .btnWrapper {
                 display: flex;
+                justify-content: space-between;
                 align-items: center;
-                gap: 20px;
+                padding: 0 12px;
+
+                .leftButtons {
+                    display: flex;
+                    align-items: center;
+                    gap: 20px;
+                }
             }
         }
     }

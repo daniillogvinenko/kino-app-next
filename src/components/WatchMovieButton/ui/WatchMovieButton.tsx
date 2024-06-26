@@ -1,5 +1,6 @@
 "use client";
 
+import { StarRating } from "@/components/StarRating";
 import cls from "./WatchMovieButton.module.scss";
 import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
@@ -18,6 +19,7 @@ export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [controlsIsVisible, setControlsIsVisible] = useState(false);
+    const [rateModalIsOpened, setRateModalIsOpened] = useState(false);
     const divRef = useRef<HTMLDivElement>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
     const timeInputRef = useRef<HTMLInputElement>(null);
@@ -82,14 +84,25 @@ export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {
         debouncedCallback();
     };
 
+    const handleOnEnded = () => {
+        setRateModalIsOpened(true);
+        setWindowIsOpen(false);
+    };
+
     return (
         <>
-            <Modal onClose={handleClose} isOpen={windowIsOpen}>
+            <Modal className={cls.rateModal} isOpen={rateModalIsOpened} onClose={() => setRateModalIsOpened(false)}>
+                <div onMouseMove={handleMouseMove} className={cls.modalContent}>
+                    <StarRating onClick={console.log} />
+                </div>
+            </Modal>
+            <Modal className={cls.playerModal} onClose={handleClose} isOpen={windowIsOpen}>
                 <div className="container">
                     <div onMouseMove={handleMouseMove} className={cls.modalContent} ref={divRef}>
                         <video
                             onClick={handlePlayPause}
                             onTimeUpdate={onTimeUpdate}
+                            onEnded={handleOnEnded}
                             ref={videoRef}
                             src={`${API}/static/video/movies/${src}`}
                         />
