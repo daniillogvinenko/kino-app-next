@@ -1,6 +1,12 @@
 export type Mods = Record<string, string | boolean | undefined>;
 
-// эта функция нужна чтобы вешать какие-то классы, особенно если они идут по какому-либо условию
+/**
+ * Allows to work more efficiently with classnames
+ * @param cls Main classname
+ * @param mods Mods object that allows to add classnames conditionally. For example: { cls.isLoading: isLoading }
+ * @param additional Array of additional classnames
+ * @return className. For example cn('Button', {disabled: isDisabled}, ['somethingElse']) => 'Button disabled somethingElse'
+ */
 export function cn(cls: string, mods?: Mods, additional?: Array<string | undefined>): string {
     let addClasses: Array<string | undefined> = [];
     let modsClasses: Mods = {};
