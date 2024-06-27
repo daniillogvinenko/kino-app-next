@@ -17,7 +17,7 @@ export const mapGenresToRussian: Record<Genre, string> = {
 };
 
 /**
- * [someFunction description]
+ * maps array of movie genres in English to array in Russian
  * @param arr Array of genres in English. For example: ['thriller', 'drama', 'comedy']
  * @return Array of genres in Russian. For example: ['триллер', 'драма', 'комедия']
  */
@@ -36,7 +36,7 @@ export const mapProfessiosToRussian: Record<Profession, string> = {
 };
 
 /**
- * [someFunction description]
+ * maps array of professions in English to array in Russian
  * @param arr Array of professions in English. For example: ['producer', 'actor']
  * @return Array of professions in Russian. For example: ['продюсер', 'актер']
  */
