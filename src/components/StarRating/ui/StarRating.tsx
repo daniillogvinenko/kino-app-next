@@ -64,7 +64,7 @@ export const StarRating = () => {
         setCurrentStarsCount(0);
     };
 
-    const className = (starNumber: number): string => {
+    const classNameColor = (starNumber: number): string => {
         if (currentStarsCount >= starNumber && currentStarsCount < 5) {
             return cls.red;
         }
@@ -83,7 +83,7 @@ export const StarRating = () => {
     if (rate) {
         return (
             <div className={cls.rate}>
-                <div className={className(rate)}>
+                <div className={classNameColor(rate)}>
                     {rate} <StarIcon className={cls.icon} width={48} height={48} />
                 </div>
                 <Button onClick={() => setRate(0)} variant={"borderless"}>
@@ -98,7 +98,7 @@ export const StarRating = () => {
             <div className={cls.top}>
                 {currentStarsCount ? (
                     <div className={cls.hoveredTop}>
-                        <p className={className(currentStarsCount)}>{currentStarsCount}</p>{" "}
+                        <p className={classNameColor(currentStarsCount)}>{currentStarsCount}</p>{" "}
                         <p>{stars.find((s) => s.rate === currentStarsCount)?.description}</p>
                     </div>
                 ) : (
@@ -112,7 +112,7 @@ export const StarRating = () => {
                         key={star.rate}
                         onMouseEnter={onHover(star.rate)}
                         onMouseLeave={onLeave}
-                        className={cn(cls.starIcon, {}, [className(star.rate)])}
+                        className={cn(cls.starIcon, {}, [classNameColor(star.rate)])}
                         width={72}
                         height={54}
                         onClick={() => setRate(star.rate)}
