@@ -14,6 +14,9 @@ interface ModalProps {
 
 const ANIMATION_DELAY = 0;
 
+/**
+ * The `Modal` component is used for app modal windows.
+ */
 export const Modal = (props: ModalProps) => {
     const { children, className, isOpen, onClose, lazy } = props;
 

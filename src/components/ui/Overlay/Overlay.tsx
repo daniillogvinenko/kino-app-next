@@ -6,6 +6,9 @@ interface OverlayProps {
     onClick?: () => void;
 }
 
+/**
+ * The `Overlay` component is used for creating dark tint behind modals and for similar tasks.
+ */
 export const Overlay = (props: OverlayProps) => {
     const { className, onClick } = props;
 

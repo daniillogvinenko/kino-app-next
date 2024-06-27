@@ -7,6 +7,9 @@ interface PageLoaderProps {
     className?: string;
 }
 
+/**
+ * The `PageLoader` component is used for creating loading animation while fetching data or pages.
+ */
 export const PageLoader = ({ className }: PageLoaderProps) => {
     return (
         <Image

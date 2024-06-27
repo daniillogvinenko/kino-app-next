@@ -6,6 +6,9 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     fullWidth?: boolean;
 }
 
+/**
+ * The `Input` component is used for app input fields.
+ */
 const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps, ref) => {
     const { fullWidth, ...otherProps } = props;
 

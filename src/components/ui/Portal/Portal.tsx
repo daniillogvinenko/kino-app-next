@@ -6,6 +6,9 @@ interface PortalProps {
     element?: HTMLElement;
 }
 
+/**
+ * The `Portal` component is used for creating React portals.
+ */
 export const Portal = (props: PortalProps) => {
     // значение по умолчанию ↓↓↓
     const { children, element = document.body } = props;

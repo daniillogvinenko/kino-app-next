@@ -36,6 +36,9 @@ interface ButtonProps extends VariantProps<typeof buttonVariants> {
     disabled?: boolean;
 }
 
+/**
+ * The `Button` component is used for app buttons.
+ */
 export const Button = ({
     children,
     size,

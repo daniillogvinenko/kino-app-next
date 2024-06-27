@@ -7,6 +7,9 @@ interface InputRangeProps {
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
+/**
+ * The `InputRange` component is used for app inputs with range type (aka sliders).
+ */
 export const InputRange = forwardRef<HTMLInputElement, InputRangeProps>(
     ({ className, onChange }: InputRangeProps, ref) => {
         return <input ref={ref} onChange={onChange} type="range" className={cn(cls.RangeInput, {}, [className])} />;
