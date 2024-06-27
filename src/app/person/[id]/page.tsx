@@ -2,8 +2,9 @@ import { MoviesOfPerson } from "@/components/MoviesOfPerson";
 import cls from "./page.module.scss";
 import Image from "next/image";
 import { API } from "@/shared/consts/consts";
-import { Person } from "@prisma/client";
+import { Movie, Person } from "@prisma/client";
 import { Metadata } from "next";
+import { mapGenresArrayToRussian, mapProfessionArrayToRussian } from "@/shared/helpers/maps/maps";
 
 interface PersonPageProps {
     params: {
@@ -12,9 +13,10 @@ interface PersonPageProps {
 }
 
 export async function generateMetadata({ params }: PersonPageProps): Promise<Metadata> {
-    const person: Person = await fetch(`${API}/api/persons/${params.id}`, { cache: "no-store" }).then((response) =>
-        response.json()
-    );
+    const person: Person & { actedInMovies: Movie[]; directedMovies: Movie[] } = await fetch(
+        `${API}/api/persons/${params.id}`,
+        { cache: "no-store" }
+    ).then((response) => response.json());
 
     return {
         title: `${person.fullName} (${person.fullNameEnglish}) - Фильмы, биография`,
@@ -24,9 +26,15 @@ export async function generateMetadata({ params }: PersonPageProps): Promise<Met
 export default async function PersonPage(props: PersonPageProps) {
     const { params } = props;
 
-    const person = await fetch(`${API}/api/persons/${params.id}`, { cache: "no-store" })
+    const person: Person & { actedInMovies: Movie[]; directedMovies: Movie[] } = await fetch(
+        `${API}/api/persons/${params.id}`,
+        { cache: "no-store" }
+    )
         .then((response) => response.json())
         .catch(() => undefined);
+
+    const professionsString = mapProfessionArrayToRussian(person.professions).join(", ");
+    const genresString = mapGenresArrayToRussian(person.personGenres).join(", ");
 
     return (
         <div className={cls.PersonPage}>
@@ -41,7 +49,7 @@ export default async function PersonPage(props: PersonPageProps) {
                                 <div className={cls.aboutTitle}>О персоне</div>
                                 <div className={cls.grid}>
                                     <span className={cls.gridLeftColumn}>Карьера</span>
-                                    <span>{person.personGenres.join(", ")}</span>
+                                    <span>{professionsString}</span>
                                     <span className={cls.gridLeftColumn}>Рост</span>
                                     <span>1,83м</span>
                                     <span className={cls.gridLeftColumn}>Дата рождения</span>
@@ -49,7 +57,7 @@ export default async function PersonPage(props: PersonPageProps) {
                                     <span className={cls.gridLeftColumn}>Место рождения</span>
                                     <span>Лос-Анджелес, Калифорния, США</span>
                                     <span className={cls.gridLeftColumn}>Жанры</span>
-                                    <span>{person.professions.join(", ")}</span>
+                                    <span>{genresString}</span>
                                 </div>
                             </div>
                         </div>

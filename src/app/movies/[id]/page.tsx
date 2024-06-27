@@ -8,6 +8,7 @@ import { SendReview } from "@/components/SendReview";
 import { FavoritesButton } from "@/components/FavoritesButton/FavoritesButton";
 import { Metadata } from "next";
 import { Movie, Person } from "@prisma/client";
+import { mapGenresArrayToRussian } from "@/shared/helpers/maps/maps";
 
 interface MoviePageProps {
     params: {
@@ -32,6 +33,8 @@ export default async function MoviePage({ params }: MoviePageProps) {
         .then((response) => response.json())
         .catch(() => undefined);
 
+    const genresString = mapGenresArrayToRussian(movie?.movieGenres).join(", ");
+
     return (
         <div className={cls.MoviePage}>
             <div className="container">
@@ -47,7 +50,7 @@ export default async function MoviePage({ params }: MoviePageProps) {
                             <div>
                                 <div className={cls.title}>{movie?.title}</div>
                                 <div className={cls.shortInfo}>
-                                    {movie?.year} | {movie?.movieGenres.join(", ")} | {movie?.age}+
+                                    {movie?.year} | {genresString} | {movie?.age}+
                                 </div>
                                 <p>{movie?.movieDescription}</p>
                                 <div className={cls.btnWrapper}>
@@ -61,7 +64,7 @@ export default async function MoviePage({ params }: MoviePageProps) {
                                     <span className={cls.gridLeftColumn}>Страна производства</span>
                                     <span>{movie.country}</span>
                                     <span className={cls.gridLeftColumn}>Жанр</span>
-                                    <span>{movie?.movieGenres.join(", ")}</span>
+                                    <span>{genresString}</span>
                                     <span className={cls.gridLeftColumn}>Режисер</span>
                                     <Link href={`/person/${movie?.directorId}`}>
                                         <span className={cls.directorFullName}>{movie?.director.fullName}</span>
