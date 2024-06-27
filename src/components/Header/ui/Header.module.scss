@@ -8,9 +8,16 @@
     transition: background-color 0.3s;
 
     .flex {
+        height: 46px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        .signinBtn {
+            width: 240px;
+            display: flex;
+            justify-content: right;
+        }
 
         .userLink {
             display: flex;

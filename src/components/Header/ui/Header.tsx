@@ -53,9 +53,11 @@ export const Header = () => {
                                 <p>{user?.name}</p>
                             </Link>
                         ) : (
-                            <Button href="/api/auth/signin" variant={"outline"}>
-                                Войти
-                            </Button>
+                            <div className={cls.signinBtn}>
+                                <Button href="/api/auth/signin" variant={"outline"}>
+                                    Войти
+                                </Button>
+                            </div>
                         )}
                     </div>
                 </div>
