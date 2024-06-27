@@ -43,7 +43,9 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
                         <>
                             <div className={cls.username}>{user?.username}</div>
                             <div className={cls.btnWrapper}>
-                                <Button variant={"outline"}>Редактировать профиль</Button>
+                                <Button disabled variant={"outline"}>
+                                    Редактировать профиль
+                                </Button>
                                 <SignOutButton />
                             </div>
                             <div className={cls.favTitle}>Избранное</div>

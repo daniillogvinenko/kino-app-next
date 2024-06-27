@@ -33,21 +33,33 @@ interface ButtonProps extends VariantProps<typeof buttonVariants> {
     href?: string;
     onClick?: () => void;
     className?: string;
+    disabled?: boolean;
 }
 
-export const Button = ({ children, size, variant, shadow = "noShadow", href, onClick, className }: ButtonProps) => {
+export const Button = ({
+    children,
+    size,
+    variant,
+    disabled = false,
+    shadow = "noShadow",
+    href,
+    onClick,
+    className,
+}: ButtonProps) => {
     const clsName = cn(buttonVariants({ size, variant, shadow }), {}, [className]);
 
     if (href) {
         return (
             <Link href={href}>
-                <button className={clsName}>{children}</button>
+                <button disabled={disabled} className={clsName}>
+                    {children}
+                </button>
             </Link>
         );
     }
 
     return (
-        <button onClick={onClick} className={clsName}>
+        <button disabled={disabled} onClick={onClick} className={clsName}>
             {children}
         </button>
     );
