@@ -48,9 +48,14 @@ export default async function MoviePage({ params }: MoviePageProps) {
                                 height={443}
                             />
                             <div>
-                                <div className={cls.title}>{movie?.title}</div>
-                                <div className={cls.shortInfo}>
-                                    {movie?.year} | {genresString} | {movie?.age}+
+                                <div className={cls.flex2}>
+                                    <div>
+                                        <div className={cls.title}>{movie?.title}</div>
+                                        <div className={cls.shortInfo}>
+                                            {movie?.year} | {genresString} | {movie?.age}+
+                                        </div>
+                                    </div>
+                                    <div className={cls.rating}>{movie.rating!.toString().split("").join(",")}</div>
                                 </div>
                                 <p>{movie?.movieDescription}</p>
                                 <div className={cls.btnWrapper}>

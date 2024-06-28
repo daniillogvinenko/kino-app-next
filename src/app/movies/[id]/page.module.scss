@@ -5,6 +5,24 @@
         gap: 48px;
         padding-top: 175px;
 
+        .flex2 {
+            display: flex;
+
+            .rating {
+                font-size: 30px;
+                font-weight: 800;
+                background-color: #211f1c;
+                border: 5px solid #44413c;
+                border-radius: 13px;
+                height: 70px;
+                width: 70px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-left: 28px;
+            }
+        }
+
         img {
             border-radius: 10px;
         }

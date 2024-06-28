@@ -5,11 +5,18 @@ import Link from "next/link";
 import { API } from "@/shared/consts/consts";
 import { FavoritesButton } from "@/components/FavoritesButton/FavoritesButton";
 import { Movie } from "@prisma/client";
+import { cn } from "@/shared/helpers/classNames/classNames";
 
 export default async function HomePage() {
     const movies: Movie[] = await fetch(`${API}/api/movies`, { cache: "no-store" })
         .then((response) => response.json())
         .catch(() => undefined);
+
+    const classNameFromRating = (rating: number) => {
+        if (rating < 5) return cls.red;
+        if (rating < 7) return cls.white;
+        return cls.green;
+    };
 
     return (
         <div className={cls.HomePage}>
@@ -29,11 +36,16 @@ export default async function HomePage() {
                                             height={287}
                                         />
                                     </Link>
-                                    <FavoritesButton
-                                        className={cls.favButton}
-                                        key={movie.id}
-                                        movieId={movie.id.toString()}
-                                    />
+                                    <div className={cls.movieInfo}>
+                                        <div className={cn(cls.rating, {}, [classNameFromRating(movie.rating!)])}>
+                                            {movie.rating!.toString().split("").join(",")}
+                                        </div>
+                                        <FavoritesButton
+                                            className={cls.favButton}
+                                            key={movie.id}
+                                            movieId={movie.id.toString()}
+                                        />
+                                    </div>
                                     <div className={cls.movieTitle}>{movie.title}</div>
                                 </div>
                             ))}

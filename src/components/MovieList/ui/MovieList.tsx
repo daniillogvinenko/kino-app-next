@@ -18,7 +18,7 @@ export const MovieList = ({ movies }: { movies: Movie[] }) => {
                     <div>
                         <div className={cls.movieYear}>2019</div>
                         <div className={cls.movieTitle}>{movie?.title}</div>
-                        <div className={cls.movieRating}>Рейтинг: 7,3</div>
+                        <div className={cls.movieRating}>Рейтинг: {movie.rating!.toString().split("").join(",")}</div>
                         <Button href={`/movies/${movie.id}`} variant={"outline"} size={"sm"}>
                             Подробнее
                         </Button>
