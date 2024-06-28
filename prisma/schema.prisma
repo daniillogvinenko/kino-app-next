@@ -50,6 +50,7 @@ model Movie {
   year             Int?
   country          String?
   age              Int?
+  rating           Int?
   Review           Review[]
 }
 
