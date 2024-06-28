@@ -38,6 +38,9 @@ export const SearchBar = () => {
                 setSearchResultPersons(persons);
                 setIsLoading(false);
             });
+        } else {
+            setSearchResultMovies([]);
+            setSearchResultPersons([]);
         }
     }, [searchValue]);
 
@@ -57,6 +60,8 @@ export const SearchBar = () => {
 
     const handleCloseSearch = () => {
         setIsSearchOpened(false);
+        setSearchResultMovies([]);
+        setSearchResultPersons([]);
         setSearchValue("");
     };
 
