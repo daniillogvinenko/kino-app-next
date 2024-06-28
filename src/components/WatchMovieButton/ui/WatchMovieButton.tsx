@@ -15,6 +15,10 @@ interface WatchMovieButtonProps {
     src: string | null;
 }
 
+/**
+ * Button opens the movie player modal
+ * @returns
+ */
 export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {
     const [windowIsOpen, setWindowIsOpen] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);

@@ -5,6 +5,10 @@ import cls from "./MainPageHeroSection.module.scss";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 
+/**
+ * Hero section on mane page
+ * @returns
+ */
 export const MainPageHeroSection = () => {
     const [emblaRef] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 4000 })]);
 

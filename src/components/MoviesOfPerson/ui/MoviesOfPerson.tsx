@@ -11,6 +11,10 @@ interface MoviesOfPersonProps {
     className?: string;
 }
 
+/**
+ * renders movies of a person
+ * @returns
+ */
 export const MoviesOfPerson = ({ person, className }: MoviesOfPersonProps) => {
     const [category, setCategory] = useState<"directed" | "acted">(person.actedInMovies.length ? "acted" : "directed");
 

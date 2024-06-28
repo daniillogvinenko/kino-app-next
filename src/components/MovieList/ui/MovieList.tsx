@@ -4,6 +4,10 @@ import cls from "./MovieList.module.scss";
 import { FavoritesButton } from "@/components/FavoritesButton/FavoritesButton";
 import { Movie } from "@prisma/client";
 
+/**
+ * renders list of movies
+ * @returns
+ */
 export const MovieList = ({ movies }: { movies: Movie[] }) => {
     return (
         <div data-testid="MovieList" className={cls.listWrapper}>

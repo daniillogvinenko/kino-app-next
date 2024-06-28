@@ -15,6 +15,10 @@ interface SendReviewProps {
     movieId: string;
 }
 
+/**
+ * Send review form and list of reviews for a movie
+ * @returns
+ */
 export const SendReview = ({ movieId }: SendReviewProps) => {
     const [value, setValue] = useState("");
     const [reviews, setReviews] = useState<(Review & { user: User })[]>([]);
@@ -42,7 +46,7 @@ export const SendReview = ({ movieId }: SendReviewProps) => {
         }
     };
 
-    // доделать обработку неудачного запроса
+    // todo доделать обработку неудачного запроса
     const handleDeleteReview = (reviewId: number) => {
         setCommentIsDeleteing((p) => [...p, reviewId]);
         fetch(`${API}/api/reviews`, {

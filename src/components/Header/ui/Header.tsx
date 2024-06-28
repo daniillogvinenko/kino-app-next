@@ -12,6 +12,10 @@ import { usePathname } from "next/navigation";
 
 const pagesWithoutHeader = ["/signin"];
 
+/**
+ * App header
+ * @returns
+ */
 export const Header = () => {
     const session = useSession();
     const user = session.data?.user;

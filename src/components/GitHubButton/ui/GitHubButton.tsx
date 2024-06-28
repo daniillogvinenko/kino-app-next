@@ -7,6 +7,10 @@ import cls from "./GitHubButton.module.scss";
 import Image from "next/image";
 import { API } from "@/shared/consts/consts";
 
+/**
+ * Button for signing up with GitHub. Should be used on sign in page
+ * @returns
+ */
 export const GitHubButton = () => {
     const searchParams = useSearchParams();
     const callbackUrl = searchParams.get("callbackUrl") || "/";

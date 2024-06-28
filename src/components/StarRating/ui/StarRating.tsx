@@ -52,6 +52,10 @@ const stars: Star[] = [
     },
 ];
 
+/**
+ * allows the user to rate the movie after watching it
+ * @returns
+ */
 export const StarRating = () => {
     const [rate, setRate] = useState(0);
     const [currentStarsCount, setCurrentStarsCount] = useState<number>(0);

@@ -6,7 +6,6 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import cls from "./SignInForm.module.scss";
-import { GitHubButton } from "@/components/GitHubButton";
 import { PageLoader } from "@/components/ui/PageLoader";
 import Link from "next/link";
 import Image from "next/image";

@@ -14,6 +14,10 @@ interface FavoritesButtonProps {
     className?: string;
 }
 
+/**
+ * Button that allow user to add or remove a movie to/from his favorites list
+ * @returns
+ */
 export const FavoritesButton = (props: FavoritesButtonProps) => {
     const { movieId, className } = props;
     const [user, setUser] = useState<any>();
