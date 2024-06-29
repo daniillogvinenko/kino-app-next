@@ -7,6 +7,8 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { User } from "@prisma/client";
 import { Metadata } from "next";
+import { UserExpanded } from "@/shared/types/entities";
+import { UnsubscribeButton } from "@/components/UnsubscribeButton";
 
 interface ProfilePageProps {
     params: {
@@ -25,7 +27,7 @@ export async function generateMetadata({ params }: ProfilePageProps): Promise<Me
 }
 
 export default async function ProfilePage({ params }: ProfilePageProps) {
-    const user = await fetch(`${API}/api/users/${params.id}`, { cache: "no-store" })
+    const user: UserExpanded = await fetch(`${API}/api/users/${params.id}`, { cache: "no-store" })
         .then((response) => response.json())
         .catch(() => undefined);
 
@@ -34,6 +36,14 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
     if (session?.user?.name !== params.id) {
         redirect("/");
     }
+
+    const handleUnsubscribe = () => {
+        fetch(`${API}/api/users/${user?.username}`, {
+            method: "PATCH",
+            body: JSON.stringify({ operation: "unsubscribe" }),
+            cache: "no-store",
+        });
+    };
 
     return (
         <div className={cls.ProfilePage}>
@@ -47,6 +57,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
                                     Редактировать профиль
                                 </Button>
                                 <SignOutButton />
+                                {user.subscription ? <UnsubscribeButton username={user.username} /> : null}
                             </div>
                             <div className={cls.favTitle}>Избранное</div>
                             <MovieList className={cls.movieList} movies={user?.favoriteMovies} />

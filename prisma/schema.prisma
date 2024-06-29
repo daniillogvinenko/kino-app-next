@@ -20,6 +20,7 @@ model User {
   password       String
   favoriteMovies Movie[]
   Reviews        Review[]
+  subscription   Boolean?
 }
 
 // рост, дата рожд., место рожд.

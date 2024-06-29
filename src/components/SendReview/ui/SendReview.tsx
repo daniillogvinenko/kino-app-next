@@ -58,7 +58,6 @@ export const SendReview = ({ movieId }: SendReviewProps) => {
             method: "DELETE",
         }).then((response) => {
             if (response.ok) {
-                console.log("here");
                 setReviews((r) => {
                     const resArray = JSON.parse(JSON.stringify(r?.filter((item) => item.id !== reviewId)));
                     return resArray;

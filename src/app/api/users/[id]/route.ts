@@ -49,5 +49,29 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
         });
     }
 
+    // change subscription to true
+    if (body.operation === "subscribe") {
+        await prisma.user.update({
+            where: {
+                username: params.id,
+            },
+            data: {
+                subscription: true,
+            },
+        });
+    }
+
+    // change subscription to false
+    if (body.operation === "unsubscribe") {
+        await prisma.user.update({
+            where: {
+                username: params.id,
+            },
+            data: {
+                subscription: false,
+            },
+        });
+    }
+
     return NextResponse.json("success");
 }
