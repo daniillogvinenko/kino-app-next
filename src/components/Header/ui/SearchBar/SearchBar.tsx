@@ -60,7 +60,7 @@ export const SearchBar = () => {
 
     if (!isSearchOpened) {
         return (
-            <div data-testid="SearchBarClosed" className={cls.SearchBarOpen} onClick={handleOpenSearch}>
+            <div data-testid="SearchBarClosed" className={cls.SearchBarOpenBtn} onClick={handleOpenSearch}>
                 <Image width={24} height={24} src="/static/icons/search.svg" alt="searchIcon" />
                 <span>Поиск</span>
             </div>
