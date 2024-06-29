@@ -1,6 +1,7 @@
 import { MainPageHeroSection } from "@/components/MainPageHeroSection";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
+import "@/shared/helpers/tests/emblaMocks";
 
 describe("MainPageHeroSection", () => {
     it("renders MainPageHeroSection", () => {
