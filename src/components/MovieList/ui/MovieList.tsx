@@ -3,14 +3,15 @@ import Image from "next/image";
 import cls from "./MovieList.module.scss";
 import { FavoritesButton } from "@/components/FavoritesButton/FavoritesButton";
 import { Movie } from "@prisma/client";
+import { cn } from "@/shared/helpers/classNames/classNames";
 
 /**
  * renders list of movies
  * @returns
  */
-export const MovieList = ({ movies }: { movies: Movie[] }) => {
+export const MovieList = ({ movies, className }: { movies: Movie[]; className?: string }) => {
     return (
-        <div data-testid="MovieList" className={cls.listWrapper}>
+        <div data-testid="MovieList" className={cn(cls.listWrapper, {}, [className])}>
             {movies?.map((movie) => (
                 <div key={movie?.id} className={cls.movieCard}>
                     <FavoritesButton className={cls.deleteMovieButton} movieId={movie.id.toString()} />

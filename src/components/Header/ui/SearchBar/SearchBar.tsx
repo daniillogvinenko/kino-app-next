@@ -21,13 +21,6 @@ export const SearchBar = () => {
     useEffect(() => {
         if (searchValue) {
             setIsLoading(true);
-            // fetch(`${API}/api/movies?search=${searchValue}`, { cache: "no-store" })
-            //     .then((response) => response.json())
-            //     .then((data) => {
-            //         setSearchResultMovies(data);
-            //         setIsLoading(false);
-            //     })
-            //     .catch(() => setError(true));
 
             const p1 = fetch(`${API}/api/movies?search=${searchValue}`, { cache: "no-store" });
             const p2 = fetch(`${API}/api/persons?search=${searchValue}`, { cache: "no-store" });
@@ -138,7 +131,9 @@ export const SearchBar = () => {
                                         </Link>
                                     ))}
                                 </ul>
-                                <Button variant={"borderless"}>Показать все результаты</Button>
+                                <Button href={`/search?search=${searchValue}`} variant={"borderless"}>
+                                    Показать все результаты
+                                </Button>
                             </div>
                         )}
                     </>

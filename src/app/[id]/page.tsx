@@ -49,7 +49,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
                                 <SignOutButton />
                             </div>
                             <div className={cls.favTitle}>Избранное</div>
-                            <MovieList movies={user?.favoriteMovies} />
+                            <MovieList className={cls.movieList} movies={user?.favoriteMovies} />
                         </>
                     ) : (
                         <div>
