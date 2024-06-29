@@ -91,7 +91,7 @@ export const SearchBar = () => {
                         ) : (
                             <div className={cls.searchResults}>
                                 <ul>
-                                    {searchResultMovies.length ? <p className={cls.category}>Фильмы</p> : null}
+                                    {!!searchResultMovies.length && <p className={cls.category}>Фильмы</p>}
                                     {searchResultMovies?.slice(0, 3).map((movie) => (
                                         <Link onClick={handleCloseSearch} key={movie.id} href={`/movies/${movie.id}`}>
                                             <li>
@@ -113,9 +113,9 @@ export const SearchBar = () => {
                                     ))}
                                 </ul>
                                 <ul>
-                                    {searchResultPersons.length ? <p className={cls.category}>Персоны</p> : null}
+                                    {!!searchResultPersons.length && <p className={cls.category}>Персоны</p>}
                                     {searchResultPersons?.slice(0, 3).map((person) => (
-                                        <Link onClick={handleCloseSearch} key={person.id} href={`/movies/${person.id}`}>
+                                        <Link onClick={handleCloseSearch} key={person.id} href={`/person/${person.id}`}>
                                             <li>
                                                 <Image
                                                     src={`/static/images/persons/${person.mainImage}`}

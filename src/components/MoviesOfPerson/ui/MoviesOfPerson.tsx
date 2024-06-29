@@ -30,7 +30,7 @@ export const MoviesOfPerson = ({ person, className }: MoviesOfPersonProps) => {
         <div data-testid="MoviesOfPerson" className={cn(cls.MoviesOfPerson, {}, [className])}>
             <div className={cls.filmsTitle}>В главных ролях</div>
             <div className={cls.swithcerWrapper}>
-                {person.actedInMovies.length ? (
+                {!!person.actedInMovies.length && (
                     <div data-testid="actedSwitcher" onClick={handleSetCategoryActed} className={cls.switcher}>
                         <div className={cls.switcherCategory}>Актер</div>
                         <div className={cls.switcherAmount}>{person?.actedInMovies.length} фильмов</div>
@@ -39,8 +39,8 @@ export const MoviesOfPerson = ({ person, className }: MoviesOfPersonProps) => {
                             className={cls.switcherIndicator}
                         ></div>
                     </div>
-                ) : null}
-                {person.directedMovies.length ? (
+                )}
+                {!!person.directedMovies.length && (
                     <div data-testid="directedSwitcher" onClick={handleSetCategoryDirected} className={cls.switcher}>
                         <div className={cls.switcherCategory}>Режисер</div>
                         <div className={cls.switcherAmount}>{person?.directedMovies.length} фильмов</div>
@@ -49,7 +49,7 @@ export const MoviesOfPerson = ({ person, className }: MoviesOfPersonProps) => {
                             className={cls.switcherIndicator}
                         ></div>
                     </div>
-                ) : null}
+                )}
             </div>
             <div className={cls.separator}></div>
             {category === "acted" ? (
