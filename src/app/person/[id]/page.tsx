@@ -5,6 +5,7 @@ import { API } from "@/shared/consts/consts";
 import { Movie, Person } from "@prisma/client";
 import { Metadata } from "next";
 import { mapGenresArrayToRussian, mapProfessionArrayToRussian } from "@/shared/helpers/maps/maps";
+import { PersonExpanded } from "@/shared/types/entities";
 
 interface PersonPageProps {
     params: {
@@ -13,10 +14,9 @@ interface PersonPageProps {
 }
 
 export async function generateMetadata({ params }: PersonPageProps): Promise<Metadata> {
-    const person: Person & { actedInMovies: Movie[]; directedMovies: Movie[] } = await fetch(
-        `${API}/api/persons/${params.id}`,
-        { cache: "no-store" }
-    ).then((response) => response.json());
+    const person: PersonExpanded = await fetch(`${API}/api/persons/${params.id}`, { cache: "no-store" }).then(
+        (response) => response.json()
+    );
 
     return {
         title: `${person.fullName} (${person.fullNameEnglish}) - Фильмы, биография`,
@@ -26,10 +26,7 @@ export async function generateMetadata({ params }: PersonPageProps): Promise<Met
 export default async function PersonPage(props: PersonPageProps) {
     const { params } = props;
 
-    const person: Person & { actedInMovies: Movie[]; directedMovies: Movie[] } = await fetch(
-        `${API}/api/persons/${params.id}`,
-        { cache: "no-store" }
-    )
+    const person: PersonExpanded = await fetch(`${API}/api/persons/${params.id}`, { cache: "no-store" })
         .then((response) => response.json())
         .catch(() => undefined);
 

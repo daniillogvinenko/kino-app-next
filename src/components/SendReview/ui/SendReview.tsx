@@ -10,6 +10,7 @@ import { Review, User } from "@prisma/client";
 import Image from "next/image";
 import { cn } from "@/shared/helpers/classNames/classNames";
 import { PageLoader } from "@/components/ui/PageLoader";
+import { ReviewExpanded } from "@/shared/types/entities";
 
 interface SendReviewProps {
     movieId: string;
@@ -21,7 +22,7 @@ interface SendReviewProps {
  */
 export const SendReview = ({ movieId }: SendReviewProps) => {
     const [value, setValue] = useState("");
-    const [reviews, setReviews] = useState<(Review & { user: User })[]>([]);
+    const [reviews, setReviews] = useState<ReviewExpanded[]>([]);
     const [commentIsDeleteing, setCommentIsDeleteing] = useState<number[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const session = useSession();
@@ -104,7 +105,7 @@ export const SendReview = ({ movieId }: SendReviewProps) => {
                     isLoading ? (
                         <PageLoader className={cls.loader} />
                     ) : (
-                        reviews?.map((r: Review & { user: User }) => (
+                        reviews?.map((r) => (
                             <div
                                 className={cn(cls.reviewCard, {}, [
                                     commentIsDeleteing.includes(r.id) ? cls.isLoading : "",

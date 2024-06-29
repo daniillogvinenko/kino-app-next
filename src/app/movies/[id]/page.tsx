@@ -9,6 +9,7 @@ import { FavoritesButton } from "@/components/FavoritesButton/FavoritesButton";
 import { Metadata } from "next";
 import { Movie, Person } from "@prisma/client";
 import { mapGenresArrayToRussian } from "@/shared/helpers/maps/maps";
+import { MovieExpanded } from "@/shared/types/entities";
 
 interface MoviePageProps {
     params: {
@@ -27,7 +28,7 @@ export async function generateMetadata({ params }: MoviePageProps): Promise<Meta
 }
 
 export default async function MoviePage({ params }: MoviePageProps) {
-    const movie: Movie & { director: Person; mainActors: Person[] } = await fetch(`${API}/api/movies/${params.id}`, {
+    const movie: MovieExpanded = await fetch(`${API}/api/movies/${params.id}`, {
         cache: "no-store",
     })
         .then((response) => response.json())
