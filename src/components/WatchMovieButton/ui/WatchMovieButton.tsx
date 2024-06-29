@@ -92,6 +92,7 @@ export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {
     const handleOnEnded = () => {
         setRateModalIsOpened(true);
         setWindowIsOpen(false);
+        handleLeaveFullScreen();
     };
 
     return (
