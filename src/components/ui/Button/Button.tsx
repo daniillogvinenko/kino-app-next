@@ -11,6 +11,7 @@ const buttonVariants = cva(cls.Button, {
             outline: cls.outline,
             white: cls.white,
             borderless: cls.borderless,
+            gradient: cls.gradient,
         },
         size: {
             sm: cls.sm,

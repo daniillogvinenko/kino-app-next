@@ -9,6 +9,7 @@ import { User } from "@prisma/client";
 import { Metadata } from "next";
 import { UserExpanded } from "@/shared/types/entities";
 import { UnsubscribeButton } from "@/components/UnsubscribeButton";
+import { SubscribeButton } from "@/components/SubscribeButton";
 
 interface ProfilePageProps {
     params: {
@@ -37,14 +38,6 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
         redirect("/");
     }
 
-    const handleUnsubscribe = () => {
-        fetch(`${API}/api/users/${user?.username}`, {
-            method: "PATCH",
-            body: JSON.stringify({ operation: "unsubscribe" }),
-            cache: "no-store",
-        });
-    };
-
     return (
         <div className={cls.ProfilePage}>
             <div className="container">
@@ -57,8 +50,21 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
                                     Редактировать профиль
                                 </Button>
                                 <SignOutButton />
-                                {user.subscription ? <UnsubscribeButton username={user.username} /> : null}
                             </div>
+                            <div className={cls.favTitle}>Подписка</div>
+
+                            {user.subscription ? (
+                                <>
+                                    <p className={cls.subscriptionDescription}>Действует до 01.01.2000</p>
+                                    <UnsubscribeButton username={user.username} />
+                                </>
+                            ) : (
+                                <>
+                                    <p className={cls.subscriptionDescription}>У Вас нет активной подписки</p>
+                                    <SubscribeButton>Подключить подписку</SubscribeButton>
+                                </>
+                            )}
+
                             <div className={cls.favTitle}>Избранное</div>
                             <MovieList className={cls.movieList} movies={user?.favoriteMovies} />
                         </>

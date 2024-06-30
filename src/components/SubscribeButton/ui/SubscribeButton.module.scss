@@ -1,0 +1,67 @@
+.subscribeModal {
+    z-index: 20;
+
+    .modalContent {
+        display: flex;
+        width: 860px;
+        border-radius: 20px;
+        overflow: hidden;
+        color: black;
+
+        .title {
+            color: black;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .left {
+            background-color: #e6e6e6;
+            width: 50%;
+            padding: 35px 45px;
+
+            .tarifCard {
+                text-align: center;
+                background-color: white;
+                border-radius: 20px;
+                padding: 52px 0;
+
+                .tarifTitle {
+                    font-size: 32px;
+                    margin-bottom: 8px;
+                    margin-top: 12px;
+                }
+
+                .price {
+                    color: var(--accent-color);
+                    font-size: 20px;
+                }
+            }
+        }
+
+        .right {
+            background-color: #f3f3f3;
+            width: 50%;
+            padding: 35px 45px;
+
+            .cardsWrapper {
+                margin-bottom: 100px;
+                .cardFlex {
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 6px 8px;
+                    transition-duration: 0.2s;
+                    cursor: pointer;
+
+                    &:hover {
+                        background: #dadada;
+                    }
+                }
+            }
+
+            .payBtn {
+                width: 100%;
+                margin: 12px 0 8px;
+            }
+        }
+    }
+}
