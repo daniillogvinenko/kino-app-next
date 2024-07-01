@@ -6,22 +6,26 @@ import { Modal } from "@/components/ui/Modal";
 import { API } from "@/shared/consts/consts";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { ReactNode, useState } from "react";
 
 interface SubscribeButtonProps {
     children: ReactNode;
 }
 
+// todo - обработать запрос (перезагрузка страницы)
 export const SubscribeButton = ({ children }: SubscribeButtonProps) => {
     const [subscribeModalIsOpened, setSubscribeModalIsOpened] = useState(false);
     const { data } = useSession();
+
+    const router = useRouter();
 
     const handleSubscribe = () => {
         fetch(`${API}/api/users/${data?.user?.name}`, {
             method: "PATCH",
             body: JSON.stringify({ operation: "subscribe" }),
             cache: "no-store",
-        });
+        }).then(() => router.refresh());
     };
 
     return (

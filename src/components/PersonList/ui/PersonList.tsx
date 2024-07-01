@@ -20,8 +20,7 @@ export const PersonList = ({ persons, className }: { persons: Person[]; classNam
                         alt="movieImage"
                     />
                     <div>
-                        <div className={cls.movieYear}>2019</div>
-                        <div className={cls.movieTitle}>{person?.fullName}</div>
+                        <div className={cls.personName}>{person?.fullName}</div>
                         <Button href={`/person/${person.id}`} variant={"outline"} size={"sm"}>
                             Подробнее
                         </Button>

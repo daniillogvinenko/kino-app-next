@@ -42,6 +42,7 @@ export const SignInForm = () => {
                     <Link href="/">
                         <Image src="/static/icons/header-logo.svg" alt="logo" width={240} height={32} />
                     </Link>
+
                     <Input
                         placeholder="Введите имя пользователя"
                         value={usernameInput}
@@ -56,6 +57,9 @@ export const SignInForm = () => {
                     <Button className={cls.btn} variant={"white"} onClick={handleSubmit}>
                         Продолжить
                     </Button>
+                    <p className={cls.authData}>
+                        *Вы можете авторизоваться используя следующие данные: имя пользователя - user1 пароль - user1
+                    </p>
                 </div>
             )}
         </>

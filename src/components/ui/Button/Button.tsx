@@ -54,7 +54,7 @@ export const Button = ({
 
     if (href) {
         return (
-            <Link href={href}>
+            <Link onClick={onClick} href={href}>
                 <button disabled={disabled} className={clsName}>
                     {children}
                 </button>

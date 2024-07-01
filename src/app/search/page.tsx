@@ -31,6 +31,7 @@ export default function SearchPage() {
         } else {
             setSearchResultMovies([]);
             setSearchResultPersons([]);
+            setIsLoading(false);
         }
     }, [searchValue]);
 
@@ -39,7 +40,7 @@ export default function SearchPage() {
             <div className="container">
                 <h1>Все результаты по запросу &quot;{searchValue}&quot;</h1>
                 {isLoading ? (
-                    <PageLoader />
+                    <PageLoader className={cls.loader} />
                 ) : (
                     <>
                         <p className={cls.categoryTitle}>фильмы</p>

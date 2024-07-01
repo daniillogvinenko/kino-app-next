@@ -14,6 +14,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { User } from "@prisma/client";
 import { SubscribeButton } from "@/components/SubscribeButton";
+import { secondsToTime } from "@/shared/helpers/formatTime/formatTime";
 
 interface WatchMovieButtonProps {
     src: string | null;
@@ -30,6 +31,7 @@ export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {
     const [controlsIsVisible, setControlsIsVisible] = useState(false);
     const [rateModalIsOpened, setRateModalIsOpened] = useState(false);
     const [isSubscribed, setIsSubscribed] = useState(false);
+    const [currentTime, setCurrentTime] = useState<number | undefined>(0);
     const divRef = useRef<HTMLDivElement>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
     const timeInputRef = useRef<HTMLInputElement>(null);
@@ -42,19 +44,10 @@ export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {
         if (user?.name) {
             fetch(`${API}/api/users/${user?.name}`).then(async (response) => {
                 const data: User = await response.json();
-                console.log(data);
                 setIsSubscribed(data.subscription!);
             });
         }
     }, [user?.name]);
-
-    const handleOpen = () => {
-        if (user) {
-            setWindowIsOpen(true);
-        } else {
-            router.push("/signin");
-        }
-    };
 
     const handleClose = () => {
         setWindowIsOpen(false);
@@ -83,6 +76,7 @@ export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {
 
     const onTimeUpdate = (e: SyntheticEvent<HTMLVideoElement, Event>) => {
         timeInputRef!.current!.value = String((+e.currentTarget.currentTime / +e.currentTarget.duration) * 100);
+        setCurrentTime(videoRef.current?.currentTime);
     };
 
     // event -> 0 - 100%
@@ -169,12 +163,6 @@ export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {
                                         width={28}
                                         height={28}
                                     />
-                                    {/* <input
-                                        onChange={handleVolumeInputChange}
-                                        ref={volumeInputRef}
-                                        className={cls.volumeInput}
-                                        type="range"
-                                    /> */}
                                     <InputRange
                                         onChange={handleVolumeInputChange}
                                         className={cls.volumeInput}
@@ -182,32 +170,41 @@ export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {
                                     />
                                 </div>
 
-                                {isFullscreen ? (
-                                    <Image
-                                        onClick={handleLeaveFullScreen}
-                                        src="/static/icons/leaveFullscreen.svg"
-                                        alt="playBtn"
-                                        width={32}
-                                        height={32}
-                                    />
-                                ) : (
-                                    <Image
-                                        onClick={handleEnterFullScreen}
-                                        src="/static/icons/fullscreen.svg"
-                                        alt="playBtn"
-                                        width={32}
-                                        height={32}
-                                    />
-                                )}
+                                <div className={cls.rightButtons}>
+                                    <p className={cls.time}>
+                                        {secondsToTime(currentTime)} / {secondsToTime(videoRef.current?.duration)}
+                                    </p>
+                                    {isFullscreen ? (
+                                        <Image
+                                            onClick={handleLeaveFullScreen}
+                                            src="/static/icons/leaveFullscreen.svg"
+                                            alt="playBtn"
+                                            width={32}
+                                            height={32}
+                                        />
+                                    ) : (
+                                        <Image
+                                            onClick={handleEnterFullScreen}
+                                            src="/static/icons/fullscreen.svg"
+                                            alt="playBtn"
+                                            width={32}
+                                            height={32}
+                                        />
+                                    )}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </Modal>
             {isSubscribed ? (
-                <Button onClick={handleOpen}>Смотреть</Button>
-            ) : (
+                <Button onClick={() => setWindowIsOpen(true)}>Смотреть</Button>
+            ) : user ? (
                 <SubscribeButton>Смотреть по подписке</SubscribeButton>
+            ) : (
+                <Button variant={"gradient"} href="/signin">
+                    Войдите чтобы смотреть
+                </Button>
             )}
         </>
     );

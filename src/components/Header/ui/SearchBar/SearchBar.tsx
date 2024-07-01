@@ -131,7 +131,11 @@ export const SearchBar = () => {
                                         </Link>
                                     ))}
                                 </ul>
-                                <Button href={`/search?search=${searchValue}`} variant={"borderless"}>
+                                <Button
+                                    onClick={handleCloseSearch}
+                                    href={`/search?search=${searchValue}`}
+                                    variant={"borderless"}
+                                >
                                     Показать все результаты
                                 </Button>
                             </div>
