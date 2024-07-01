@@ -2,7 +2,6 @@ import { MoviesOfPerson } from "@/components/MoviesOfPerson";
 import cls from "./page.module.scss";
 import Image from "next/image";
 import { API } from "@/shared/consts/consts";
-import { Movie, Person } from "@prisma/client";
 import { Metadata } from "next";
 import { mapGenresArrayToRussian, mapProfessionArrayToRussian } from "@/shared/helpers/maps/maps";
 import { PersonExpanded } from "@/shared/types/entities";
@@ -48,11 +47,11 @@ export default async function PersonPage(props: PersonPageProps) {
                                     <span className={cls.gridLeftColumn}>Карьера</span>
                                     <span>{professionsString}</span>
                                     <span className={cls.gridLeftColumn}>Рост</span>
-                                    <span>1,83м</span>
+                                    <span>{person.height}</span>
                                     <span className={cls.gridLeftColumn}>Дата рождения</span>
-                                    <span>11 ноября, 1974 • 49 лет</span>
+                                    <span>{person.dateOfBirth}</span>
                                     <span className={cls.gridLeftColumn}>Место рождения</span>
-                                    <span>Лос-Анджелес, Калифорния, США</span>
+                                    <span>{person.placeOfBirth}</span>
                                     <span className={cls.gridLeftColumn}>Жанры</span>
                                     <span>{genresString}</span>
                                 </div>

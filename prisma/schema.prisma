@@ -38,7 +38,7 @@ model Person {
 }
 
 model Movie {
-  id               Int      @id @default(autoincrement())
+  id               Int      @id
   title            String
   director         Person   @relation("directorOfMovie", fields: [directorId], references: [id])
   directorId       Int

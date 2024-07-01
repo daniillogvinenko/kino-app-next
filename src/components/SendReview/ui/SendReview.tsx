@@ -120,7 +120,7 @@ export const SendReview = ({ movieId }: SendReviewProps) => {
                                 <div className={cls.bottomFlex}>
                                     <div className={cls.flexRight}>
                                         <p className={cls.dateTime}>{new Date(r.dateTime).toDateString()}</p>
-                                        <div className={cls.reactionsWrapper}>
+                                        {/* <div className={cls.reactionsWrapper}>
                                             <Image src={`${API}/static/icons/like.svg`} alt="" height={18} width={18} />
                                             <p>12</p>
                                             <Image
@@ -129,7 +129,7 @@ export const SendReview = ({ movieId }: SendReviewProps) => {
                                                 height={18}
                                                 width={18}
                                             />
-                                        </div>
+                                        </div> */}
                                     </div>
                                     {user?.name === r.username ? (
                                         <p onClick={() => handleDeleteReview(r.id)} className={cls.dateTime}>

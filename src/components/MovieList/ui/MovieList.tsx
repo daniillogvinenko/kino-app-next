@@ -17,7 +17,7 @@ export const MovieList = ({ movies, className }: { movies: Movie[]; className?: 
                     <FavoritesButton className={cls.deleteMovieButton} movieId={movie.id.toString()} />
                     <Image width={85} height={130} src={`/static/images/movies/${movie?.mainImage}`} alt="movieImage" />
                     <div>
-                        <div className={cls.movieYear}>2019</div>
+                        <div className={cls.movieYear}>{movie.year}</div>
                         <div className={cls.movieTitle}>{movie?.title}</div>
                         <div className={cls.movieRating}>Рейтинг: {movie.rating!.toString().split("").join(",")}</div>
                         <Button href={`/movies/${movie.id}`} variant={"outline"} size={"sm"}>
