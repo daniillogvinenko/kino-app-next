@@ -23,7 +23,6 @@ model User {
   subscription   Boolean?
 }
 
-// рост, дата рожд., место рожд.
 model Person {
   id              Int          @id @default(autoincrement())
   fullName        String
@@ -33,9 +32,11 @@ model Person {
   personGenres    Genre[]
   professions     Profession[]
   mainImage       String
+  height          Int?
+  dateOfBirth     String?
+  placeOfBirth    String?
 }
 
-// длительность, страна, возр. ограничение, год
 model Movie {
   id               Int      @id @default(autoincrement())
   title            String
