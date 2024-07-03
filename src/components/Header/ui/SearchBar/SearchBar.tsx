@@ -89,56 +89,70 @@ export const SearchBar = () => {
                         {error ? (
                             <div>Произошла ошибка при загрузке</div>
                         ) : (
-                            <div className={cls.searchResults}>
-                                <ul>
-                                    {!!searchResultMovies.length && <p className={cls.category}>Фильмы</p>}
-                                    {searchResultMovies?.slice(0, 3).map((movie) => (
-                                        <Link onClick={handleCloseSearch} key={movie.id} href={`/movies/${movie.id}`}>
-                                            <li>
-                                                <Image
-                                                    src={`/static/images/movies/${movie.mainImage}`}
-                                                    alt=""
-                                                    width={43}
-                                                    height={65}
-                                                />
-                                                <div className={cls.movieInfoWrapper}>
-                                                    <p>{movie.title}</p>
-                                                    <p className={cls.movieInfo}>
-                                                        <span>{movie.rating!.toString().split("").join(",")}</span>
-                                                        {movie.country}
-                                                    </p>
-                                                </div>
-                                            </li>
-                                        </Link>
-                                    ))}
-                                </ul>
-                                <ul>
-                                    {!!searchResultPersons.length && <p className={cls.category}>Персоны</p>}
-                                    {searchResultPersons?.slice(0, 3).map((person) => (
-                                        <Link onClick={handleCloseSearch} key={person.id} href={`/person/${person.id}`}>
-                                            <li>
-                                                <Image
-                                                    src={`/static/images/persons/${person.mainImage}`}
-                                                    alt=""
-                                                    width={43}
-                                                    height={65}
-                                                />
-                                                <div className={cls.movieInfoWrapper}>
-                                                    <p>{person.fullName}</p>
-                                                    <p className={cls.movieInfo}>{person.fullNameEnglish}</p>
-                                                </div>
-                                            </li>
-                                        </Link>
-                                    ))}
-                                </ul>
-                                <Button
-                                    onClick={handleCloseSearch}
-                                    href={`/search?search=${searchValue}`}
-                                    variant={"borderless"}
-                                >
-                                    Показать все результаты
-                                </Button>
-                            </div>
+                            <>
+                                {!!searchValue && (
+                                    <div className={cls.searchResults}>
+                                        <ul>
+                                            {!!searchResultMovies.length && <p className={cls.category}>Фильмы</p>}
+                                            {searchResultMovies?.slice(0, 3).map((movie) => (
+                                                <Link
+                                                    onClick={handleCloseSearch}
+                                                    key={movie.id}
+                                                    href={`/movies/${movie.id}`}
+                                                >
+                                                    <li>
+                                                        <Image
+                                                            src={`/static/images/movies/${movie.mainImage}`}
+                                                            alt=""
+                                                            width={43}
+                                                            height={65}
+                                                        />
+                                                        <div className={cls.movieInfoWrapper}>
+                                                            <p>{movie.title}</p>
+                                                            <p className={cls.movieInfo}>
+                                                                <span>
+                                                                    {movie.rating!.toString().split("").join(",")}
+                                                                </span>
+                                                                {movie.country}
+                                                            </p>
+                                                        </div>
+                                                    </li>
+                                                </Link>
+                                            ))}
+                                        </ul>
+                                        <ul>
+                                            {!!searchResultPersons.length && <p className={cls.category}>Персоны</p>}
+                                            {searchResultPersons?.slice(0, 3).map((person) => (
+                                                <Link
+                                                    onClick={handleCloseSearch}
+                                                    key={person.id}
+                                                    href={`/person/${person.id}`}
+                                                >
+                                                    <li>
+                                                        <Image
+                                                            src={`/static/images/persons/${person.mainImage}`}
+                                                            alt=""
+                                                            width={43}
+                                                            height={65}
+                                                        />
+                                                        <div className={cls.movieInfoWrapper}>
+                                                            <p>{person.fullName}</p>
+                                                            <p className={cls.movieInfo}>{person.fullNameEnglish}</p>
+                                                        </div>
+                                                    </li>
+                                                </Link>
+                                            ))}
+                                        </ul>
+                                        <Button
+                                            onClick={handleCloseSearch}
+                                            href={`/search?search=${searchValue}`}
+                                            variant={"borderless"}
+                                        >
+                                            Показать все результаты
+                                        </Button>
+                                    </div>
+                                )}
+                            </>
                         )}
                     </>
                 )}
