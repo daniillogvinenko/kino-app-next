@@ -24,13 +24,15 @@ export const SearchBar = () => {
 
             const p1 = fetch(`${API}/api/movies?search=${searchValue}`, { cache: "no-store" });
             const p2 = fetch(`${API}/api/persons?search=${searchValue}`, { cache: "no-store" });
-            Promise.all([p1, p2]).then(async ([res1, res2]) => {
-                const movies: Movie[] = await res1.json();
-                const persons: Person[] = await res2.json();
-                setSearchResultMovies(movies);
-                setSearchResultPersons(persons);
-                setIsLoading(false);
-            });
+            Promise.all([p1, p2])
+                .then(async ([res1, res2]) => {
+                    const movies: Movie[] = await res1.json();
+                    const persons: Person[] = await res2.json();
+                    setSearchResultMovies(movies);
+                    setSearchResultPersons(persons);
+                    setIsLoading(false);
+                })
+                .catch(() => setError(true));
         } else {
             setSearchResultMovies([]);
             setSearchResultPersons([]);
