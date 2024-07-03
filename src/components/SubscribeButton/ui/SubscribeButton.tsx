@@ -25,7 +25,11 @@ export const SubscribeButton = ({ children }: SubscribeButtonProps) => {
             method: "PATCH",
             body: JSON.stringify({ operation: "subscribe" }),
             cache: "no-store",
-        }).then(() => router.refresh());
+        }).then(() => {
+            router.refresh();
+            setSubscribeModalIsOpened(false);
+            console.log("refresh");
+        });
     };
 
     return (
