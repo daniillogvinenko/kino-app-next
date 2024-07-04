@@ -8,6 +8,8 @@ import { API } from "@/shared/consts/consts";
 import { PageLoader } from "@/components/ui/PageLoader";
 import { Movie, Person } from "@prisma/client";
 import { Button } from "@/components/ui/Button";
+import { SearchIcon } from "@/components/ui/icons/SearchIcon";
+import { CloseIcon } from "@/components/ui/icons/CloseIcon";
 
 export const SearchBar = () => {
     const [isSearchOpened, setIsSearchOpened] = useState<boolean>(false);
@@ -63,7 +65,7 @@ export const SearchBar = () => {
     if (!isSearchOpened) {
         return (
             <div data-testid="SearchBarClosed" className={cls.SearchBarOpenBtn} onClick={handleOpenSearch}>
-                <Image width={24} height={24} src="/static/icons/search.svg" alt="searchIcon" />
+                <SearchIcon />
                 <span>Поиск</span>
             </div>
         );
@@ -76,13 +78,7 @@ export const SearchBar = () => {
             <div data-testid="SearchBarOpened" className={cls.SearchBar}>
                 <div className={cls.inputWrapper}>
                     <Input ref={inputRef} value={searchValue} onChange={handleSearchChange} />
-                    <Image
-                        onClick={handleCloseSearch}
-                        src="/static/icons/close.svg"
-                        alt="closeIcon"
-                        width={14}
-                        height={14}
-                    />
+                    <CloseIcon onClick={handleCloseSearch} />
                 </div>
                 {isLoading ? (
                     <PageLoader className={cls.loader} />

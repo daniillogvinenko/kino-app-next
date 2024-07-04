@@ -8,6 +8,8 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { Movie } from "@prisma/client";
 import { cn } from "@/shared/helpers/classNames/classNames";
+import { Heart } from "../ui/icons/Heart";
+import { PurpleHeart } from "../ui/icons/PurpleHeart";
 
 interface FavoritesButtonProps {
     movieId: string;
@@ -71,7 +73,7 @@ export const FavoritesButton = (props: FavoritesButtonProps) => {
                 className={cn(cls.favButton, {}, [className])}
                 variant={"white"}
             >
-                <Image width={18} height={18} src={`${API}/static/icons/purpleHeartFilled.svg`} alt="" />
+                <PurpleHeart />
             </Button>
         );
     }
@@ -83,7 +85,7 @@ export const FavoritesButton = (props: FavoritesButtonProps) => {
             className={cn(cls.favButton, {}, [className])}
             variant={"white"}
         >
-            <Image width={18} height={18} src={`${API}/static/icons/purpleHeart.svg`} alt="" />
+            <Heart />
         </Button>
     );
 };

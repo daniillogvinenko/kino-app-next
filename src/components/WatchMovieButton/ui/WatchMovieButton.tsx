@@ -15,6 +15,12 @@ import { useRouter } from "next/navigation";
 import { User } from "@prisma/client";
 import { SubscribeButton } from "@/components/SubscribeButton";
 import { secondsToTime } from "@/shared/helpers/formatTime/formatTime";
+import { FullScreenIcon } from "@/components/ui/icons/FullScreenIcon";
+import { LeaveFullscreenIcon } from "@/components/ui/icons/LeaveFullscreenIcon";
+import { PauseIcon } from "@/components/ui/icons/PauseIcon";
+import { PlayIcon } from "@/components/ui/icons/PlayIcon";
+import { Replay10sIcon } from "@/components/ui/icons/Replay10sIcon";
+import { Skip10sIcon } from "@/components/ui/icons/Skip10sIcon";
 
 interface WatchMovieButtonProps {
     src: string | null;
@@ -133,36 +139,12 @@ export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {
                             <div className={cls.btnWrapper}>
                                 <div className={cls.leftButtons}>
                                     {isPlaying ? (
-                                        <Image
-                                            onClick={handlePlayPause}
-                                            src="/static/icons/pause.svg"
-                                            alt="playBtn"
-                                            width={32}
-                                            height={32}
-                                        />
+                                        <PauseIcon onClick={handlePlayPause} />
                                     ) : (
-                                        <Image
-                                            onClick={handlePlayPause}
-                                            src="/static/icons/play.svg"
-                                            alt="playBtn"
-                                            width={32}
-                                            height={32}
-                                        />
+                                        <PlayIcon onClick={handlePlayPause} />
                                     )}
-                                    <Image
-                                        onClick={handleReplay}
-                                        src={`/static/icons/replay10s.svg`}
-                                        alt="replay"
-                                        width={28}
-                                        height={28}
-                                    />
-                                    <Image
-                                        onClick={handleSkip}
-                                        src={`/static/icons/skip10s.svg`}
-                                        alt="replay"
-                                        width={28}
-                                        height={28}
-                                    />
+                                    <Replay10sIcon onClick={handleReplay} />
+                                    <Skip10sIcon onClick={handleSkip} />
                                     <InputRange
                                         onChange={handleVolumeInputChange}
                                         className={cls.volumeInput}
@@ -175,21 +157,9 @@ export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {
                                         {secondsToTime(currentTime)} / {secondsToTime(videoRef.current?.duration)}
                                     </p>
                                     {isFullscreen ? (
-                                        <Image
-                                            onClick={handleLeaveFullScreen}
-                                            src="/static/icons/leaveFullscreen.svg"
-                                            alt="playBtn"
-                                            width={32}
-                                            height={32}
-                                        />
+                                        <LeaveFullscreenIcon onClick={handleLeaveFullScreen} />
                                     ) : (
-                                        <Image
-                                            onClick={handleEnterFullScreen}
-                                            src="/static/icons/fullscreen.svg"
-                                            alt="playBtn"
-                                            width={32}
-                                            height={32}
-                                        />
+                                        <FullScreenIcon onClick={handleEnterFullScreen} />
                                     )}
                                 </div>
                             </div>

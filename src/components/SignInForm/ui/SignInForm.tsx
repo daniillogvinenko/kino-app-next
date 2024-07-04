@@ -9,6 +9,7 @@ import cls from "./SignInForm.module.scss";
 import { PageLoader } from "@/components/ui/PageLoader";
 import Link from "next/link";
 import Image from "next/image";
+import { HeaderLogoIcon } from "@/components/ui/icons/HeaderLogoIcon";
 
 export const SignInForm = () => {
     const router = useRouter();
@@ -37,10 +38,8 @@ export const SignInForm = () => {
                 <PageLoader className={cls.loader} />
             ) : (
                 <div className={cls.SignInForm}>
-                    {/* <GitHubButton />
-                    <div className={cls.separator}></div> */}
                     <Link href="/">
-                        <Image src="/static/icons/header-logo.svg" alt="logo" width={240} height={32} />
+                        <HeaderLogoIcon />
                     </Link>
 
                     <Input

@@ -11,6 +11,8 @@ import Image from "next/image";
 import { cn } from "@/shared/helpers/classNames/classNames";
 import { PageLoader } from "@/components/ui/PageLoader";
 import { ReviewExpanded } from "@/shared/types/entities";
+import { LikeIcon } from "@/components/ui/icons/LikeIcon";
+import { DislikeIcon } from "@/components/ui/icons/DislikeIcon";
 
 interface SendReviewProps {
     movieId: string;
@@ -120,16 +122,11 @@ export const SendReview = ({ movieId }: SendReviewProps) => {
                                 <div className={cls.bottomFlex}>
                                     <div className={cls.flexRight}>
                                         <p className={cls.dateTime}>{new Date(r.dateTime).toDateString()}</p>
-                                        {/* <div className={cls.reactionsWrapper}>
-                                            <Image src={`${API}/static/icons/like.svg`} alt="" height={18} width={18} />
+                                        <div className={cls.reactionsWrapper}>
+                                            <LikeIcon />
                                             <p>12</p>
-                                            <Image
-                                                src={`${API}/static/icons/dislike.svg`}
-                                                alt=""
-                                                height={18}
-                                                width={18}
-                                            />
-                                        </div> */}
+                                            <DislikeIcon />
+                                        </div>
                                     </div>
                                     {user?.name === r.username ? (
                                         <p onClick={() => handleDeleteReview(r.id)} className={cls.dateTime}>

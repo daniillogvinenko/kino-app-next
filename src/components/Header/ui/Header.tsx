@@ -9,6 +9,7 @@ import { useCallback, useEffect, useState } from "react";
 import { cn } from "@/shared/helpers/classNames/classNames";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { HeaderLogoIcon } from "@/components/ui/icons/HeaderLogoIcon";
 
 const pagesWithoutHeader = ["/signin"];
 
@@ -45,7 +46,7 @@ export const Header = () => {
             <div className="container">
                 <div className={cls.flex}>
                     <Link href="/">
-                        <Image src="/static/icons/header-logo.svg" alt="logo" width={240} height={32} />
+                        <HeaderLogoIcon />
                     </Link>
                     <div>
                         <SearchBar />

@@ -1,8 +1,8 @@
 import { cn } from "@/shared/helpers/classNames/classNames";
-import StarIcon from "../../../../public/static/icons/starIcon.svg";
 import cls from "./StarRating.module.scss";
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { StarIcon } from "@/components/ui/icons/StarIcon";
 
 interface Star {
     rate: number;
@@ -88,7 +88,8 @@ export const StarRating = () => {
         return (
             <div className={cls.rate}>
                 <div className={classNameColor(rate)}>
-                    {rate} <StarIcon className={cls.icon} width={48} height={48} />
+                    {/* todo Icon component */}
+                    {rate} <StarIcon className={cls.icon} />
                 </div>
                 <Button onClick={() => setRate(0)} variant={"borderless"}>
                     Удалить оценку
@@ -113,13 +114,11 @@ export const StarRating = () => {
             <div className={cls.rateFlex}>
                 {stars.map((star) => (
                     <StarIcon
-                        key={star.rate}
+                        onClick={() => setRate(star.rate)}
                         onMouseEnter={onHover(star.rate)}
                         onMouseLeave={onLeave}
                         className={cn(cls.starIcon, {}, [classNameColor(star.rate)])}
-                        width={72}
-                        height={54}
-                        onClick={() => setRate(star.rate)}
+                        key={star.rate}
                     />
                 ))}
             </div>

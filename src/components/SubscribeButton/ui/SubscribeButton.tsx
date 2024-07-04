@@ -3,6 +3,8 @@
 import cls from "./SubscribeButton.module.scss";
 import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
+import { AppLogoIcon } from "@/components/ui/icons/AppLogoIcon";
+import { TickIcon } from "@/components/ui/icons/TickIcon";
 import { API } from "@/shared/consts/consts";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -43,7 +45,7 @@ export const SubscribeButton = ({ children }: SubscribeButtonProps) => {
                     <div className={cls.left}>
                         <p className={cls.title}>Вы подключаете</p>
                         <div className={cls.tarifCard}>
-                            <Image src={`${API}/static/icons/appLogo.svg`} alt="" width={50} height={50} />
+                            <AppLogoIcon />
                             <p className={cls.tarifTitle}>MovieVault+</p>
                             <p className={cls.price}>299 ₽ в месяц</p>
                         </div>
@@ -53,7 +55,7 @@ export const SubscribeButton = ({ children }: SubscribeButtonProps) => {
                         <div className={cls.cardsWrapper}>
                             <div className={cls.cardFlex}>
                                 <div>•••• 1234</div>
-                                <Image src={`${API}/static/icons/tick.svg`} alt="tick" width={19.5} height={12.5} />
+                                <TickIcon />
                             </div>
                             <div className={cls.cardFlex}>
                                 <div>•••• 1234</div>
