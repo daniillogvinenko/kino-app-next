@@ -58,6 +58,7 @@ export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {
     const handleClose = () => {
         setWindowIsOpen(false);
         videoRef.current?.pause();
+        setIsPlaying(false);
     };
 
     const handlePlayPause = () => {
