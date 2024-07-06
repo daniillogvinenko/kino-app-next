@@ -88,7 +88,6 @@ export const StarRating = () => {
         return (
             <div className={cls.rate}>
                 <div className={classNameColor(rate)}>
-                    {/* todo Icon component */}
                     {rate} <StarIcon className={cls.icon} />
                 </div>
                 <Button onClick={() => setRate(0)} variant={"borderless"}>

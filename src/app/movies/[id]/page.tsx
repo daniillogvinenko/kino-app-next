@@ -87,12 +87,14 @@ export default async function MoviePage({ params }: MoviePageProps) {
                             {movie?.mainActors.map((actor: Person) => (
                                 <Link href={`/person/${actor.id}`} key={actor.id}>
                                     <div className={cls.actorCard}>
-                                        <Image
-                                            src={`/static/images/persons/${actor.mainImage}`}
-                                            alt="actorImage"
-                                            width={88}
-                                            height={88}
-                                        />
+                                        <div className={cls.imgWrapper}>
+                                            <Image
+                                                src={`/static/images/persons/${actor.mainImage}`}
+                                                alt="actorImage"
+                                                width={88}
+                                                height={88}
+                                            />
+                                        </div>
                                         <div>{actor.fullName}</div>
                                     </div>
                                 </Link>

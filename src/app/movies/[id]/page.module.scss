@@ -100,15 +100,18 @@
             &:hover {
                 img {
                     transform: scale(1.07);
-                    box-shadow: 0 0 90px rgb(0, 0, 0);
                 }
             }
 
-            img {
-                transition-duration: 0.2s;
+            .imgWrapper {
+                overflow: hidden;
                 border-radius: 20px;
-                object-fit: cover;
                 margin-bottom: 10px;
+
+                img {
+                    transition-duration: 0.2s;
+                    object-fit: cover;
+                }
             }
         }
     }

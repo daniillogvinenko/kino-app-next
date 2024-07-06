@@ -29,12 +29,14 @@ export default async function HomePage() {
                             {movies?.map((movie) => (
                                 <div key={movie.id} className={cls.card}>
                                     <Link key={movie.id} href={`movies/${movie.id}`}>
-                                        <Image
-                                            src={`/static/images/movies/${movie.mainImage}`}
-                                            alt="movieImage"
-                                            width={190}
-                                            height={287}
-                                        />
+                                        <div className={cls.imgWrapper}>
+                                            <Image
+                                                src={`/static/images/movies/${movie.mainImage}`}
+                                                alt="movieImage"
+                                                width={190}
+                                                height={287}
+                                            />
+                                        </div>
                                     </Link>
                                     <div className={cls.movieInfo}>
                                         <div className={cn(cls.rating, {}, [classNameFromRating(movie.rating!)])}>
