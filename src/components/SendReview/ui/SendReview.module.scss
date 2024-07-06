@@ -73,7 +73,7 @@
 
     .reviewCard.isLoading {
         position: relative;
-        * {
+        & > * {
             opacity: 0;
         }
 
