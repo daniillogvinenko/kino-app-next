@@ -1,7 +1,7 @@
-import { SearchBar } from "@/components/Header/ui/SearchBar/SearchBar";
 import { mockFetch } from "@/shared/helpers/tests/testsHelpers";
 import "@testing-library/jest-dom";
 import { fireEvent, render, screen } from "@testing-library/react";
+import { SearchBar } from "./SearchBar";
 
 jest.mock("next/navigation", () => ({
     useSearchParams: () => {
@@ -29,7 +29,7 @@ describe("SearchBar", () => {
         fireEvent.change(input, { target: { value: "12345" } });
         expect(input.value).toBe("12345");
 
-        const closeButton = search.getElementsByTagName("img")[0];
+        const closeButton = search.getElementsByTagName("svg")[0];
         fireEvent.click(closeButton);
         expect(search).not.toBeInTheDocument();
     });

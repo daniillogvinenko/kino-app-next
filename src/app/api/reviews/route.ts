@@ -21,6 +21,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(reviews);
 }
 
+// todo заменить на NextRequest
 export async function POST(req: Request) {
     const body = await req.json();
     const today = new Date();

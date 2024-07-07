@@ -30,6 +30,7 @@ export const SendReview = ({ movieId }: SendReviewProps) => {
     const session = useSession();
     const user = session.data?.user;
 
+    // todo переписать на server actions
     const handleSendReview = () => {
         if (value && value.trim()) {
             setIsLoading(true);
