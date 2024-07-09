@@ -11,7 +11,7 @@ import { cn } from "@/shared/helpers/classNames/classNames";
  */
 export const MovieList = ({ movies, className }: { movies: Movie[]; className?: string }) => {
     return (
-        <div data-testid="MovieList" className={cn(cls.listWrapper, {}, [className])}>
+        <div className={cn(cls.listWrapper, {}, [className])}>
             {movies?.map((movie) => (
                 <div key={movie?.id} className={cls.movieCard}>
                     <FavoritesButton className={cls.deleteMovieButton} movieId={movie.id.toString()} />

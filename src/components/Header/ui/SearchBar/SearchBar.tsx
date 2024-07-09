@@ -64,7 +64,7 @@ export const SearchBar = () => {
 
     if (!isSearchOpened) {
         return (
-            <div data-testid="SearchBarClosed" className={cls.SearchBarOpenBtn} onClick={handleOpenSearch}>
+            <div data-testid="SearchBar.openButton" className={cls.SearchBarOpenBtn} onClick={handleOpenSearch}>
                 <SearchIcon />
                 <span>Поиск</span>
             </div>
@@ -75,9 +75,14 @@ export const SearchBar = () => {
         <>
             <Overlay onClick={handleCloseSearch} className={cls.overlay} />
 
-            <div data-testid="SearchBarOpened" className={cls.SearchBar}>
+            <div data-testid="SearchBar.opened" className={cls.SearchBar}>
                 <div className={cls.inputWrapper}>
-                    <Input ref={inputRef} value={searchValue} onChange={handleSearchChange} />
+                    <Input
+                        data-testid="SearchBar.input"
+                        ref={inputRef}
+                        value={searchValue}
+                        onChange={handleSearchChange}
+                    />
                     <CloseIcon onClick={handleCloseSearch} />
                 </div>
                 {isLoading ? (
@@ -89,8 +94,8 @@ export const SearchBar = () => {
                         ) : (
                             <>
                                 {!!searchValue && (
-                                    <div className={cls.searchResults}>
-                                        <ul>
+                                    <div data-testid="SearchBar.results" className={cls.searchResults}>
+                                        <ul data-testid="SearchBar.movieResults">
                                             {!!searchResultMovies.length && <p className={cls.category}>Фильмы</p>}
                                             {searchResultMovies?.slice(0, 3).map((movie) => (
                                                 <Link
@@ -118,7 +123,7 @@ export const SearchBar = () => {
                                                 </Link>
                                             ))}
                                         </ul>
-                                        <ul>
+                                        <ul data-testid="SearchBar.personResults">
                                             {!!searchResultPersons.length && <p className={cls.category}>Персоны</p>}
                                             {searchResultPersons?.slice(0, 3).map((person) => (
                                                 <Link
