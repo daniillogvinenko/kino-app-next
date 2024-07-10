@@ -90,19 +90,22 @@ export const SendReview = ({ movieId }: SendReviewProps) => {
     }, [movieId]);
 
     return (
-        <>
+        <div data-testid="SendReview">
             {user && reviews ? (
                 <div className={cls.newReview}>
                     <Input
+                        dataTestId="SendReview.input"
                         placeholder="Введите свой отзыв"
                         fullWidth
                         value={value}
                         onChange={(e) => setValue(e.target.value)}
                     />
-                    <Button onClick={handleSendReview}>Отправить</Button>
+                    <Button dataTestId="SendReview.sendButton" onClick={handleSendReview}>
+                        Отправить
+                    </Button>
                 </div>
             ) : null}
-            <div className={cls.reviewsWrapper}>
+            <div data-testid="reviewsWrapper" className={cls.reviewsWrapper}>
                 {reviews ? (
                     isLoading ? (
                         <PageLoader className={cls.loader} />
@@ -130,7 +133,11 @@ export const SendReview = ({ movieId }: SendReviewProps) => {
                                         </div>
                                     </div>
                                     {user?.name === r.username ? (
-                                        <p onClick={() => handleDeleteReview(r.id)} className={cls.dateTime}>
+                                        <p
+                                            data-testid="SendReview.deleteButton"
+                                            onClick={() => handleDeleteReview(r.id)}
+                                            className={cls.dateTime}
+                                        >
                                             Удалить комментарий
                                         </p>
                                     ) : null}
@@ -144,6 +151,6 @@ export const SendReview = ({ movieId }: SendReviewProps) => {
                     </div>
                 )}
             </div>
-        </>
+        </div>
     );
 };

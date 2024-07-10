@@ -10,7 +10,7 @@ import { cn } from "@/shared/helpers/classNames/classNames";
  */
 export const PersonList = ({ persons, className }: { persons: Person[]; className?: string }) => {
     return (
-        <div className={cn(cls.listWrapper, {}, [className])}>
+        <div data-testid="PersonList" className={cn(cls.listWrapper, {}, [className])}>
             {persons?.map((person) => (
                 <div key={person?.id} className={cls.movieCard}>
                     <Image

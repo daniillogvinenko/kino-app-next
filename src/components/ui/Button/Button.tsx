@@ -1,5 +1,5 @@
 import { VariantProps, cva } from "class-variance-authority";
-import { MouseEventHandler, ReactNode } from "react";
+import { ReactNode } from "react";
 import cls from "./Button.module.scss";
 import Link from "next/link";
 import { cn } from "@/shared/helpers/classNames/classNames";

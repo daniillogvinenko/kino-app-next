@@ -4,16 +4,23 @@ import { cn } from "@/shared/helpers/classNames/classNames";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     fullWidth?: boolean;
+    dataTestId?: string;
 }
 
 /**
  * The `Input` component is used for app input fields.
  */
 const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps, ref) => {
-    const { fullWidth, ...otherProps } = props;
+    const { fullWidth, dataTestId, ...otherProps } = props;
 
     return (
-        <input ref={ref} className={cn(cls.Input, { [cls.fullWidth]: fullWidth }, [])} type="text" {...otherProps} />
+        <input
+            data-testid={dataTestId}
+            ref={ref}
+            className={cn(cls.Input, { [cls.fullWidth]: fullWidth }, [])}
+            type="text"
+            {...otherProps}
+        />
     );
 });
 
