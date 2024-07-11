@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import "@/shared/styles/index.scss";
-import { FavoritesButton } from "./FavoritesButton";
+import { SignOutButton } from "./SignOutButton";
 import { defaultDecorator } from "@/shared/storybook/defaultDecorator";
 import { sessionDecorator } from "@/shared/storybook/sessionDecorator";
 
-const meta: Meta<typeof FavoritesButton> = {
-    component: FavoritesButton,
+const meta: Meta<typeof SignOutButton> = {
+    component: SignOutButton,
     decorators: [defaultDecorator, sessionDecorator(true)],
 };
 
 export default meta;
-type Story = StoryObj<typeof FavoritesButton>;
+type Story = StoryObj<typeof SignOutButton>;
 
 export const Regular: Story = {
-    args: { movieId: "1" },
+    args: {},
 };

@@ -7,7 +7,6 @@ import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/Button";
 import { useCallback, useEffect, useState } from "react";
 import { cn } from "@/shared/helpers/classNames/classNames";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { HeaderLogoIcon } from "@/components/ui/icons/HeaderLogoIcon";
 
