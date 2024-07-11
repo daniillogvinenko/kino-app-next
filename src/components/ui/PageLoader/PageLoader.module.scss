@@ -4,17 +4,24 @@
     border-bottom-color: transparent;
     display: inline-block;
     box-sizing: border-box;
-    animation: flipX 0.8s linear infinite;
+    animation: flipX 1.6s linear infinite;
 }
 
 @keyframes flipX {
     0% {
         transform: perspective(200px) rotateX(0deg) rotateY(0deg);
     }
-    50% {
+    25% {
         transform: perspective(200px) rotateX(-180deg) rotateY(0deg);
     }
-    100% {
+
+    50% {
         transform: perspective(200px) rotateX(-180deg) rotateY(-180deg);
+    }
+    75% {
+        transform: perspective(200px) rotateX(0) rotateY(-180deg);
+    }
+    100% {
+        transform: perspective(200px) rotateX(0) rotateY(0);
     }
 }

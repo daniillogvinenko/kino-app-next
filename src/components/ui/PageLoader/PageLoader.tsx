@@ -1,8 +1,6 @@
-import { API } from "@/shared/consts/consts";
-import Image from "next/image";
 import cls from "./PageLoader.module.scss";
 import { cn } from "@/shared/helpers/classNames/classNames";
-import { AppLogoIcon } from "../../icons/AppLogoIcon";
+import { AppLogoIcon } from "../icons/AppLogoIcon";
 
 interface PageLoaderProps {
     className?: string;
