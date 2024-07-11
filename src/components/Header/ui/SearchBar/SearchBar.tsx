@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState, useRef } from "react";
+import { ChangeEvent, useEffect, useState, useRef, useLayoutEffect } from "react";
 import cls from "./SearchBar.module.scss";
 import Link from "next/link";
 import Image from "next/image";
@@ -20,7 +20,7 @@ export const SearchBar = () => {
     const [error, setError] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (searchValue) {
             setIsLoading(true);
 
