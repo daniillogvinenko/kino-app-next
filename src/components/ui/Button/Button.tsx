@@ -36,6 +36,7 @@ interface ButtonProps extends VariantProps<typeof buttonVariants> {
     className?: string;
     disabled?: boolean;
     dataTestId?: string;
+    type?: "button" | "submit" | "reset";
 }
 
 /**
@@ -47,6 +48,7 @@ export const Button = ({
     variant,
     disabled = false,
     shadow = "noShadow",
+    type = "button",
     href,
     onClick,
     dataTestId,
@@ -65,7 +67,7 @@ export const Button = ({
     }
 
     return (
-        <button data-testid={dataTestId} disabled={disabled} onClick={onClick} className={clsName}>
+        <button type={type} data-testid={dataTestId} disabled={disabled} onClick={onClick} className={clsName}>
             {children}
         </button>
     );
