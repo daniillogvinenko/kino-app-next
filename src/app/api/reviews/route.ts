@@ -3,6 +3,7 @@ import { prisma } from "../../../../lib/prisma";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export async function GET(req: NextRequest) {
+    // /reviews?movieId=2
     const movieId = req.nextUrl.searchParams.get("movieId");
     if (movieId) {
         const reviewsOfMovie = await prisma.review.findMany({
@@ -16,6 +17,7 @@ export async function GET(req: NextRequest) {
         return NextResponse.json(reviewsOfMovie);
     }
 
+    // /reviews
     const reviews = await prisma.review.findMany();
 
     return NextResponse.json(reviews);

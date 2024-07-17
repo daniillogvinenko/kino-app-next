@@ -2,6 +2,7 @@ import "@testing-library/jest-dom";
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { SearchBar } from "./SearchBar";
 import { Movie, Person } from "@prisma/client";
+import { awaitTest } from "@/shared/helpers/tests/testsHelpers";
 
 // jest.mock("next/navigation", () => ({
 //     useSearchParams: () => {
@@ -129,13 +130,15 @@ describe("SearchBar", () => {
         const searchBarOpened = screen.getByTestId("SearchBar.opened");
         expect(searchBarOpened).toBeInTheDocument();
 
-        act(() => {
+        act(async () => {
             const input = screen.getByTestId<HTMLInputElement>("SearchBar.input");
             fireEvent.change(input, { target: { value: "12345" } });
             expect(input.value).toBe("12345");
 
             fireEvent.change(input, { target: { value: "1234567" } });
             expect(input.value).toBe("1234567");
+
+            await awaitTest(500);
 
             const results = screen.getByTestId("SearchBar.results");
             expect(results).toBeInTheDocument();

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../../lib/prisma";
 
 export async function GET(req: NextRequest) {
+    // /movies
     const movies = await prisma.movie.findMany({
         include: {
             director: true,
@@ -9,14 +10,9 @@ export async function GET(req: NextRequest) {
         },
     });
 
+    // /movies?userId=1
     const userId = req.nextUrl.searchParams.get("userId");
     if (userId) {
-        const user = await prisma.user.findUnique({
-            where: {
-                username: userId,
-            },
-        });
-
         const moviesOfUser = await prisma.movie.findMany({
             where: {
                 favoredBy: {
@@ -29,6 +25,7 @@ export async function GET(req: NextRequest) {
         return NextResponse.json(moviesOfUser);
     }
 
+    // /movies?search=abc
     const searchValue = req.nextUrl.searchParams.get("search");
     if (searchValue) {
         const filteredMovies = movies.filter((m) => m.title.toLowerCase().includes(searchValue.toLowerCase()));
