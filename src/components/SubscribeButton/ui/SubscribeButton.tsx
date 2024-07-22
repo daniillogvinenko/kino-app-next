@@ -37,6 +37,7 @@ export const SubscribeButton = ({ children }: SubscribeButtonProps) => {
     return (
         <>
             <Modal
+                lazy
                 className={cls.subscribeModal}
                 isOpen={subscribeModalIsOpened}
                 onClose={() => setSubscribeModalIsOpened(false)}

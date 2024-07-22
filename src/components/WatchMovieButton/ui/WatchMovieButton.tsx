@@ -120,12 +120,17 @@ export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {
 
     return (
         <>
-            <Modal className={cls.rateModal} isOpen={rateModalIsOpened} onClose={() => setRateModalIsOpened(false)}>
+            <Modal
+                lazy
+                className={cls.rateModal}
+                isOpen={rateModalIsOpened}
+                onClose={() => setRateModalIsOpened(false)}
+            >
                 <div onMouseMove={handleMouseMove} className={cls.modalContent}>
                     <StarRating />
                 </div>
             </Modal>
-            <Modal className={cls.playerModal} onClose={handleClose} isOpen={windowIsOpen}>
+            <Modal lazy className={cls.playerModal} onClose={handleClose} isOpen={windowIsOpen}>
                 <div className="container">
                     <div onMouseMove={handleMouseMove} className={cls.modalContent} ref={divRef}>
                         <video
