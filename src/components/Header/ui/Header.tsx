@@ -9,6 +9,7 @@ import { useCallback, useEffect, useState } from "react";
 import { cn } from "@/shared/helpers/classNames/classNames";
 import { usePathname } from "next/navigation";
 import { HeaderLogoIcon } from "@/components/ui/icons/HeaderLogoIcon";
+import { useScroll } from "@/shared/hooks/useScroll";
 
 const pagesWithoutHeader = ["/signin"];
 
@@ -30,11 +31,7 @@ export const Header = () => {
         }
     }, []);
 
-    useEffect(() => {
-        document.addEventListener("scroll", handleListener);
-
-        return () => removeEventListener("scroll", handleListener);
-    }, [handleListener]);
+    useScroll(handleListener);
 
     if (pagesWithoutHeader.includes(pathname)) {
         return null;

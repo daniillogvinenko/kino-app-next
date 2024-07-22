@@ -16,6 +16,7 @@ export default function SearchPage() {
     const [searchResultPersons, setSearchResultPersons] = useState<Person[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
+    // todo вынести в хук?
     useEffect(() => {
         if (searchValue) {
             setIsLoading(true);
