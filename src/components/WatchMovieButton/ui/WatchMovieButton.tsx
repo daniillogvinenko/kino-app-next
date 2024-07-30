@@ -6,13 +6,10 @@ import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
 import { API } from "@/shared/consts/consts";
 import { cn } from "@/shared/helpers/classNames/classNames";
-import Image from "next/image";
-import { ChangeEvent, SyntheticEvent, useCallback, useEffect, useRef, useState } from "react";
+import { ChangeEvent, SyntheticEvent, useRef, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { InputRange } from "@/components/ui/InputRange";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { User } from "@prisma/client";
 import { SubscribeButton } from "@/components/SubscribeButton";
 import { secondsToTime } from "@/shared/helpers/formatTime/formatTime";
 import { FullScreenIcon } from "@/components/ui/icons/FullScreenIcon";
@@ -21,6 +18,7 @@ import { PauseIcon } from "@/components/ui/icons/PauseIcon";
 import { PlayIcon } from "@/components/ui/icons/PlayIcon";
 import { Replay10sIcon } from "@/components/ui/icons/Replay10sIcon";
 import { Skip10sIcon } from "@/components/ui/icons/Skip10sIcon";
+import { useIsSubscribed } from "@/shared/hooks/useIsSubscribed";
 
 interface WatchMovieButtonProps {
     src: string | null;
@@ -36,7 +34,6 @@ export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [controlsIsVisible, setControlsIsVisible] = useState(false);
     const [rateModalIsOpened, setRateModalIsOpened] = useState(false);
-    const [isSubscribed, setIsSubscribed] = useState(false);
     const [currentTime, setCurrentTime] = useState<number | undefined>(0);
     const divRef = useRef<HTMLDivElement>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
@@ -44,16 +41,8 @@ export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {
     const volumeInputRef = useRef<HTMLInputElement>(null);
     const session = useSession();
     const user = session.data?.user;
-    const router = useRouter();
 
-    useEffect(() => {
-        if (user?.name) {
-            fetch(`${API}/api/users/${user?.name}`).then(async (response) => {
-                const data: User = await response.json();
-                setIsSubscribed(data.subscription!);
-            });
-        }
-    }, [user?.name]);
+    const { isSubscribed, isLoading } = useIsSubscribed(user?.name);
 
     const handleClose = () => {
         setWindowIsOpen(false);
@@ -117,6 +106,13 @@ export const WatchMovieButton = ({ src }: WatchMovieButtonProps) => {
         setWindowIsOpen(false);
         handleLeaveFullScreen();
     };
+
+    if (isLoading && user)
+        return (
+            <Button disabled variant={"borderless"}>
+                Загрузка информации о подписке...
+            </Button>
+        );
 
     return (
         <>
